@@ -24,7 +24,8 @@ footer {
     background-color: var(--fo-bg, @footerBottomBackground);
     padding-top: 2.5rem;
     padding-bottom: 1.5rem;
-    font-size: 1rem;
+    font-size: @font-size-base;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
 
     a {
       text-decoration: none;
@@ -66,7 +67,7 @@ footer {
 }
 
 .footer-heading {
-  font-size: 1.1rem;
+  font-size: @font-size-nav;
   font-weight: 600;
   color: var(--fo-fg, @footerGrey);
   margin-bottom: 0.75rem;
@@ -138,7 +139,7 @@ footer {
   align-items: center;
   gap: 0.75rem;
   color: var(--fo-fg, @footerGrey);
-  font-size: 0.9rem;
+  font-size: @font-size-sm;
 
   > span {
     opacity: 0.7;
@@ -166,7 +167,7 @@ footer {
 .footer-powered-rdm {
   color: var(--fo-fg, @footerGrey);
   opacity: 0.85;
-  font-size: 0.85rem;
+  font-size: @font-size-sm;
   font-weight: 600;
   letter-spacing: 1px;
 }
@@ -175,7 +176,7 @@ footer {
    Legacy
 ====================================== */
 .bodytext {
-  font-size: 16px;
+  font-size: @font-size-base;
 }
 
 .spacer {

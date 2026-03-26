@@ -11,7 +11,7 @@
 ====================================== */
 .creators {
   margin: 0 0 1em;
-  font-size: 0.95rem;
+  font-size: @font-size-base;
 }
 
 .creators span {
@@ -88,7 +88,7 @@
 }
 
 .ui.items > .item > .content > .header {
-  font-size: 1.15rem !important;
+  font-size: @font-size-nav !important;
   font-weight: 600;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .ui.items > .item > .content > .description {
-  font-size: 0.95rem;
+  font-size: @font-size-base;
   color: @primaryText;
   line-height: 1.5;
   margin: 0.5rem 0 0 0 !important;
@@ -120,13 +120,13 @@
 }
 
 .ui.items > .item > .content > .extra {
-  font-size: 0.9rem;
+  font-size: @font-size-sm;
 }
 
 /* Bottom meta footer — matches .record-card-meta style */
 .ui.items > .item > .content > .extra:not(.labels-actions) {
   color: @recordLightText;
-  font-size: 0.9rem;
+  font-size: @font-size-sm;
   margin-top: 0.75rem;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   padding-top: 0.75rem;
@@ -142,7 +142,7 @@
    Search results — creatibutors
 ====================================== */
 .creatibutors {
-  font-size: 0.95rem;
+  font-size: @font-size-base;
   color: @recordText;
   line-height: 1.5;
 }
@@ -302,14 +302,14 @@ aside.column .facet-wrapper {
     background: none !important;
     box-shadow: none !important;
     color: @recordLightText !important;
-    font-size: 0.75rem !important;
+    font-size: @font-size-xs !important;
     height: auto !important;
   }
 }
 
 /* Checkbox label text */
 aside.column .facet-wrapper .ui.checkbox label {
-  font-size: 0.875rem !important;
+  font-size: @font-size-sm !important;
   color: @primaryText !important;
   cursor: pointer !important;
   line-height: 1.4 !important;
@@ -368,7 +368,7 @@ aside.column .ui.card.borderless.facet.mt-0 {
   }
 
   .ui.list .item a {
-    font-size: 0.875rem;
+    font-size: @font-size-sm;
     color: @overridePrimary;
     text-decoration: none;
 
@@ -421,7 +421,7 @@ aside.column .ui.card:not(.borderless) {
       min-height: 1.5rem;
 
       label {
-        font-size: 0.875rem !important;
+        font-size: @font-size-sm !important;
         color: @primaryText !important;
       }
     }

@@ -11,6 +11,7 @@
 ====================================== */
 header > nav {
   padding: 0;
+  background: transparent;
 }
 
 /* ======================================
@@ -27,28 +28,44 @@ header > nav {
    ROW 1: Top navigation bar
 ====================================== */
 .header-topbar {
-  background-color: @primaryBackground;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem 0;
   border-bottom: 1px solid black;
 }
 
-.header-topbar-inner {
+/* Single outlined pill wrapping all nav items */
+.header-topbar .ui.container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 0.75rem 0;
+}
+
+.header-topbar-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: #ffffff !important;
+  border: 1px solid black;
+  border-radius: @radiusPill;
+  padding: 0.3rem 0.5rem;
 }
 
 .header-topbar-link {
   color: @primaryText !important;
+  background: transparent;
+  border: none;
   font-size: 18px;
   font-weight: 400;
   text-decoration: none;
-  padding: 5px 8px;
+  padding: 0.3em 0.9em;
+  display: inline-block;
+  border-radius: @radiusPill;
+  transition: color @transitionFast ease, background-color @transitionFast ease;
 
   &:hover {
-    background-color: @primaryLinkHoverBackground;
-    color: @primaryLink !important;
+    color: @overridePrimary !important;
+    background-color: fade(@overridePrimary, 6%);
     text-decoration: none;
   }
 }
@@ -95,6 +112,7 @@ header > nav {
   display: none;
   position: absolute;
   top: 100%;
+  margin-top: 0.4rem;
   left: 0;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -102,6 +120,17 @@ header > nav {
   min-width: 200px;
   z-index: 1000;
   padding: 0.5rem 0;
+  border-radius: @radiusSmall;
+
+  /* Bridge the margin-top gap so hover isn't lost while moving mouse down */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+  }
 }
 
 .header-topbar-dropdown-item {
@@ -121,10 +150,10 @@ header > nav {
 }
 
 /* ======================================
-   ROW 2: Lang | Login — transparent so body gradient shows through (matches page-inner-banner)
+   ROW 2: Lang | Login — transparent, inherits nav gradient
 ====================================== */
 .header-secondrow-outer {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .header-secondrow {

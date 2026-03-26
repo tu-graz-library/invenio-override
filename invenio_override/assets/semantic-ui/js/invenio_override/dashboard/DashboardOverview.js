@@ -43,7 +43,7 @@ const NAV_BOXES = [
     title: "Upload Publication",
     description: "Deposit a publication",
     icon: "book",
-    url: "/uploads/new",
+    url: "/publications/uploads/new",
     marc21Only: true,
     highlight: true,
   },

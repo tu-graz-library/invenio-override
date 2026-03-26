@@ -9,10 +9,12 @@
 /* ======================================
    Upstream overrides — dashboard header suppression
 ====================================== */
-/* Hide dashboard tab navigation, user info box, community header, and separator line */
-.page-subheader,
-.page-subheader-outer,
-.ui.secondary.pointing.menu.page-subheader,
+/* Hide dashboard tab navigation, user info box, and separator line.
+   Exception: community detail pages use .page-subheader-outer.with-submenu for their nav tabs —
+   those must remain visible. */
+.page-subheader-outer:not(.with-submenu),
+.page-subheader-outer:not(.with-submenu) .page-subheader,
+.page-subheader-outer:not(.with-submenu) .ui.secondary.pointing.menu.page-subheader,
 #dashboard-user-header-container {
   display: none !important;
   visibility: hidden !important;
@@ -48,7 +50,7 @@
   transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 
   i.icon {
-    font-size: 2rem;
+    font-size: @font-size-2xl;
     margin: 0;
     line-height: 1;
   }
@@ -68,14 +70,14 @@
 }
 
 .upload-new-title {
-  font-size: 1rem;
+  font-size: @font-size-base;
   font-weight: 600;
   color: @primaryText;
   line-height: 1.2;
 }
 
 .upload-new-desc {
-  font-size: 0.85rem;
+  font-size: @font-size-sm;
   color: @recordLightText;
   line-height: 1.3;
 }
@@ -168,14 +170,14 @@
 }
 
 .dashboard-nav-box-title {
-  font-size: 1.05rem;
+  font-size: @font-size-nav;
   font-weight: 600;
   color: @primaryText;
   transition: color 0.2s ease;
 }
 
 .dashboard-nav-box-desc {
-  font-size: 0.85rem;
+  font-size: @font-size-sm;
   color: @recordLightText;
   line-height: 1.4;
   margin-top: -0.5rem;
@@ -189,7 +191,7 @@
 }
 
 .dashboard-section-title {
-  font-size: 1.5rem;
+  font-size: @font-size-xl;
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
@@ -238,14 +240,14 @@
 }
 
 .dashboard-card-title {
-  font-size: 1.15rem;
+  font-size: @font-size-nav;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: @primaryText;
 }
 
 .dashboard-card-desc {
-  font-size: 0.95rem;
+  font-size: @font-size-base;
   color: @recordText;
   line-height: 1.5;
   margin: 0;
@@ -277,7 +279,9 @@
 
 .dashboard-section-heading {
   margin: 0 !important;
-  font-size: 1.2rem !important;
+  font-size: @font-size-lg !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
 
   .ui.label {
     margin-left: 0.5rem;
@@ -304,7 +308,7 @@
 }
 
 .dashboard-item-title {
-  font-size: 1rem !important;
+  font-size: @font-size-base !important;
   line-height: 1.4 !important;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -386,6 +390,7 @@
 /* ======================================
    Dashboard tab pages — request items
 ====================================== */
+
 .ui.items > .item.flex {
   background: #ffffff;
   border: @borderSubtle;
@@ -393,6 +398,7 @@
   padding: 1.25rem 1.5rem !important;
   margin-bottom: 0.75rem !important;
   box-shadow: @cardShadowRest;
+  align-items: flex-start;
 }
 
 /* ======================================
@@ -408,7 +414,6 @@
 
 /* ======================================
    Hide duplicate "New upload" button from InvenioRDM empty-state
-   (we have our own circle button on desktop and mobile action bar on small screens)
 ====================================== */
 .uploads-search-app .ui.placeholder.segment .ui.positive.button,
 .uploads-search-app .ui.segment.placeholder .ui.positive.button {
@@ -576,7 +581,7 @@
   /* Slightly smaller font on mobile search input */
   .uploads-search-app .row.mobile.tablet.only input,
   .requests-search-app .row.mobile.tablet.only input {
-    font-size: 14px !important;
+    font-size: @font-size-sm !important;
   }
 
   /* Upload circle: scale down on mobile */

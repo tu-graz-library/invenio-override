@@ -39,7 +39,7 @@ h2 {
 ====================================== */
 
 .frontpage-hero-section {
-  background: linear-gradient(180deg, #dcdee0 0%, #f0f0f0 100%);
+  background: transparent;
   border-bottom: none;
   padding: 6rem 0 2rem;
   text-align: center;
@@ -68,10 +68,11 @@ h2 {
 }
 
 #hero-canvas line.hline {
-  stroke: rgba(100, 110, 140, 0.13);
+  stroke: rgba(100, 110, 140, 0.18);
   stroke-width: 0.6;
   transition: stroke 0.35s ease;
 }
+
 
 /* On pillar hover — nodes and lines turn red */
 .hero-hover-rdm circle.node-rdm,
@@ -147,7 +148,7 @@ h2 {
    Inner page title banner
 ====================================== */
 .page-inner-banner {
-  background: linear-gradient(180deg, #dcdee0 0%, #f0f0f0 100%);
+  background: transparent;
   padding: @pageInnerBannerPaddingTop 0 @pageInnerBannerPaddingBottom;
   text-align: center;
 }
@@ -188,8 +189,13 @@ h2 {
   width: 100% !important;
 }
 
+.frontpage-search-wrapper .ui.selection.dropdown,
+.frontpage-search-wrapper .ui.dropdown {
+  font-size: @font-size-base !important;
+}
+
 .frontpage-search-wrapper .ui.icon.input > input {
-  font-size: 0.95rem !important;
+  font-size: @font-size-base !important;
   padding-top: 0.85em !important;
   padding-bottom: 0.85em !important;
   border-radius: @radiusPill 0 0 @radiusPill !important;
@@ -219,19 +225,18 @@ h2 {
   width: 100% !important;
   border-color: @overridePrimary !important;
   border-radius: 0 0 1.5rem 1.5rem !important;
-  background: rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   overflow: hidden !important;
-  /* Force GPU compositing so border-radius is preserved during transition */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  isolation: isolate;
 }
 
 .frontpage-search-wrapper .ui.search > .results .result:last-child,
 .frontpage-search-wrapper .ui.search > .results .result:last-child:hover,
 .frontpage-search-wrapper .ui.search > .results .result:last-child.active {
   border-radius: 0 0 1.5rem 1.5rem !important;
+  overflow: hidden !important;
 }
 
 /* ======================================
@@ -251,11 +256,11 @@ h2 {
   align-items: center;
   gap: 0.5rem;
   color: @recordText;
-  font-size: 1rem;
+  font-size: @font-size-base;
 
   i.icon {
     color: @overridePrimary;
-    font-size: 1.1rem;
+    font-size: @font-size-nav;
     margin: 0;
   }
 }
@@ -348,11 +353,10 @@ h2 {
 }
 
 .frontpage-pillar-title {
-  font-size: 0.85rem;
+  font-size: @font-size-base;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: @recordLightText;
+  letter-spacing: 0px;
+  color: #000000;
   transition: color 0.2s ease;
   white-space: nowrap;
 }
@@ -365,7 +369,7 @@ h2 {
    Below-hero gradient continuation
 ====================================== */
 .frontpage-below-hero {
-  background: linear-gradient(180deg, #f0f0f0 0%, #ffffff 100%);
+  background: transparent;
   padding-bottom: 0.5rem;
 }
 
@@ -378,10 +382,10 @@ h2 {
   .more {
     display: inline-block;
     padding: 0.5em 1.3em;
-    border: 1.5px solid @recordText;
+    border: 1px solid #000000;
     border-radius: @radiusPill;
-    color: @recordText;
-    font-size: 0.85rem;
+    color: #000000;
+    font-size: @font-size-sm;
     font-weight: 500;
     background: transparent;
     text-decoration: none !important;
@@ -428,7 +432,7 @@ h2 {
   white-space: nowrap;
   color: @primaryText;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: @font-size-base;
   text-decoration: none !important;
   transition: color 0.2s ease;
 
@@ -445,7 +449,7 @@ h2 {
 
     i.icon {
       margin: 0 !important;
-      font-size: 0.75rem;
+      font-size: @font-size-xs;
       line-height: 1 !important;
     }
   }
@@ -489,7 +493,7 @@ h2 {
     margin-bottom: 0.25rem;
 
     a {
-      font-size: 1.15rem;
+      font-size: @font-size-nav;
       color: @primaryText;
       font-weight: 600;
       text-decoration: none;
@@ -511,7 +515,7 @@ h2 {
 
   .record-card-description {
     color: @primaryText;
-    font-size: 0.95rem;
+    font-size: @font-size-base;
     line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -522,7 +526,7 @@ h2 {
 
 .record-card-meta {
   color: @recordLightText;
-  font-size: 0.9rem;
+  font-size: @font-size-sm;
   margin-top: 0.75rem;
   display: flex;
   justify-content: space-between;
@@ -535,7 +539,7 @@ h2 {
   display: flex;
   gap: 1rem;
   color: @recordLightText;
-  font-size: 0.9rem;
+  font-size: @font-size-sm;
 
   span {
     display: inline-flex;
@@ -605,7 +609,7 @@ h2 {
   .btn:hover {
     background: @primaryLinkHoverBackground;
     color: @primaryButton;
-    font-size: 1rem;
+    font-size: @font-size-base;
     font-weight: bold;
   }
 }
@@ -630,7 +634,9 @@ h2 {
    Frontpage — reasons card (dark gradient, two-column)
 ====================================== */
 .fp-reasons-section {
-  background: linear-gradient(120deg, lighten(@footerBottomBackground, 8%) 0%, lighten(@footerBottomBackground, 16%) 100%);
+  background: radial-gradient(ellipse at 15% 55%, #e8e8e8 0%, #c9c9c9 100%);
+  border: @borderSubtle;
+  box-shadow: 0 4px 24px rgba(255, 255, 255, 0.7), 0 1px 4px rgba(0, 0, 0, 0.05);
   border-radius: @radiusCardLarge;
   padding: 2rem 2.5rem;
   margin-top: 2.5rem;
@@ -640,18 +646,6 @@ h2 {
   gap: 1.5rem;
   overflow: hidden;
   position: relative;
-
-  /* Radial glow behind the title on the left */
-  &::after {
-    content: '';
-    position: absolute;
-    left: -5%;
-    top: -30%;
-    width: 55%;
-    height: 160%;
-    background: radial-gradient(ellipse, rgba(255,255,255,0.22) 0%, transparent 70%);
-    pointer-events: none;
-  }
 }
 
 .fp-reasons-left {
@@ -664,9 +658,9 @@ h2 {
 }
 
 .fp-reasons-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #ffffff;
+  color: @primaryText;
   margin: 0;
   line-height: 1.3;
 }
@@ -674,20 +668,21 @@ h2 {
 .fp-reasons-more {
   display: inline-block;
   padding: 0.5em 1.1em;
-  border: 1.5px solid rgba(255,255,255,0.5);
+  border: 1.5px solid @overridePrimary;
   border-radius: @radiusPill;
-  color: #ffffff !important;
-  font-size: 0.85rem;
+  color: @recordText !important;
+  font-size: @font-size-sm;
   font-weight: 500;
   text-decoration: none !important;
-  background: rgba(255,255,255,0.08);
-  transition: background 0.2s ease, border-color 0.2s ease;
+  background: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
   white-space: nowrap;
   align-self: flex-start;
 
   &:hover {
-    background: rgba(255,255,255,0.18);
-    border-color: rgba(255,255,255,0.8);
+    border-color: @overridePrimary;
+    background: fade(@overridePrimary, 10%);
+    color: @overridePrimary !important;
   }
 }
 
@@ -699,22 +694,25 @@ h2 {
 
 .fp-reasons-strip {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, auto);
   gap: 0.45rem 2rem;
   margin-left: auto;
   margin-right: 0;
   width: fit-content;
+  line-height: normal;
+  align-items: center;
 }
 
 .fp-reason-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.45rem;
-  color: rgba(255,255,255,0.75);
-  font-size: 0.9rem;
+  color: @recordText;
+  font-size: @font-size-base;
+  line-height: normal;
 
   strong {
-    color: #ffffff;
+    color: @primaryText;
     font-weight: 600;
   }
 }
@@ -723,7 +721,8 @@ h2 {
   width: 1.4rem;
   height: 1.4rem;
   flex-shrink: 0;
-  stroke: fade(@overridePrimary, 80%);
+  margin-top: 0.15em;
+  stroke: @primaryText;
 }
 
 /* Responsive: stack on tablet/mobile */

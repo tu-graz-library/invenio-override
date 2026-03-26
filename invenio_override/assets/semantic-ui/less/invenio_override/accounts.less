@@ -38,7 +38,7 @@
   color: @primaryButton;
   font-family: "Source Sans Pro";
   font-weight: 300;
-  font-size: 16px;
+  font-size: @font-size-base;
 }
 .tu-button-style button:hover {
   cursor: pointer;
@@ -91,7 +91,7 @@
 
 .accounts-subtitle {
   color: rgba(0, 0, 0, 0.55);
-  font-size: 0.95rem;
+  font-size: @font-size-base;
   margin-top: 0.25rem;
   margin-bottom: 0;
 }
@@ -214,7 +214,7 @@
   }
 
   .login-section-label {
-    font-size: 0.95rem;
+    font-size: @font-size-base;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.65);
     margin-bottom: 1.1rem;
@@ -229,7 +229,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: @font-size-sm;
     color: rgba(0, 0, 0, 0.6);
 
     a {
@@ -279,7 +279,7 @@
   padding: 1rem 0.5rem;
 
   h4 {
-    font-size: 1rem;
+    font-size: @font-size-base;
     font-weight: 600;
     margin-bottom: 0.35rem;
     color: rgba(0, 0, 0, 0.75);
@@ -287,7 +287,7 @@
 
   p {
     color: rgba(0, 0, 0, 0.6);
-    font-size: 0.95rem;
+    font-size: @font-size-base;
     margin-bottom: 1.25rem;
     line-height: 1.5;
   }
@@ -305,7 +305,7 @@
   padding: 1.75rem 2rem;
 
   .register-card-title {
-    font-size: 1rem;
+    font-size: @font-size-base;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.75);
     margin-bottom: 1.25rem;
@@ -330,5 +330,39 @@
   }
   #switch_right {
     order: 1;
+  }
+}
+
+/* ======================================
+   Settings pages — card style
+====================================== */
+.invenio-page-body .ui.vertical.fluid.menu {
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  overflow: hidden;
+}
+
+.invenio-page-body .ui.segments {
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+
+  > .ui.segment {
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+
+    &:first-child {
+      border-top: none;
+      border-radius: @radiusCardLarge @radiusCardLarge 0 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 @radiusCardLarge @radiusCardLarge;
+    }
   }
 }

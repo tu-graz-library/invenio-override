@@ -7,8 +7,11 @@
 
 /* ======================================
    Deposit page — wider container
+   #rdm-deposit-form  = RDM records (Container has this id)
+   marc21 Container has no id — target it via its mount div
 ====================================== */
-#rdm-deposit-form {
+#rdm-deposit-form,
+#marc21-deposit-form .ui.container {
   max-width: 1350px !important;
   width: 95% !important;
 }
@@ -16,7 +19,8 @@
 /* ======================================
    Deposit form — accordion sections (card style)
 ====================================== */
-#deposit-form .ui.accordion.invenio-accordion-field {
+#deposit-form .ui.accordion.invenio-accordion-field,
+#marc21-deposit-form .ui.accordion.invenio-accordion-field {
   background: #ffffff;
   border: @borderSubtle;
   border-radius: @radiusCardLarge;
@@ -33,7 +37,7 @@
     padding: 0.85rem 1.25rem !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: @font-size-base;
 
     /* Chevron / icon — keep it subtle */
     i.icon {
@@ -48,7 +52,8 @@
 }
 
 /* Error state — red border on accordion card */
-#deposit-form .ui.accordion.invenio-accordion-field.error {
+#deposit-form .ui.accordion.invenio-accordion-field.error,
+#marc21-deposit-form .ui.accordion.invenio-accordion-field.error {
   border-color: rgba(159, 58, 56, 0.45) !important;
 
   > .title {
@@ -60,7 +65,8 @@
 /* ======================================
    Deposit form — group fields (nested repeated fields)
 ====================================== */
-#deposit-form .invenio-group-field.fields {
+#deposit-form .invenio-group-field.fields,
+#marc21-deposit-form .invenio-group-field.fields {
   background-color: rgba(0, 0, 0, 0.02) !important;
   border: 1px solid rgba(0, 0, 0, 0.07) !important;
   border-radius: @radiusCard !important;
@@ -70,7 +76,8 @@
 /* ======================================
    Deposit form — right sidebar cards
 ====================================== */
-#deposit-form .deposit-sidebar {
+#deposit-form .deposit-sidebar,
+#marc21-deposit-form .deposit-sidebar {
 
   /* Each card in the sidebar gets the same card style as search result cards */
   .ui.card {
@@ -107,6 +114,7 @@
 
 /* Override the full-width top-attached banner → inline card before the form grid */
 #deposit-form .ui.message.flashed.top.attached,
+#marc21-deposit-form .ui.message.flashed.top.attached,
 .ui.message.flashed.top.attached[id$="-feedback-div"] {
   /* Flow naturally in the DOM — sits between page title and .ui.grid.mt-25 */
   position: relative !important;
@@ -116,14 +124,14 @@
   left: auto !important;
 
   display: block !important;
-  width: auto !important;
+  width: fit-content !important;
   max-width: 68.75% !important; /* matches computer={11} out of 16 columns */
+  margin: 0 auto 1.25rem auto !important;
 
   border-radius: @radiusCardLarge !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
   border: @borderSubtle !important;
   padding: 1rem 1.5rem !important;
-  margin: 0 0 1.25rem 0 !important;
 
   z-index: auto;
   animation: depositToastIn 0.25s ease;
@@ -147,22 +155,36 @@
 }
 
 /* ======================================
+   Deposit form — curation request list
+   Remove border/spacing from .extra that search.less adds globally;
+====================================== */
+#deposit-form .ui.items > .item > .content > .extra:not(.labels-actions),
+#marc21-deposit-form .ui.items > .item > .content > .extra:not(.labels-actions) {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* ======================================
    Deposit form — responsive
 ====================================== */
 @media (max-width: 991px) {
   /* On tablet/mobile the column is 16-wide (full width) */
   #deposit-form .ui.message.flashed.top.attached,
+  #marc21-deposit-form .ui.message.flashed.top.attached,
   .ui.message.flashed.top.attached[id$="-feedback-div"] {
     max-width: 100% !important;
   }
 }
 
 @media (max-width: 767px) {
-  #deposit-form .ui.accordion.invenio-accordion-field {
+  #deposit-form .ui.accordion.invenio-accordion-field,
+  #marc21-deposit-form .ui.accordion.invenio-accordion-field {
     margin-bottom: 0.75rem !important;
   }
 
-  #deposit-form .deposit-sidebar .ui.card {
+  #deposit-form .deposit-sidebar .ui.card,
+  #marc21-deposit-form .deposit-sidebar .ui.card {
     margin-bottom: 0.75rem !important;
   }
 }

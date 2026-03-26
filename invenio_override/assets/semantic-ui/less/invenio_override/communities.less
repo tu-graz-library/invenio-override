@@ -19,9 +19,33 @@
 /* ======================================
    Upstream overrides — page subheader
 ====================================== */
+/* Remove base #ededed background on community detail subheader */
+.ui.container.page-subheader-outer {
+  background-color: transparent !important;
+}
+
 /* Hide the upstream communities search subheader — page-inner-banner already renders the title */
 .ui.container.page-subheader-outer.compact {
   display: none !important;
+}
+
+#deposit-form .ui.container.page-subheader-outer.compact {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  margin: 0 0 1em 0 !important;
+  padding: 0.7em 0 !important;
+  background: transparent !important;
+}
+
+#deposit-form .ui.container.page-subheader-outer.compact .page-subheader {
+  display: flex !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
 }
 
 /* ======================================

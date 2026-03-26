@@ -42,14 +42,23 @@
   #}
 
   {%- block page_inner_banner %}
-  {%- if title %}
+  {%- set _path = request.path %}
+  {%- if title or _path == '/publications/search' %}
   <div class="page-inner-banner">
     <div class="ui container">
-      <h1 class="page-inner-banner-title">{{ title }}</h1>
+      <h1 class="page-inner-banner-title">{{ title or _("Publications") }}</h1>
       {%- if page_description %}
       <p class="page-inner-banner-description">{{ page_description }}</p>
-      {%- elif request.path == '/communities/new' %}
+      {%- elif _path in ['/communities', '/communities-search', '/communities/search'] %}
+      <p class="page-inner-banner-description">{{ _("Organize, curate and collaborate on records for your institution, project, topic or event.") }}</p>
+      {%- elif _path == '/communities/new' %}
       <p class="page-inner-banner-description">{{ _("Create a community to organize and share your research outputs.") }}</p>
+      {%- elif _path.startswith('/account/settings') %}
+      <p class="page-inner-banner-description">{{ _("Manage your profile, security and connected applications.") }}</p>
+      {%- elif _path == '/publications/search' %}
+      <p class="page-inner-banner-description">{{ _("Search and discover scientific publications from TU Graz.") }}</p>
+      {%- elif _path == '/oer/search' %}
+      <p class="page-inner-banner-description">{{ _("Search and discover open educational resources.") }}</p>
       {%- endif %}
     </div>
   </div>

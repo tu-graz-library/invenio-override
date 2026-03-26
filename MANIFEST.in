@@ -16,6 +16,7 @@ recursive-include invenio_override/translations *.po *.pot *.mo
 # added by check_manifest.py
 include *.md
 include *.rst
+include *.example
 include *.sh
 include *.txt
 include *.rst

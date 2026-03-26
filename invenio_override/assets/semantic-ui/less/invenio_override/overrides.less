@@ -34,6 +34,8 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #f0f0f0;
+  background-image: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -62,13 +64,13 @@ pre,
 }
 
 /* consistent heading sizes */
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
+h1 { font-size: @font-size-2xl; }
+h2 { font-size: @font-size-xl; }
+h3 { font-size: @font-size-lg; }
 h4 { font-size: 1.1rem; }
 
 pre {
-  font-size: 14px;
+  font-size: @font-size-sm;
 }
 
 /* ======================================
@@ -389,7 +391,7 @@ pre {
 }
 
 .menus {
-  font-size: 16.8px;
+  font-size: @font-size-base;
 }
 
 /* ======================================
@@ -484,4 +486,38 @@ html {
 
 .ui.padded.segments.large.form > .ui.segment:first-child {
   border-top: none !important;
+}
+
+
+/* ======================================
+   Request detail — tab panels
+====================================== */
+#conversation-tab-panel,
+#record-tab-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+#conversation-tab-panel {
+  padding-top: 1rem !important;
+}
+
+#record-tab-panel .ui.relaxed.grid {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ======================================
+   Request detail — grid columns as cards
+   Scoped to top-level React grid only to avoid
+   nested card-in-card in the Record preview tab
+====================================== */
+#request-detail > .ui.grid > .column {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem !important;
 }

@@ -25,7 +25,7 @@
     {% set pub_option = {
         "key": "marc21",
         "text": "Publications",
-        "value": url_for("invenio_records_marc21.search"),
+        "value": "/publications/search",
         "title": "Publication",
     } %}
     {% set options = options + [pub_option] %}
@@ -35,7 +35,7 @@
     {% set edu_option = {
         "key": "lom",
         "text": "Educational Resources",
-        "value": url_for("invenio_records_lom.search"),
+        "value": "/oer/search",
         "title": "OER",
     } %}
     {% set options = options + [edu_option] %}
@@ -169,7 +169,7 @@
         </a>
 
         {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH or config.get('OVERRIDE_SHOW_PUBLICATIONS_CARD') %}
-        <a href="/records/search?q=&f=resource_type%3Apublication&l=list&p=1&s=10&sort=newest" class="frontpage-pillar" data-hero-group="pub" title="{{ _('Search publications') }}">
+        <a href="/publications/search" class="frontpage-pillar" data-hero-group="pub" title="{{ _('Search publications') }}">
           <div class="frontpage-pillar-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="10" y="6" width="22" height="30" rx="1"/><rect x="16" y="12" width="22" height="30" rx="1"/>
@@ -181,7 +181,7 @@
         {% endif %}
 
         {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES or config.get('OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD') %}
-        <a href="{% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES %}{{ url_for('invenio_records_lom.search') }}{% else %}/oer/search{% endif %}" class="frontpage-pillar" data-hero-group="edu" title="{{ _('Search educational resources') }}">
+        <a href="/oer/search" class="frontpage-pillar" data-hero-group="edu" title="{{ _('Search educational resources') }}">
           <div class="frontpage-pillar-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M24 8 L6 18 L24 28 L42 18 Z"/>

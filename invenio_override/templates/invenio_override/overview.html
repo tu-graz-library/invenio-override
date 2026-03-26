@@ -22,7 +22,7 @@
 <section class="ui container rel-mt-3 dashboard-overview">
   <div id="dashboard-overview"
        data-show-curations="{{ 'true' if current_menu.submenu('dashboard').submenu('curation-overview').visible else 'false' }}"
-       data-show-publications="{{ 'true' if config.get('OVERRIDE_SHOW_PUBLICATIONS_SEARCH') else 'false' }}">
+       data-show-publications="{{ 'true' if can_view_marc21 else 'false' }}">
   </div>
 </section>
 {%- endblock page_body %}

@@ -1,6 +1,5 @@
 {#
-  Copyright (C) 2020-2023 Graz University of Technology.
-  Copyright (C) 2026 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
   invenio-override is free software; you can redistribute it and/or
   modify it under the terms of the MIT License; see LICENSE file for more
@@ -32,18 +31,17 @@
       <div class="login-flash-messages">{{ flashed_messages() }}</div>
 
       {% if config.OAUTHCLIENT_REMOTE_APPS %}
-      {% set displayed_providers = [] %}
+      {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
       {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
-      {% if app.title == "Meduni SSO" and "Meduni SSO" not in displayed_providers %}
+      {% if not allowed or name in allowed %}
       <div class="login-oauth-section">
         {{ oauth_button(name, next=request.args.get('next')) }}
       </div>
-      {% set _ = displayed_providers.append(app.title) %}
       {% endif %}
       {% endfor %}
       {% endif %}
 
-      {%- if has_displayed_sso and has_local_login %}
+      {%- if config.OAUTHCLIENT_REMOTE_APPS and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
       <div class="ui horizontal divider login-divider">{{ _("Or") }}</div>
       {%- endif %}
 

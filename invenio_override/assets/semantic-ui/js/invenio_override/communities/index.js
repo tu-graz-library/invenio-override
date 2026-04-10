@@ -1,4 +1,4 @@
-// Copyright (C) 2026 Shared RDM.
+// Copyright (C) 2020-2026 Graz University of Technology.
 
 import { CommunityCards } from "./CommunityCards";
 import React from "react";

@@ -1,6 +1,5 @@
 {#
-  Copyright (C) 2020-2023 Graz University of Technology.
-  Copyright (C) 2026 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
   invenio-override is free software; you can redistribute it and/or
   modify it under the terms of the MIT License; see LICENSE file for more
@@ -43,12 +42,13 @@
         <h3 class="footer-heading">{{ _(column_title) }}</h3>
         <ul class="footer-links">
           {% for link in links %}
+          {%- set is_external = link.get('external', False) %}
           <li>
             {% if link.get('url') %}
             <a href="{{ link.url }}" title="{{ link.get('title', link.label) }}"
-              {% if link.get('external', False) %}target="_blank" rel="noopener noreferrer"{% endif %}>
+              {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
               {{ _(link.label) }}
-              {% if link.get('external', False) %}<i class="external alternate icon"></i>{% endif %}
+              {% if is_external %}<i class="external alternate icon"></i>{% endif %}
               {% if link.get('icon') %}<i class="{{ link.icon }} icon"></i>{% endif %}
             </a>
             {% else %}

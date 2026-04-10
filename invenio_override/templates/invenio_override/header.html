@@ -1,6 +1,5 @@
 {#
-  Copyright (C) 2020-2023 Graz University of Technology.
-  Copyright (C) 2026 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
   invenio-override is free software; you can redistribute it and/or
   modify it under the terms of the MIT License; see LICENSE file for more
@@ -49,6 +48,12 @@
       <h1 class="page-inner-banner-title">{{ title or _("Publications") }}</h1>
       {%- if page_description %}
       <p class="page-inner-banner-description">{{ page_description }}</p>
+      {%- elif _path == '/me/uploads' %}
+      <p class="page-inner-banner-description">{{ _("Manage and publish your research data, publications and other outputs.") }}</p>
+      {%- elif _path == '/me/requests' %}
+      <p class="page-inner-banner-description">{{ _("Manage your open requests and collaborations.") }}</p>
+      {%- elif _path == '/me/communities' %}
+      <p class="page-inner-banner-description">{{ _("Manage your communities and collaborate with others.") }}</p>
       {%- elif _path in ['/communities', '/communities-search', '/communities/search'] %}
       <p class="page-inner-banner-description">{{ _("Organize, curate and collaborate on records for your institution, project, topic or event.") }}</p>
       {%- elif _path == '/communities/new' %}

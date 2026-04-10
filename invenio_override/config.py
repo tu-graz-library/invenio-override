@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2020-2023 Graz University of Technology.
-# Copyright (C) 2024 Shared RDM.
+# Copyright (C) 2020-2026 Graz University of Technology.
 #
 # invenio_override is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -89,6 +88,23 @@ OVERRIDE_REASONS_PARTNER = "CERN"
 
 OVERRIDE_REASONS_BG = None
 """CSS background for the 'Why use X?' reasons strip (e.g. 'linear-gradient(120deg, #5e5e5e 0%, #727272 100%)'). None = use Less variable @footerBottomBackground."""
+
+OVERRIDE_LOGIN_OAUTH_PROVIDERS = None
+"""OAuth provider keys to show on the login page (e.g. ['keycloak_mug']).
+None = show all providers configured in OAUTHCLIENT_REMOTE_APPS."""
+
+OVERRIDE_HEADER_LOGO_LEFT = None
+"""Path to a secondary logo shown on the left side of the navbar (e.g. 'images/library_logo.png').
+None = no secondary logo displayed."""
+
+OVERRIDE_HEADER_TEXT_LINE1 = None
+"""First line of institution text shown in the navbar next to the logo (e.g. 'TU GRAZ'). None = hidden."""
+
+OVERRIDE_HEADER_TEXT_LINE2 = None
+"""Second line of institution text shown in the navbar (e.g. 'REPOSITORY'). None = hidden."""
+
+OVERRIDE_HEADER_TEXT_LINE3 = None
+"""Third line of institution text shown in the navbar (e.g. 'LIBRARY & ARCHIVES'). None = hidden."""
 
 OVERRIDE_FOOTER_BACKGROUND = None
 """CSS background color for the footer (e.g. '#4a4a4a'). None = use @footerBottomBackground from variables.less."""

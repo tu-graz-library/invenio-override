@@ -1,11 +1,15 @@
 {#
-  Copyright (C) 2021 CERN.
-  Copyright (C) 2021 Graz University of Technology.
-  Copyright (C) 2021 TU Wien.
-  Copyright (C) 2026 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
-  Invenio App RDM is free software; you can redistribute it and/or modify it
-  under the terms of the MIT License; see LICENSE file for more details.
+  invenio-override is free software; you can redistribute it and/or
+  modify it under the terms of the MIT License; see LICENSE file for more
+  details.
+
+  Overrides: invenio_app_rdm/help/search.de.html
+  Changes:
+    - Added page_description for the page inner banner.
+    - Removed the upstream h1 heading and intro paragraph from the body
+      since the banner already renders the title and description.
 #}
 {%- set title = _("Search guide") %}
 {%- set page_description = _("Diese Anleitung erklärt anhand von leicht verständlichen Beispielen, wie man erweiterte Suchanfragen schreibt.") %}

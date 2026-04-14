@@ -19,7 +19,7 @@ except ImportError:
     current_identity_can_view = lambda: False
 
 from . import config
-from .views import blueprint, index, locked, require_authenticated
+from .views import blueprint, index, locked, make_redirect, require_authenticated
 
 
 class InvenioOverride(object):
@@ -40,6 +40,12 @@ class InvenioOverride(object):
         app.extensions["invenio-override"] = self
         routes = app.config.get("OVERRIDE_ROUTES")
         blueprint.add_url_rule(routes["index"], view_func=index)
+
+        for path, target in app.config.get("OVERRIDE_DOC_REDIRECTS", {}).items():
+            endpoint = "doc_redirect_" + path.strip("/").replace("-", "_")
+            blueprint.add_url_rule(
+                path, endpoint=endpoint, view_func=make_redirect(target)
+            )
 
         @app.context_processor
         def inject_visibility():

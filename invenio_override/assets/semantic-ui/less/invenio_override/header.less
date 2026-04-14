@@ -16,12 +16,6 @@ header > nav {
 /* ======================================
    Header logo — TU Graz SVG hover
 ====================================== */
-.affiliation-logo #int-header-logo-img {
-  transition: filter 0.2s ease;
-}
-.affiliation-logo:hover #int-header-logo-img {
-  filter: brightness(0);
-}
 
 /* ======================================
    ROW 1: Top navigation bar
@@ -218,6 +212,20 @@ header > nav {
   }
 }
 
+/* Inside topbar pill — login/signup hover matches nav links (red) */
+.header-topbar-inner .short-menu-right-button {
+  margin: 0 10px;
+  padding: 0;
+
+  &:hover {
+    background-color: transparent;
+
+    a {
+      color: @primaryText;
+    }
+  }
+}
+
 /* ======================================
    ROW 3: Logo section
 ====================================== */
@@ -248,8 +256,6 @@ header > nav {
 }
 
 .affiliation-text a:hover {
-  background-color: @primaryLinkHoverBackground;
-  color: @primaryLink;
   text-decoration: none;
 }
 
@@ -264,8 +270,6 @@ header > nav {
 
 .affiliation-logo:hover {
   text-decoration: none;
-  fill: @primaryLinkHoverBackground;
-  color: @primaryLinkHoverBackground;
 }
 
 .affiliation-logo-claim {
@@ -365,6 +369,17 @@ svg:not(:root) {
 /* ======================================
    Responsive
 ====================================== */
+/* Tablet: tighten nav so items stay on one row */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .header-topbar-link {
+    font-size: 14px !important;
+    padding: 0.3em 0.5em !important;
+  }
+  .header-topbar-lang {
+    margin-left: 1rem !important;
+  }
+}
+
 @media screen and (max-width: 767.9px) {
   .header-topbar-inner {
     gap: 1rem;

@@ -341,7 +341,7 @@ msgstr "Startseite"
 #: invenio_override/templates/semantic-ui/invenio_app_rdm/users/communities.html:18
 #, fuzzy
 msgid "Communities"
-msgstr "Gemeinschaften."
+msgstr "Communities"
 
 #: build/lib/invenio_override/templates/invenio_override/header.html:41
 #: invenio_override/templates/invenio_override/navbar.html:122
@@ -587,7 +587,7 @@ msgstr "Uploads erhalten eine DOI, die sie leicht und eindeutig zitierbar macht.
 #: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:29
 #: invenio_override/templates/invenio_override/accounts/register_user.html:31
 msgid "Communities."
-msgstr "Gemeinschaften."
+msgstr "Communities"
 
 #: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:31
 #: invenio_override/templates/invenio_override/accounts/register_user.html:32
@@ -912,6 +912,47 @@ msgstr "Verwalten Sie Ihr Profil, Ihre Einstellungen und Kontooptionen."
 #: invenio_override/templates/semantic-ui/invenio_theme/page_settings.html:27
 msgid "Account settings"
 msgstr "Kontoeinstellungen"
+
+#: invenio_override/templates/invenio_override/header_frontpage.html
+msgid "All"
+msgstr "Alle"
+
+#: invenio_override/templates/invenio_override/header_frontpage.html
+msgid "Publish and share your research data — citable, visible, and FAIR."
+msgstr "Forschungsdaten veröffentlichen und teilen — zitierbar, sichtbar und FAIR."
+
+#: invenio_override/templates/invenio_override/header_frontpage.html
+msgid "TU Graz Research Data Repository"
+msgstr "TU Graz Research Data Repository"
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "REPOSITORY"
+msgstr "Repository"
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "LIBRARY & ARCHIVES"
+msgstr "Bibliothek und Archiv"
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "SCIENCE"
+msgstr "WISSEN"
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "TECHNOLOGY"
+msgstr "TECHNIK"
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "PASSION"
+msgstr "LEIDENSCHAFT"
+
+msgid "Accessibility Statement"
+msgstr "Erklärung zur Barrierefreiheit"
+
+msgid "List of preferred file formats"
+msgstr "Liste bevorzugter Dateiformate"
+
+msgid "Curation Workflow"
+msgstr "Kurations-Workflow"
 
 #~ msgid "Search"
 #~ msgstr "Suchen"

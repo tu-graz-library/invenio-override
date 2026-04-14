@@ -835,6 +835,26 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "REPOSITORY"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "LIBRARY & ARCHIVES"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "SCIENCE"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "TECHNOLOGY"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html
+msgid "PASSION"
+msgstr ""
+
 #: invenio_override/templates/semantic-ui/invenio_theme/page_settings.html:21
 msgid "My account"
 msgstr ""

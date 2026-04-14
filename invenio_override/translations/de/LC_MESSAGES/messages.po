@@ -4,7 +4,6 @@
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: invenio-override 0.0.3\n"
@@ -317,7 +316,7 @@ msgstr "Neueste Uploads"
 
 #: invenio_override/templates/invenio_override/recent_uploads.html:17
 msgid "Explore Research Results available in the repository."
-msgstr ""
+msgstr "Forschungsergebnisse im Repository entdecken."
 
 #: invenio_override/templates/invenio_override/recent_uploads.html:19
 msgid "There are no public records to show."
@@ -490,6 +489,119 @@ msgstr "Mit sharedRDM registrieren"
 #: invenio_override/templates/invenio_override/accounts/register_user.html:66
 msgid "Sign up with repository credentials"
 msgstr "Mit Repository-Zugangsdaten registrieren"
+
+#: invenio_override/templates/invenio_override/navbar.html:125
+msgid "My Uploads"
+msgstr "Meine Uploads"
+
+#: invenio_override/templates/invenio_override/navbar.html:126
+msgid "My Requests"
+msgstr "Meine Anfragen"
+
+#: invenio_override/templates/invenio_override/navbar.html:134
+msgid "My Communities"
+msgstr "Meine Gruppen"
+
+#: invenio_override/templates/invenio_override/navbar.html:135
+msgid "All Communities"
+msgstr "Alle Gruppen"
+
+#: invenio_override/templates/invenio_override/navbar.html:136
+msgid "New Community"
+msgstr "Neue Gruppe"
+
+#: invenio_override/templates/invenio_override/navbar.html:143
+msgid "Administration"
+msgstr "Administration"
+
+#: invenio_override/templates/invenio_override/navbar.html:148
+msgid "Help"
+msgstr "Hilfe"
+
+#: invenio_override/templates/invenio_override/navbar.html:153
+msgid "Contact"
+msgstr "Kontakt"
+
+#: invenio_override/templates/invenio_override/navbar.html:186
+msgid "Close"
+msgstr "Schließen"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:12
+#, python-format
+msgid "Why use the %(title)s?"
+msgstr "Warum %(title)s verwenden?"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:13
+msgid "View statistics"
+msgstr "Statistiken anzeigen"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:23
+msgid "permanently available"
+msgstr "dauerhaft verfügbar"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:39
+msgid "DOI for every upload"
+msgstr "DOI für jeden Upload"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:49
+msgid "Curated"
+msgstr "Kuratiert"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:49
+msgid "review before publication"
+msgstr "Überprüfung vor der Veröffentlichung"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:57
+msgid "Flexible access"
+msgstr "Flexibler Zugang"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:57
+msgid "open or restricted"
+msgstr "offen oder eingeschränkt"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:65
+msgid "Versioned"
+msgstr "Versioniert"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:65
+msgid "update datasets easily"
+msgstr "Datensätze einfach aktualisieren"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:75
+msgid "Statistics"
+msgstr "Statistiken"
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:75
+msgid "usage stats on every record"
+msgstr "Nutzungsstatistiken für jeden Datensatz"
+
+#: invenio_override/templates/invenio_override/recent_uploads.html:14
+msgid "All uploads"
+msgstr "Alle Uploads"
+
+#: invenio_override/templates/invenio_override/recent_uploads.html:80
+msgid "Uploaded on"
+msgstr "Hochgeladen am"
+
+#: invenio_override/templates/invenio_override/overview.html:13
+msgid "Manage your uploads, communities and requests."
+msgstr "Verwalten Sie Ihre Uploads, Gruppen und Anfragen."
+
+#: invenio_override/templates/invenio_override/header_frontpage.html:140
+msgid "FAIR Data"
+msgstr "FAIR-Daten"
+
+#: invenio_override/templates/invenio_override/header_frontpage.html:141
+msgid "Citable with DOI"
+msgstr "Zitierbar mit DOI"
+
+#: invenio_override/templates/invenio_override/header_frontpage.html:142
+msgid "Open Access"
+msgstr "Open Access"
+
+#: invenio_override/templates/invenio_override/header_frontpage.html:143
+msgid "Long-term Preservation"
+msgstr "Langzeitarchivierung"
 
 #~ msgid "Search"
 #~ msgstr "Suchen"

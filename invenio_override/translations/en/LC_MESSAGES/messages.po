@@ -442,6 +442,99 @@ msgstr ""
 msgid "Sign up with repository credentials"
 msgstr ""
 
+#: invenio_override/templates/invenio_override/navbar.html:125
+msgid "My Uploads"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:126
+msgid "My Requests"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:134
+msgid "My Communities"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:135
+msgid "All Communities"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:136
+msgid "New Community"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:143
+msgid "Administration"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:148
+msgid "Help"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:153
+msgid "Contact"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/navbar.html:186
+msgid "Close"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:12
+#, python-format
+msgid "Why use the %(title)s?"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:13
+msgid "View statistics"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:23
+msgid "permanently available"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:39
+msgid "DOI for every upload"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:49
+msgid "Curated"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:49
+msgid "review before publication"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:57
+msgid "Flexible access"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:57
+msgid "open or restricted"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:65
+msgid "Versioned"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:65
+msgid "update datasets easily"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:75
+msgid "Statistics"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/frontpage_reasons.html:75
+msgid "usage stats on every record"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/recent_uploads.html:14
+msgid "All uploads"
+msgstr ""
+
+#: invenio_override/templates/invenio_override/recent_uploads.html:80
+msgid "Uploaded on"
+msgstr ""
+
 #~ msgid "Search"
 #~ msgstr ""
 

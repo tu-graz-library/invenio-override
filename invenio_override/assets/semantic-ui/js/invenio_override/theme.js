@@ -4,7 +4,7 @@ import $ from "jquery";
 import { MultipleOptionsSearchBar } from "@js/invenio_search_ui/components";
 import React from "react";
 import ReactDOM from "react-dom";
-import { i18next } from "@translations/invenio_app_rdm/i18next";
+import { i18next } from "@translations/invenio_override/i18next";
 import { CommunityCards } from "./communities/CommunityCards";
 import { overrideStore } from "react-overridable";
 import { UploadsResults } from "./UploadsResults";

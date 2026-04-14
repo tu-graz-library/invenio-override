@@ -3,12 +3,13 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import { Image, http } from "react-invenio-forms";
+import { i18next } from "@translations/invenio_override/i18next";
 import React, { Component } from "react";
 
 class CommunityCard extends Component {
   render() {
     const { community, defaultLogo } = this.props;
-    const title = community.metadata?.title || "Untitled";
+    const title = community.metadata?.title || i18next.t("Untitled");
     const description = community.metadata?.description || "";
     const href = `/communities/${community.slug}`;
 

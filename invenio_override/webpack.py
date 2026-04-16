@@ -20,6 +20,9 @@ theme = WebpackThemeBundle(
                 "invenio-override-dashboard": "./js/invenio_override/dashboard/index.js",
                 "invenio-override-communities": "./js/invenio_override/communities/index.js",
             },
+            aliases={
+                "@translations/invenio_override": "translations/invenio_override",
+            },
             dependencies={
                 "jquery": "^3.2.1",
                 # Peer dependencies required by react-searchkit 3.x

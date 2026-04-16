@@ -1,13 +1,13 @@
 import "semantic-ui-css";
 
 import $ from "jquery";
+import { CommunityCards } from "./communities/CommunityCards";
 import { MultipleOptionsSearchBar } from "@js/invenio_search_ui/components";
 import React from "react";
 import ReactDOM from "react-dom";
-import { i18next } from "@translations/invenio_app_rdm/i18next";
-import { CommunityCards } from "./communities/CommunityCards";
-import { overrideStore } from "react-overridable";
 import { UploadsResults } from "./UploadsResults";
+import { i18next } from "@translations/invenio_override/i18next";
+import { overrideStore } from "react-overridable";
 
 /* Register uploads results override — must run before invenio-app-rdm-user-uploads.js */
 overrideStore.add("InvenioAppRdm.DashboardUploads.SearchApp.results", UploadsResults);

@@ -33,7 +33,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #f0f0f0;
-  background-image: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
+  background-image: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
@@ -291,7 +291,15 @@ pre {
 }
 
 .flash-notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin: 5px 15px;
+
+  .flash-close-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
 }
 
 /* ======================================
@@ -496,12 +504,12 @@ html {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0 !important;
 }
 
 #conversation-tab-panel {
   padding-top: 1rem !important;
 }
+
 
 #record-tab-panel .ui.relaxed.grid {
   margin-left: 0 !important;

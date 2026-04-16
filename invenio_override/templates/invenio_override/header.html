@@ -42,7 +42,7 @@
 
   {%- block page_inner_banner %}
   {%- set _path = request.path %}
-  {%- if title or _path == '/publications/search' %}
+  {%- if (title or _path == '/publications/search') and not (_path.startswith('/records/') and not _path.startswith('/records/search')) %}
   <div class="page-inner-banner">
     <div class="ui container">
       <h1 class="page-inner-banner-title">{{ title or _("Publications") }}</h1>

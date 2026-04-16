@@ -14,7 +14,7 @@
 
 {% set base_option = {
     "key": "rdm",
-    "text": "Research Results",
+    "text": _("Research Results"),
     "value": "/records/search",
     "title": "Research Data",
 } %}
@@ -23,7 +23,7 @@
 {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH %}
     {% set pub_option = {
         "key": "marc21",
-        "text": "Publications",
+        "text": _("Publications"),
         "value": "/publications/search",
         "title": "Publication",
     } %}
@@ -33,7 +33,7 @@
 {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES %}
     {% set edu_option = {
         "key": "lom",
-        "text": "Educational Resources",
+        "text": _("Educational Resources"),
         "value": "/oer/search",
         "title": "OER",
     } %}
@@ -43,7 +43,7 @@
 {% if options | length > 1 %}
     {% set all_option = {
         "key": "records",
-        "text": "All",
+        "text": _("All"),
         "value": url_for("invenio_search_ui.search"),
         "title": "repo",
     } %}
@@ -142,9 +142,9 @@
           <span class="hero-trust-badge">{{ _("Open Access") }}</span>
           <span class="hero-trust-badge">{{ _("Long-term Preservation") }}</span>
         </div> #}
-        <h1 class="frontpage-hero-title">{{ config.THEME_FRONTPAGE_TITLE }}</h1>
+        <h1 class="frontpage-hero-title">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h1>
         {% if config.OVERRIDE_FRONTPAGE_SUBTITLE %}
-        <p class="frontpage-hero-subtitle">{{ config.OVERRIDE_FRONTPAGE_SUBTITLE }}</p>
+        <p class="frontpage-hero-subtitle">{{ _(config.OVERRIDE_FRONTPAGE_SUBTITLE) }}</p>
         {% endif %}
 
         <div class="frontpage-search-wrapper" style="max-width:600px; width:100%; margin:1.5rem 0 0;">

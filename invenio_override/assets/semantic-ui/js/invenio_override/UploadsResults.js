@@ -3,6 +3,7 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 import React from "react";
+import { i18next } from "@translations/invenio_override/i18next";
 import { ResultsList, Sort } from "react-searchkit";
 import { Grid, Segment } from "semantic-ui-react";
 import { InvenioSearchPagination } from "@js/invenio_search_ui/components";
@@ -30,7 +31,7 @@ export const UploadsResults = ({
                 className="small pt-5 pb-5 highlight-background"
               >
                 <Grid.Column width={4}>
-                  {total} result(s) found
+                  {i18next.t("{{total}} result(s) found", { total })}
                 </Grid.Column>
                 <Grid.Column width={12} textAlign="right">
                   {sortOptions && (

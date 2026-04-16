@@ -114,6 +114,16 @@ def comingsoon() -> str:
     return render_template("invenio_override/comingsoon.html")
 
 
+def make_redirect(target: str, endpoint: str = "redirect"):
+    """Return a view function that redirects to target."""
+
+    def view():
+        return redirect(target)
+
+    view.__name__ = endpoint
+    return view
+
+
 def locked(e) -> str:
     """
     Render the locked error page.

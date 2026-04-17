@@ -1,0 +1,39 @@
+{#
+  Copyright (C) 2020-2026 Graz University of Technology.
+
+  invenio-override is free software; you can redistribute it and/or
+  modify it under the terms of the MIT License; see LICENSE file for more
+  details.
+
+  Overrides: invenio_theme/macros/messages.html
+  Changes:
+    - Redesigned flash message layout with category icons and a close button.
+    - Wraps each message in a flashed-wrapper div for positioning.
+#}
+
+{%- macro flashed_messages(center_text=false) -%}
+  {%- block messages scoped %}
+  {%- for category, msg in get_flashed_messages(with_categories=True) %}
+    {%- set category = 'info' if category not in ['info', 'error', 'warning', 'success'] else category %}
+    <div class="flashed-wrapper">
+      <div class="ui {{ category }} flashed message">
+        <div class="flash-notification-content">
+          {%- if category == 'success' %}
+          <i class="check circle icon" aria-hidden="true"></i>
+          {%- elif category == 'warning' %}
+          <i class="exclamation triangle icon" aria-hidden="true"></i>
+          {%- elif category == 'error' %}
+          <i class="times circle icon" aria-hidden="true"></i>
+          {%- else %}
+          <i class="info circle icon" aria-hidden="true"></i>
+          {%- endif %}
+          <span role="alert" id="flash-message">{{ msg }}</span>
+          <button class="ui icon button close-btn flash-close-btn" aria-label="{{ _('Close') }}" type="button">
+            <i class="times icon" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  {%- endfor %}
+  {%- endblock messages %}
+{%- endmacro %}

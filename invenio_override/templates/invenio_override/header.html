@@ -1,10 +1,9 @@
 {#
-Copyright (C) 2020-2023 Graz University of Technology.
-Copyright (C) 2024 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
-invenio-override is free software; you can redistribute it and/or
-modify it under the terms of the MIT License; see LICENSE file for more
-details.
+  invenio-override is free software; you can redistribute it and/or
+  modify it under the terms of the MIT License; see LICENSE file for more
+  details.
 #}
 
 {% if not config.OVERRIDE_PRODUCTION %}
@@ -26,54 +25,13 @@ details.
       {%- block navbar_header %}
       {%- include "invenio_override/navbar.html" %}
       {%- endblock navbar_header %}
-
-      <div class="ui container">
-        <div class="ui grid stackable container">
-          <div id="main-menu-container" class="three column row centered container">
-            <div class="two wide column main-menu-entry">
-              <a href="/" title="Home" class="ui item no-decoration">
-                <span class="home-inline">
-                  <i class="home icon"></i>
-                  {{_ ("Home")}}
-                </span>
-              </a>
-            </div>
-
-            <div class="two wide column main-menu-entry">
-              <a role="menuitem" href="/communities" class="no-decoration">{{ _("Communities") }}</a>
-            </div>
-            <div class="two wide column main-menu-entry">
-              <a role="menuitem" href="/me/overview" class="no-decoration">{{ _("Dashboard") }}</a>
-            </div>
-
-            <!--Please refer to https://github.com/inveniosoftware/invenio-app-rdm/blob/master/invenio_app_rdm/theme/templates/semantic-ui/invenio_app_rdm/header_login.html
-              for future changes to the admin button.-->
-            {% set ns = namespace(admin_menu=False) %}
-            {%- for item in current_menu.submenu('profile-admin').children if item.visible %}
-            {% set ns.admin_menu = True %}
-            {% set admin_text = item.text|safe %}
-            {% if 'Administration' in item.text|safe %}
-            {% set admin_text = _ ("Administration")%}
-            {%- endif %}
-            <div class="two wide column main-menu-entry">
-              <a role="menuitem" href="{{ item.url }}"" class=" no-decoration">{{ admin_text }}</a>
-            </div>
-            {%- endfor %}
-
-            {%- set other_langs = current_i18n.get_locales() | selectattr("language", "ne", current_i18n.language) |
-            list %}
-            {%- for l in other_langs %}
-            <div class="two wide column main-menu-entry">
-              <a class="ui item no-decoration" href="{{ url_for('invenio_i18n.set_lang', lang_code=l.language) }}">
-                {{ l.get_display_name().upper()[0:2] }}
-              </a>
-            </div>
-            {%- endfor %}
-            <div id="margin-divider" class="ui divider main-menu-underline-line"></div>
-            <div class="spacer"></div>
-          </div>
     </nav>
     {%- endblock navbar %}
+
+    {%- block site_banner %}
+    {%- from "invenio_banners/banner.html" import banner with context -%}
+    {{ banner() }}
+    {%- endblock site_banner %}
 
     {%- block flashmessages %}
     {%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
@@ -86,4 +44,34 @@ details.
   {%- include "invenio_theme/breadcrumbs.html" %}
   {%- endblock breadcrumbs %}
   #}
+
+  {%- block page_inner_banner %}
+  {%- set _path = request.path %}
+  {%- if (title or _path == '/publications/search') and not (_path.startswith('/records/') and not _path.startswith('/records/search')) %}
+  <div class="page-inner-banner">
+    <div class="ui container">
+      <h1 class="page-inner-banner-title">{{ title or _("Publications") }}</h1>
+      {%- if page_description %}
+      <p class="page-inner-banner-description">{{ page_description }}</p>
+      {%- elif _path == '/me/uploads' %}
+      <p class="page-inner-banner-description">{{ _("Manage and publish your research data, publications and other outputs.") }}</p>
+      {%- elif _path == '/me/requests' %}
+      <p class="page-inner-banner-description">{{ _("Manage your open requests and collaborations.") }}</p>
+      {%- elif _path == '/me/communities' %}
+      <p class="page-inner-banner-description">{{ _("Manage your communities and collaborate with others.") }}</p>
+      {%- elif _path in ['/communities', '/communities-search', '/communities/search'] %}
+      <p class="page-inner-banner-description">{{ _("Organize, curate and collaborate on records for your institution, project, topic or event.") }}</p>
+      {%- elif _path == '/communities/new' %}
+      <p class="page-inner-banner-description">{{ _("Create a community to organize and share your research outputs.") }}</p>
+      {%- elif _path.startswith('/account/settings') %}
+      <p class="page-inner-banner-description">{{ _("Manage your profile, security and connected applications.") }}</p>
+      {%- elif _path == '/publications/search' %}
+      <p class="page-inner-banner-description">{{ _("Search and discover scientific publications from TU Graz.") }}</p>
+      {%- elif _path == '/oer/search' %}
+      <p class="page-inner-banner-description">{{ _("Search and discover open educational resources.") }}</p>
+      {%- endif %}
+    </div>
+  </div>
+  {%- endif %}
+  {%- endblock page_inner_banner %}
 </div>

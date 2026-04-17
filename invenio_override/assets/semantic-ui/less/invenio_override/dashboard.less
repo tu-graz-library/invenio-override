@@ -1,0 +1,595 @@
+/*
+ *   Copyright (C) 2020-2026 Graz University of Technology.
+ *
+ * invenio-override is free software; you can redistribute it and/or modify it
+ * under the terms of the MIT License; see LICENSE file for more details.
+ */
+
+/* ======================================
+   Upstream overrides — dashboard header suppression
+====================================== */
+/* Hide dashboard tab navigation, user info box, and separator line.
+   Exception: community detail pages use .page-subheader-outer.with-submenu for their nav tabs —
+   those must remain visible. */
+.page-subheader-outer:not(.with-submenu),
+.page-subheader-outer:not(.with-submenu) .page-subheader,
+.page-subheader-outer:not(.with-submenu) .ui.secondary.pointing.menu.page-subheader,
+#dashboard-user-header-container {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ======================================
+   Uploads page — new upload circle button + label
+====================================== */
+.upload-new-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.upload-new-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: @greyDark;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+  i.icon {
+    font-size: @font-size-2xl;
+    margin: 0;
+    line-height: 1;
+  }
+
+  &:hover {
+    border-color: @overridePrimary;
+    color: @overridePrimary;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+  }
+}
+
+.upload-new-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.upload-new-title {
+  font-size: @font-size-base;
+  font-weight: 600;
+  color: @primaryText;
+  line-height: 1.2;
+}
+
+.upload-new-desc {
+  font-size: @font-size-sm;
+  color: @recordLightText;
+  line-height: 1.3;
+}
+
+
+/* ======================================
+   Dashboard nav grid — big circles
+====================================== */
+.dashboard-nav-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: @contentGridGap;
+  margin: @contentGridMarginV 0;
+  animation: none !important;
+}
+
+.dashboard-nav-box {
+  flex: 0 0 180px;
+}
+
+/* Hide containers until JS renders — prevents flash of original content */
+#dashboard-overview:empty,
+#user-communities:empty,
+#new-communities:empty,
+.communities-frontpage:not(.override-ready) {
+  visibility: hidden;
+}
+
+/* Remove all animations from nav circles to prevent blink on load */
+.dashboard-nav-grid,
+.dashboard-nav-grid *,
+.dashboard-nav-box,
+.dashboard-nav-box-circle,
+.dashboard-nav-box-circle i.icon {
+  animation: none !important;
+}
+
+.dashboard-nav-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: @primaryText;
+  gap: 1rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: @primaryText;
+
+    .dashboard-nav-box-circle {
+      border-color: @overridePrimary;
+
+      i.icon { color: @overridePrimary; }
+    }
+
+    .dashboard-nav-box-title {
+      color: @overridePrimary;
+    }
+  }
+}
+
+.dashboard-nav-box-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  i.icon {
+    font-size: 2.2rem;
+    color: @greyDark;
+    margin: 0;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+}
+
+.dashboard-nav-box-highlight .dashboard-nav-box-circle {
+  border-color: @overridePrimary;
+
+  i.icon { color: @overridePrimary; }
+}
+
+.dashboard-nav-box-title {
+  font-size: @font-size-nav;
+  font-weight: 600;
+  color: @primaryText;
+  transition: color 0.2s ease;
+}
+
+.dashboard-nav-box-desc {
+  font-size: @font-size-sm;
+  color: @recordLightText;
+  line-height: 1.4;
+  margin-top: -0.5rem;
+}
+
+/* ======================================
+   Dashboard overview — card grid
+====================================== */
+.dashboard-overview {
+  padding-bottom: 2rem;
+}
+
+.dashboard-section-title {
+  font-size: @font-size-xl;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  padding: 2rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: @cardShadowRest;
+  transition: box-shadow @transitionDuration ease, transform @transitionDuration ease;
+}
+
+.dashboard-card:hover {
+  box-shadow: @cardShadowHover;
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.dashboard-card-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.dashboard-card-title {
+  font-size: @font-size-nav;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: @primaryText;
+}
+
+.dashboard-card-desc {
+  font-size: @font-size-base;
+  color: @recordText;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ======================================
+   Dashboard overview — React sections
+====================================== */
+.dashboard-overview-react {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-section {
+  background: #ffffff;
+  border: @borderSubtle !important;
+  border-radius: @radiusCardLarge !important;
+  padding: 1.5rem !important;
+  box-shadow: @cardShadowRest !important;
+}
+
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dashboard-section-heading {
+  margin: 0 !important;
+  font-size: @font-size-lg !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+
+  .ui.label {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+}
+
+.view-all-btn {
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.dashboard-item-card {
+  border-radius: @radiusCard !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
+  }
+}
+
+.dashboard-item-title {
+  font-size: @font-size-base !important;
+  line-height: 1.4 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.dashboard-community-logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: @radiusSmall;
+  }
+}
+
+.dashboard-empty-message {
+  text-align: center;
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* ======================================
+   Dashboard tab pages — tab menu
+====================================== */
+.ui.secondary.pointing.menu.page-subheader {
+  border-bottom: 2px solid rgba(34, 36, 38, 0.08);
+
+  .item {
+    font-weight: 500;
+    color: @recordText;
+    border-bottom-width: 3px;
+    transition: color @transitionFast ease, border-color @transitionFast ease;
+    padding: 0.85em 1.25em;
+
+    &:hover {
+      color: @primaryText;
+    }
+
+    &.active {
+      color: @overridePrimary;
+      border-color: @overridePrimary;
+      font-weight: 600;
+    }
+  }
+}
+
+/* ======================================
+   Dashboard tab pages — View button right-aligned
+====================================== */
+.deposits-list-item .extra.labels-actions .ui.button {
+  margin-left: auto !important;
+  flex-shrink: 0;
+}
+
+/* ======================================
+   Dashboard tab pages — upload list items
+====================================== */
+.deposits-list-item {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCard !important;
+  padding: 1.25rem 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  box-shadow: @cardShadowRest;
+}
+
+/* ======================================
+   Dashboard tab pages — request items
+====================================== */
+
+.ui.items > .item.flex {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCard !important;
+  padding: 1.25rem 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  box-shadow: @cardShadowRest;
+  align-items: flex-start;
+}
+
+/* ======================================
+   Dashboard — facet sidebar
+====================================== */
+.dashboard-sidebar {
+  .ui.card {
+    border: @borderSubtle;
+    box-shadow: @cardShadowRest;
+    border-radius: @radiusCardLarge;
+  }
+}
+
+/* ======================================
+   Hide duplicate "New upload" button from InvenioRDM empty-state
+====================================== */
+.uploads-search-app .ui.placeholder.segment .ui.positive.button,
+.uploads-search-app .ui.segment.placeholder .ui.positive.button {
+  display: none !important;
+}
+
+/* ======================================
+   Dashboard filter row — vertical alignment + equal height
+====================================== */
+.uploads-search-app .row.computer.only,
+.requests-search-app .row.computer.only {
+  align-items: center !important;
+}
+
+/* Uploads: [circle col1→1] [tabs col2→2] [search col3→3] | sort col4 hidden */
+.uploads-search-app .row.computer.only > .column:nth-child(1) { order: 1; }
+.uploads-search-app .row.computer.only > .column:nth-child(2) { order: 2; }
+.uploads-search-app .row.computer.only > .column:nth-child(3) { order: 3; }
+/* Use ID for higher specificity to override Semantic UI .computer.only display:block !important */
+#invenio-search-config.uploads-search-app .row.computer.only > .column:nth-child(4) { display: none !important; }
+
+
+/* Requests: [empty] [search col4→1] [My requests col3→2] [Open col2→3] */
+[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(2) { order: 3; }
+[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(3) { order: 2; }
+[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(4) { order: 1; }
+
+/* Requests search col: widen to five wide (match uploads) */
+.requests-search-app .row.computer.only > .column:nth-child(4) {
+  width: 31.25% !important; /* five wide on computer = 5/16 */
+}
+
+/* Same height across search input, tab menu and sort dropdown */
+.uploads-search-app .row.computer.only .ui.action.input,
+.uploads-search-app .row.computer.only .ui.input,
+.requests-search-app .row.computer.only .ui.action.input,
+.requests-search-app .row.computer.only .ui.input {
+  height: 42px !important;
+}
+.uploads-search-app .row.computer.only .ui.action.input > input,
+.uploads-search-app .row.computer.only .ui.input > input,
+.requests-search-app .row.computer.only .ui.action.input > input,
+.requests-search-app .row.computer.only .ui.input > input {
+  height: 42px !important;
+  box-sizing: border-box !important;
+}
+.uploads-search-app .row.computer.only .ui.action.input > .button,
+.requests-search-app .row.computer.only .ui.action.input > .button {
+  height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+.uploads-search-app .row.computer.only .ui.selection.dropdown,
+.requests-search-app .row.computer.only .ui.selection.dropdown {
+  height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  line-height: normal !important;
+}
+.uploads-search-app .row.computer.only .ui.secondary.pointing.menu,
+.requests-search-app .row.computer.only .ui.secondary.pointing.menu {
+  height: 42px !important;
+  align-items: center !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* ======================================
+   Dashboard — search inputs
+====================================== */
+.dashboard-search-bar,
+.search-app .ui.input > input {
+  &:focus {
+    border-color: @overridePrimary !important;
+    box-shadow: 0 0 0 2px fade(@overridePrimary, 15%);
+  }
+}
+
+/* ======================================
+   Responsive
+====================================== */
+
+/* Mobile action bar — shown on tablet/mobile, hidden on desktop */
+.dashboard-mobile-action-bar {
+  display: none;
+  justify-content: flex-end;
+  padding: 0.5rem 0 0.75rem;
+}
+
+/* ======================================
+   Mobile/tablet search row (React renders .row.mobile.tablet.only)
+   — constrain action input so button stays icon-width, input fills rest
+====================================== */
+.uploads-search-app .row.mobile.tablet.only,
+.requests-search-app .row.mobile.tablet.only {
+
+  /* Prevent the search column from overflowing its grid cell */
+  > .column {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .ui.action.input {
+    display: flex !important;
+    width: 100% !important;
+    height: 42px !important;
+
+    /* Input grows to fill all available space */
+    > input {
+      flex: 1 1 auto !important;
+      width: 0 !important;       /* let flex-grow take over */
+      min-width: 0 !important;
+      height: 42px !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Button stays exactly as wide as its icon — does not grow */
+    > .button:last-child,
+    > .buttons:last-child > .button {
+      flex: 0 0 auto !important;
+      width: auto !important;
+      height: 42px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 1rem !important;
+    }
+  }
+
+  .ui.input {
+    display: flex !important;
+    width: 100% !important;
+    height: 42px !important;
+
+    > input {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      height: 42px !important;
+      box-sizing: border-box !important;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  /* Show mobile action bar (upload / new community button) */
+  .dashboard-mobile-action-bar {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Slightly smaller font on mobile search input */
+  .uploads-search-app .row.mobile.tablet.only input,
+  .requests-search-app .row.mobile.tablet.only input {
+    font-size: @font-size-sm !important;
+  }
+
+  /* Upload circle: scale down on mobile */
+  .upload-new-circle {
+    width: 70px;
+    height: 70px;
+
+    i.icon {
+      font-size: 1.6rem;
+    }
+  }
+}

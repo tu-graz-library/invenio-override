@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2020-2023 Graz University of Technology.
-# Copyright (C) 2024 Shared RDM.
+# Copyright (C) 2020-2026 Graz University of Technology.
 #
 # invenio_override is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -78,8 +77,71 @@ OVERRIDE_RIGHT_SECTION_CONTACT_EMAIL = "support@example.com"
 # ============================================================================
 # Frontpage and Resource Overview
 # ============================================================================
-OVERRIDE_FRONTPAGE_RIGHT = False
+OVERRIDE_FRONTPAGE_RIGHT = True
 """Frontpage right section"""
+
+OVERRIDE_FRONTPAGE_SUBTITLE = ""
+"""Subtitle displayed below the frontpage title in the hero section."""
+
+OVERRIDE_REASONS_PARTNER = "CERN"
+"""Trusted partner name shown in the 'Why use X?' reasons strip on the frontpage."""
+
+OVERRIDE_REASONS_BG = None
+"""CSS background for the 'Why use X?' reasons strip (e.g. 'linear-gradient(120deg, #5e5e5e 0%, #727272 100%)'). None = use Less variable @footerBottomBackground."""
+
+OVERRIDE_LOGIN_OAUTH_PROVIDERS = None
+"""OAuth provider keys to show on the login page (e.g. ['keycloak_mug']).
+None = show all providers configured in OAUTHCLIENT_REMOTE_APPS."""
+
+OVERRIDE_HEADER_LOGO_LEFT = None
+"""Path to a secondary logo shown on the left side of the navbar (e.g. 'images/library_logo.png').
+None = no secondary logo displayed."""
+
+OVERRIDE_HEADER_TEXT_LINE1 = None
+"""First line of institution text shown in the navbar next to the logo (e.g. 'TU GRAZ'). None = hidden."""
+
+OVERRIDE_HEADER_TEXT_LINE2 = None
+"""Second line of institution text shown in the navbar (e.g. 'REPOSITORY'). None = hidden."""
+
+OVERRIDE_HEADER_TEXT_LINE3 = None
+"""Third line of institution text shown in the navbar (e.g. 'LIBRARY & ARCHIVES'). None = hidden."""
+
+OVERRIDE_FOOTER_BACKGROUND = None
+"""CSS background color for the footer (e.g. '#4a4a4a'). None = use @footerBottomBackground from variables.less."""
+
+OVERRIDE_FOOTER_FG_COLOR = None
+"""CSS text/foreground color for the footer (e.g. '#ffffff'). None = use @footerGrey from variables.less."""
+
+OVERRIDE_FOOTER_LOGO_FILTER = None
+"""CSS filter applied to partner logos in the footer bottom bar.
+None = no filter (logos display with natural colors).
+Use 'brightness(0) invert(1)' for white logos on dark backgrounds.
+"""
+
+OVERRIDE_FOOTER_DIVIDER_COLOR = None
+"""CSS color for the horizontal divider in the footer bottom bar. None = rgba(0,0,0,0.1)."""
+
+OVERRIDE_FOOTER_LOGOS = None
+"""Partner logos shown in the footer bottom bar.
+None = show the default SharedRDM partner logos.
+Set to a list of dicts to override: [{url, src (static path), alt, [title], [large (bool)]}]
+"""
+
+OVERRIDE_FOOTER_LINKS = {}
+"""Footer link columns. Dict of column_title -> list of link dicts.
+
+Each link dict has keys: label, url (optional), title (optional),
+external (optional bool), icon (optional str).
+
+Example::
+
+    OVERRIDE_FOOTER_LINKS = {
+        "Repository": [
+            {"label": "Documentation", "url": "https://docs.example.com", "external": True},
+            {"label": "Search Guide", "url": "/help/search"},
+        ],
+    }
+"""
 
 OVERRIDE_BASE_TEMPLATE = "invenio_override/base.html"
 """Default base template"""

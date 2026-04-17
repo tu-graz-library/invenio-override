@@ -1,99 +1,104 @@
 {#
-
-  Copyright (C) 2020-2023 Graz University of Technology.
-  Copyright (C) 2024 Shared RDM.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
   invenio-override is free software; you can redistribute it and/or
-  modify it under the terms of the MIT License; see LICENSE file for more details.
-
+  modify it under the terms of the MIT License; see LICENSE file for more
+  details.
 #}
 
-{% extends config.OVERRIDE_ACCOUNT_BASE %} {% from
-"invenio_accounts/_macros.html" import render_field, form_errors %} {%- from
-"invenio_oauthclient/_macros.html" import oauth_button %} {% block page_body %}
+{% extends config.OVERRIDE_ACCOUNT_BASE %}
+{% from "invenio_accounts/_macros.html" import render_field, form_errors %}
+{%- from "invenio_oauthclient/_macros.html" import oauth_button %}
 
-<div class="spacer-long"></div>
-<div class="spacer-long"></div>
+{% block page_body %}
+
+{%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+<div class="page-inner-banner">
+  <div class="ui container">
+    <h1 class="page-inner-banner-title">{{ _('Log in to') }} {{ title }}</h1>
+    <p class="page-inner-banner-description">{{ _('Access and manage your research data.') }}</p>
+  </div>
+</div>
+
+{%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
+
 <div class="ui container">
-  <div class="ui centered grid padded">
-    <div class="ui padded segments large form">
-      <div class="ui login segment padded">
-        <div class="divider hidden"></div>
+  <div class="login-page-container">
+    <div class="login-card">
 
-        {%- block form_header %} {%- set title = title or
-        _(config.THEME_SITENAME) or _('Invenio') %}
-        <h3 class="ui login header">{{ _('Log in to') }} {{title}}</h3>
-        {%- endblock form_header %}
-        <div class="ui divider"></div>
+      {%- block form_header %}{%- endblock form_header %}
 
-        {% if config.OAUTHCLIENT_REMOTE_APPS %}
-        <div class="ui form">
-          {% set displayed_providers = [] %} {% for name, app in
-          config.OAUTHCLIENT_REMOTE_APPS.items() %} {% if app.title == "Meduni
-          SSO" and "Meduni SSO" not in displayed_providers %}
-          <div class="field">
-            {{ oauth_button(name, next=request.args.get('next')) }}
-          </div>
-          {% set _ = displayed_providers.append(app.title) %} {% endif %} {%
-          endfor %}
-        </div>
-        {% endif %}
+      <div class="login-flash-messages">{{ flashed_messages() }}</div>
 
-         {%- if has_displayed_sso and has_local_login %}
-        <div class="ui horizontal divider">{{ _("Or") }}</div>
+      {% if config.OAUTHCLIENT_REMOTE_APPS %}
+      {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
+      {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
+      {% if not allowed or name in allowed %}
+      <div class="login-oauth-section">
+        {{ oauth_button(name, next=request.args.get('next')) }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {%- if config.OAUTHCLIENT_REMOTE_APPS and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+      <div class="ui horizontal divider login-divider">{{ _("Or") }}</div>
+      {%- endif %}
+
+      {%- block form_outer %}
+      {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+      {%- with form = login_user_form %}
+      <div class="login-form-section">
+        <p class="login-section-label">{{ _('Log in with repository credentials') }}</p>
+        <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="ui form">
+          {{ form.hidden_tag() }}
+          {{ form_errors(form) }}
+          {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
+          {{ render_field(form.password, icon="lock icon", errormsg=False) }}
+          <button type="submit" class="ui fluid large primary button" style="margin-top: 0.5rem;">
+            {{ _('Log In') }}
+          </button>
+        </form>
+      </div>
+      {%- endwith %}
+      {%- endif %}
+      {%- endblock form_outer %}
+
+      {%- if security.registerable or security.recoverable %}
+      <div class="login-card-footer">
+        {%- block registerable %}
+        {%- if security.registerable %}
+        <span class="login-footer-text">
+          {% trans sitename=config.ACCOUNTS_SITENAME %}New to {{ sitename }}?{% endtrans %}
+          <a href="{{ url_for_security('register', next=request.args.get('next')) }}">{{ _('Sign up') }}</a>
+        </span>
         {%- endif %}
+        {%- endblock registerable %}
 
-        {%- block form_outer %} {%- if
-        config.ACCOUNTS_LOCAL_LOGIN_ENABLED %} {%- with form = login_user_form
-        %} {%- set accordion_active = "active" if form.errors else "" %}
-        <div class="ui styled accordion">
-          <div class="title trigger {{ accordion_active }}">
-            {{ _('Log in with repository credentials') }}
-            <i class="user icon button"></i>
-          </div>
-          <div class="content {{ accordion_active }}">
-            <form
-              action="{{ url_for_security('login') }}"
-              method="POST"
-              name="login_user_form"
-              class="ui large form"
-            >
-              {{ form.hidden_tag() }} {{ form_errors(form) }} {{
-              render_field(form.email, icon="user icon", autofocus=True,
-              errormsg=False) }} {{ render_field(form.password, icon="lock
-              icon", errormsg=False) }}
-              <button type="submit" class="ui fluid large submit button">
-                <i class="ui sign-in icon"></i>{{ _('Log In') }}
-              </button>
-            </form>
-          </div>
-        </div>
-        {%- endwith %} {%- endif %} {%- endblock form_outer %}
+        {%- block recoverable %}
+        {%- if security.recoverable %}
+        <a class="login-footer-link" href="{{ url_for_security('forgot_password') }}">{{ _('Forgot password?') }}</a>
+        {%- endif %}
+        {%- endblock recoverable %}
+      </div>
+      {%- endif %}
 
-        <div class="divider hidden"></div>
-      </div>
-
-      {%- block registerable %} {%- if security.registerable %}
-      <div class="ui primary segment padded text-muted">
-        {% trans sitename=config.ACCOUNTS_SITENAME %}New to {{ sitename }}?{%
-        endtrans %}
-        <a
-          href="{{ url_for_security('register', next=request.args.get('next')) }}"
-          >{{ _('Sign up') }}</a
-        >
-      </div>
-      {%- endif %} {%- endblock registerable %} {%- block recoverable %} {%- if
-      security.recoverable %}
-      <div class="ui basic segment padded">
-        <a
-          class="ui inverted header tiny"
-          href="{{ url_for_security('forgot_password') }}"
-          >{{ _('Forgot password?') }}</a
-        >
-      </div>
-      {%- endif %} {%- endblock recoverable %}
-      <br />
     </div>
   </div>
 </div>
+
 {% endblock page_body %}
+
+{% block javascript %}
+{{ super() }}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.ui.message .close.icon').forEach(function (icon) {
+      icon.addEventListener('click', function () {
+        var msg = this.closest('.ui.message');
+        if (msg) msg.style.display = 'none';
+      });
+    });
+  });
+</script>
+{% endblock javascript %}

@@ -1,24 +1,254 @@
 /*
- *   Copyright (C) 2020-2023 Graz University of Technology.
- *   Copyright (C) 2022 Shared RDM.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *
- * invenio-override  is free software; you can redistribute it and/or modify it
+ * invenio-override is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
  */
 
+/* ======================================
+   New community form — white card wrapper
+====================================== */
+/* Hide the React form's own "Setup your new community" heading and its divider — page-inner-banner already shows the title */
+.communities-creation .ui.header,
+.communities-creation .ui.divider {
+  display: none !important;
+}
+
+
+/* ======================================
+   Upstream overrides — page subheader
+====================================== */
+/* Remove base #ededed background on community detail subheader */
 .ui.container.page-subheader-outer {
-  background-color: unset;
+  background-color: transparent !important;
 }
 
-.ui.fluid.container {
-  width: fit-content;
+/* Hide the upstream communities search subheader — page-inner-banner already renders the title */
+.ui.container.page-subheader-outer.compact {
+  display: none !important;
 }
 
-.ui.centered.grid > .row {
-  gap: 20px !important;
-  align-items: end !important;
+#deposit-form .ui.container.page-subheader-outer.compact {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  margin: 0 0 1em 0 !important;
+  padding: 0.7em 0 !important;
+  background: transparent !important;
 }
 
-.ui.grid > .row > .stretched.column > * {
-  align-content: center !important;
+#deposit-form .ui.container.page-subheader-outer.compact .page-subheader {
+  display: flex !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* ======================================
+   My Communities — sort inline fix
+====================================== */
+/* Force search + sort onto one row at all widths ≥ 768px;
+   hide the tablet-only row that duplicates the sort below the search bar */
+[data-invenio-search-config*="DashboardCommunities"] .row.tablet.only {
+  display: none !important;
+}
+
+[data-invenio-search-config*="DashboardCommunities"] .row.computer.only {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+}
+
+/* Match All Communities column widths: search=8/16 (50%), sort=4/16 (25%) */
+[data-invenio-search-config*="DashboardCommunities"] .row.computer.only > .column:nth-child(2) {
+  width: 50% !important;
+}
+
+/* Sort column — keep label and dropdown on one line */
+[data-invenio-search-config*="DashboardCommunities"] .row.computer.only .column:last-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  flex-shrink: 0;
+  width: 25% !important;
+}
+
+/* ======================================
+   Community visibility guard
+====================================== */
+/* Hide community sections until our JS renders */
+.communities-frontpage {
+  visibility: hidden;
+}
+
+.communities-frontpage.override-ready {
+  visibility: visible;
+}
+
+/* ======================================
+   Community cards — consistent card style
+====================================== */
+.ui.cards > .card.community-item,
+.community-item.ui.card,
+.community-frontpage-cards .ui.card {
+  border-radius: @radiusCardLarge !important;
+  border: @borderSubtle !important;
+  box-shadow: @cardShadowRest !important;
+  transition: box-shadow @transitionDuration ease, transform @transitionDuration ease;
+
+  &:hover {
+    box-shadow: @cardShadowHover !important;
+    transform: translateY(-2px);
+    text-decoration: none;
+
+    .header { color: @overridePrimary; }
+  }
+
+  /* Constrain image height */
+  img {
+    max-height: 120px !important;
+    width: 100% !important;
+    object-fit: cover;
+  }
+
+  .header {
+    font-size: 1rem !important;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    color: @recordText;
+    line-height: 1.5;
+  }
+}
+
+/* ======================================
+   Override community cards — clean grid
+====================================== */
+.override-community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: @contentGridGap;
+  margin-bottom: @contentGridMarginV;
+}
+
+.override-community-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  text-decoration: none;
+  color: @primaryText;
+  overflow: hidden;
+
+  &:hover {
+    text-decoration: none;
+    color: @primaryText;
+
+    .override-community-card-title {
+      color: @overridePrimary;
+    }
+  }
+}
+
+.override-community-card-logo {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: #f5f5f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.override-community-card-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.override-community-card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: @primaryText;
+  transition: color 0.2s ease;
+}
+
+.override-community-card-desc {
+  font-size: 0.82rem;
+  color: @recordLightText;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.override-community-empty {
+  color: @recordLightText;
+  font-style: italic;
+  padding: 1rem 0;
+}
+
+/* ======================================
+   Community frontpage sections
+====================================== */
+.communities-frontpage {
+  padding-top: 0;
+}
+
+/* Constrain communities nav so 3 items don't spread full width */
+.communities-frontpage .dashboard-nav-grid {
+  max-width: 700px !important;
+  margin: @contentGridMarginV auto !important;
+}
+
+/* Hide the divider lines above/below communities sections */
+.communities-frontpage > .ui.divider {
+  display: none;
+}
+
+.communities-section {
+  margin-bottom: 3rem;
+}
+
+.communities-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid @overridePrimary;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    color: @primaryText;
+  }
+
+  a {
+    font-size: 0.875rem;
+    color: @recordLightText;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover { color: @overridePrimary; }
+  }
 }

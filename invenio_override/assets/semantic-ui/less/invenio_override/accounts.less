@@ -1,17 +1,21 @@
 /*
- *   Copyright (C) 2020-2023 Graz University of Technology.
- *   Copyright (C) 2024 sharedRDM.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *   Copyright (C) 2020 Nikita Lvov.
  *
  * invenio-override  is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
  */
 
+/* ======================================
+   Cover page / background
+====================================== */
 .cover-page {
-  //text-align: center;
-  background-color: #ffffff;
+  background-color: #f0f0f0;
 }
 
+/* ======================================
+   Accounts link and button styles
+====================================== */
 .accounts-link {
   margin: 5%;
   color: @primaryLink;
@@ -33,7 +37,7 @@
   color: @primaryButton;
   font-family: "Source Sans Pro";
   font-weight: 300;
-  font-size: 16px;
+  font-size: @font-size-base;
 }
 .tu-button-style button:hover {
   cursor: pointer;
@@ -41,6 +45,9 @@
   background-color: @primaryButtonHoverBackground !important;
 }
 
+/* ======================================
+   Form accounts (sign-in / sign-up form)
+====================================== */
 .form-accounts {
   margin: 15%;
   text-align: left !important;
@@ -81,15 +88,25 @@
   font-weight: 300 !important;
 }
 
-/***
-login and sign-up pages form background color
-*/
+.accounts-subtitle {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: @font-size-base;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* ======================================
+   Login / sign-up page — form background
+====================================== */
 .sign-form {
   background-color: @signInBackground !important;
   padding: 0 !important;
   height: 100%;
 }
 
+/* ======================================
+   Login page buttons and links
+====================================== */
 .tug-button-login {
   display: flex;
   align-items: center;
@@ -98,6 +115,7 @@ login and sign-up pages form background color
 .tug-button-login :hover {
   fill: @primaryButtonHoverBackground;
 }
+
 .login-page-button {
   margin: 5%;
   text-align: center !important;
@@ -125,9 +143,9 @@ login and sign-up pages form background color
   font-size: initial;
 }
 
-/***
-allowing to switch columns on the sign-up page on the small screen
-*/
+/* ======================================
+   Responsive — column order on small screens
+====================================== */
 .switch-grid {
   display: flex;
 }
@@ -138,5 +156,212 @@ allowing to switch columns on the sign-up page on the small screen
   }
   #switch_right {
     order: 1;
+  }
+}
+
+/* ======================================
+   Login card — remove inner segment dividers and tighten footer padding
+====================================== */
+.ui.padded.segments.large.form > .ui.segment {
+  border-top: none !important;
+}
+
+.login-footer-segment {
+  padding: 0.6rem 1.5rem !important;
+  text-align: center;
+}
+
+/* ======================================
+   Login page — centered card layout
+====================================== */
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  width: 100%;
+  max-width: 440px;
+  overflow: hidden;
+
+  .login-oauth-section {
+    padding: 1.75rem 2rem 0;
+  }
+
+  .login-divider {
+    margin: 1rem 2rem;
+  }
+
+  .login-form-section {
+    padding: 1.5rem 2rem 1.75rem;
+
+    .field {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .login-flash-messages {
+    .ui.message {
+      margin: 1rem 2rem 0;
+    }
+  }
+
+  .login-section-label {
+    font-size: @font-size-base;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 1.1rem;
+  }
+
+  .login-card-footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0.85rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: @font-size-sm;
+    color: rgba(0, 0, 0, 0.6);
+
+    a {
+      color: @overridePrimary;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login-footer-link {
+    color: rgba(0, 0, 0, 0.5) !important;
+    font-weight: 400 !important;
+
+    &:hover {
+      color: @overridePrimary !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    max-width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .login-card .login-form-section {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .login-card .login-card-footer {
+    padding: 0.75rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ======================================
+   Register page — info panel
+====================================== */
+.register-info-panel {
+  padding: 1rem 0.5rem;
+
+  h4 {
+    font-size: @font-size-base;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  p {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: @font-size-base;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+}
+
+/* ======================================
+   Register page — form card
+====================================== */
+.register-card {
+  background: #ffffff;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  overflow: hidden;
+  padding: 1.75rem 2rem;
+
+  .register-card-title {
+    font-size: @font-size-base;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.75);
+    margin-bottom: 1.25rem;
+  }
+
+  .register-form .field {
+    margin-bottom: 1rem;
+  }
+}
+
+.register-sso-button {
+  margin-bottom: 0.5rem;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  #switch_left {
+    order: 2;
+  }
+  #switch_right {
+    order: 1;
+  }
+}
+
+/* ======================================
+   Settings pages — card style
+====================================== */
+.invenio-page-body .ui.vertical.fluid.menu {
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  overflow: hidden;
+}
+
+.invenio-page-body .ui.segments {
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowHover;
+  border: @borderSubtle;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+
+  > .ui.segment {
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+
+    &:first-child {
+      border-top: none;
+      border-radius: @radiusCardLarge @radiusCardLarge 0 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 @radiusCardLarge @radiusCardLarge;
+    }
   }
 }

@@ -1,0 +1,249 @@
+"""
+invenio-override configuration template.
+
+Copy the relevant sections into your instance's invenio.cfg and adjust the
+values for your institution. All OVERRIDE_* variables are provided by the
+invenio-override package.
+"""
+
+# =============================================================================
+# Invenio-Override — Institution Theme
+# Copy this block into your invenio.cfg and fill in your values.
+# =============================================================================
+
+# ------------------------------------------------------------------------------
+# Branding
+# ------------------------------------------------------------------------------
+
+# Main logo shown in the header (path relative to static/images/)
+OVERRIDE_LOGO = "images/YOUR_LOGO.png"
+
+# Browser favicon (path relative to static/)
+OVERRIDE_FAVICON = "your_favicon.ico"
+
+# Icon shown on the login page
+OVERRIDE_ICON = "images/YOUR_ICON.png"
+
+# ------------------------------------------------------------------------------
+# Header layout
+# Supports a two-logo header (left logo + right SVG) with optional text lines
+# and a claim/tagline. Leave as None to use a single centered logo instead.
+# ------------------------------------------------------------------------------
+
+# Left-side logo (e.g. library logo). Set to None for single-logo header.
+OVERRIDE_HEADER_LOGO_LEFT = None
+# OVERRIDE_HEADER_LOGO_LEFT = "images/YOUR_LEFT_LOGO.png"
+
+# Text lines shown next to the left logo (up to 3 lines)
+OVERRIDE_HEADER_TEXT_LINE1 = None
+OVERRIDE_HEADER_TEXT_LINE2 = None
+OVERRIDE_HEADER_TEXT_LINE3 = None
+# OVERRIDE_HEADER_TEXT_LINE1 = "YOUR INSTITUTION"
+# OVERRIDE_HEADER_TEXT_LINE2 = "REPOSITORY"
+# OVERRIDE_HEADER_TEXT_LINE3 = "LIBRARY & ARCHIVES"
+
+# Right-side logo (static file path inside static/images/)
+OVERRIDE_HEADER_LOGO_SVG = None
+# OVERRIDE_HEADER_LOGO_SVG = "images/your_logo.svg"
+
+# Link target when clicking the right logo
+OVERRIDE_HEADER_LOGO_LINK = None
+# OVERRIDE_HEADER_LOGO_LINK = "https://www.your-institution.at"
+
+# Animated claim words shown in the header (list of strings, or empty list)
+OVERRIDE_HEADER_CLAIM_WORDS = []
+# OVERRIDE_HEADER_CLAIM_WORDS = ["WORD ONE", "WORD TWO", "WORD THREE"]
+
+# ------------------------------------------------------------------------------
+# Frontpage
+# ------------------------------------------------------------------------------
+
+# Main hero title
+THEME_FRONTPAGE_TITLE = "Your Institution Repository"
+
+# Subtitle shown below the title (set to None to hide)
+OVERRIDE_FRONTPAGE_SUBTITLE = None
+# OVERRIDE_FRONTPAGE_SUBTITLE = "Publish and share your research — citable, visible, and FAIR."
+
+# Trusted partner shown in the "Why use X?" reasons strip (e.g. "TU Graz & CERN")
+OVERRIDE_REASONS_PARTNER = "CERN"
+
+# Feature badges shown below the search bar (list of dicts, or empty list)
+OVERRIDE_FRONTPAGE_FEATURES = []
+# OVERRIDE_FRONTPAGE_FEATURES = [
+#     {"icon": "check circle", "text": "FAIR Data"},
+#     {"icon": "quote left",   "text": "Citable with DOI"},
+#     {"icon": "lock open",    "text": "Open Access"},
+# ]
+
+# Show recent uploads section on the frontpage
+OVERRIDE_FRONTPAGE_SHOW_RECENT_UPLOADS = True
+
+# ------------------------------------------------------------------------------
+# Search — enable/disable resource types
+# ------------------------------------------------------------------------------
+
+# Enable marc21 (Publications) global search and frontpage pillar
+OVERRIDE_SHOW_PUBLICATIONS_SEARCH = False
+OVERRIDE_SHOW_PUBLICATIONS_CARD = False
+
+# Enable LOM (Educational Resources / OER) global search and frontpage pillar
+OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = False
+OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD = False
+
+# Always show RDM (Research Results) search
+OVERRIDE_SHOW_RDM_SEARCH = True
+
+# ------------------------------------------------------------------------------
+# Footer
+# ------------------------------------------------------------------------------
+
+# Footer template — use the default or provide your own
+THEME_FOOTER_TEMPLATE = "invenio_override/footer.html"
+
+# Footer link columns (dict of column_title -> list of link dicts)
+# Each link supports: label, url (optional), external (bool), icon (optional)
+OVERRIDE_FOOTER_LINKS = {
+    # "About": [
+    #     {"label": "Documentation", "url": "https://your-docs-url", "external": True},
+    #     {"label": "Terms and Conditions", "url": "/terms"},
+    #     {"label": "Data Protection", "url": "/privacy"},
+    # ],
+}
+
+# Footer colors — applied as CSS custom properties, no webpack rebuild needed
+OVERRIDE_FOOTER_BACKGROUND = "#4a4a4a"      # background color
+OVERRIDE_FOOTER_FG_COLOR = "#ffffff"          # text / link color
+OVERRIDE_FOOTER_LOGO_FILTER = "brightness(0) invert(1)"  # filter for partner logos (use "none" for light footers)
+OVERRIDE_FOOTER_DIVIDER_COLOR = "rgba(255,255,255,0.1)"  # divider line color
+
+# Partner logos in the footer bottom bar (None = default SharedRDM logos)
+OVERRIDE_FOOTER_LOGOS = None
+# OVERRIDE_FOOTER_LOGOS = [
+#     {"url": "https://your-partner.org", "src": "images/partner.svg", "alt": "Partner name"},
+# ]
+
+# ------------------------------------------------------------------------------
+# Miscellaneous
+# ------------------------------------------------------------------------------
+
+OVERRIDE_PRODUCTION = True        # Show/hide the "not production" warning banner
+OVERRIDE_CONTACT_FORM = False     # Enable contact form
+OVERRIDE_SHIBBOLETH = False       # Set True if SAML/Shibboleth is configured
+OVERRIDE_FRONTPAGE_RIGHT = False  # Enable the right section on the frontpage
+OVERRIDE_RESOURCE_OVERVIEW = False  # Show resource overview section
+
+
+# =============================================================================
+# Invenio-Override — Institution Examples
+# Real-world institution blocks. Uncomment the one you want to activate
+# and comment out all others.
+# =============================================================================
+
+# --- TUG (commented — uncomment and comment MUG block below to switch) ---
+# OVERRIDE_LOGO = "images/TUG.png"
+# OVERRIDE_FAVICON = "tug.ico"
+# OVERRIDE_PRODUCTION = True
+# OVERRIDE_ICON = "images/icon_use.png"
+# OVERRIDE_CONTACT_FORM = False
+# OVERRIDE_SHIBBOLETH = False
+# OVERRIDE_FRONTPAGE_RIGHT = False
+# OVERRIDE_FRONTPAGE_SHOW_RECENT_UPLOADS = True
+#
+# OVERRIDE_SHOW_PUBLICATIONS_SEARCH = True
+# OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = False
+# OVERRIDE_SHOW_PUBLICATIONS_CARD = True
+# OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD = True
+# OVERRIDE_SHOW_RDM_SEARCH = True
+#
+# OVERRIDE_HEADER_LOGO_LEFT = "images/library_logo.png"
+# OVERRIDE_HEADER_TEXT_LINE1 = "TU GRAZ"
+# OVERRIDE_HEADER_TEXT_LINE2 = "REPOSITORY"
+# OVERRIDE_HEADER_TEXT_LINE3 = "LIBRARY & ARCHIVES"
+# OVERRIDE_HEADER_LOGO_SVG = "images/tu_graz_logo.svg"
+# OVERRIDE_HEADER_LOGO_LINK = "https://www.tugraz.at"
+# OVERRIDE_HEADER_CLAIM_WORDS = ["SCIENCE", "PASSION", "TECHNOLOGY"]
+#
+# THEME_FRONTPAGE_TITLE = "TU Graz Research Data Repository"
+# OVERRIDE_FRONTPAGE_SUBTITLE = "Publish and share your research data — citable, visible, and FAIR."
+# OVERRIDE_FRONTPAGE_FEATURES = [
+#     {"icon": "check circle", "text": "FAIR Data"},
+#     {"icon": "quote left", "text": "Citable with DOI"},
+#     {"icon": "lock open", "text": "Open Access"},
+#     {"icon": "shield alternate", "text": "Long-term Preservation"},
+# ]
+# OVERRIDE_REASONS_PARTNER = "TU Graz & CERN"
+#
+# THEME_FOOTER_TEMPLATE = "invenio_override/footer.html"
+# OVERRIDE_FOOTER_BACKGROUND = "#4a4a4a"
+# OVERRIDE_FOOTER_FG_COLOR = "#ffffff"
+# OVERRIDE_FOOTER_LOGO_FILTER = "brightness(0) invert(1)"
+# OVERRIDE_FOOTER_DIVIDER_COLOR = "rgba(255,255,255,0.1)"
+# OVERRIDE_FOOTER_LINKS = {
+#     "Repository": [
+#         {"label": "Documentation", "url": "https://tu-graz-library.github.io/docs-repository", "external": True},
+#         {"label": "Reference Guide", "url": "#", "icon": "download"},
+#         {"label": "Search Guide", "url": "/help/search"},
+#         {"label": "Data Protection", "url": "#", "icon": "download"},
+#         {"label": "Terms and Conditions", "url": "#", "icon": "download"},
+#     ],
+#     "Features": [
+#         {"label": "Scalability"},
+#         {"label": "Institutional integration"},
+#         {"label": "Next Generation Repository"},
+#         {"label": "Repository Profiles"},
+#         {"label": "Resilient"},
+#     ],
+#     "Connected Services": [
+#         {"label": "PURE", "url": "https://pure.tugraz.at", "external": True},
+#         {"label": "CampusOnline", "url": "http://campusonline.tugraz.at", "external": True},
+#         {"label": "Research Data Management", "url": "https://rdm.tugraz.at", "external": True},
+#     ],
+#     "Accessibility": [
+#         {"label": "Tipp:"},
+#         {"label": "Use Ctrl + and Ctrl -"},
+#         {"label": "to change the font size."},
+#     ],
+# }
+
+# --- MUG (active) ---
+OVERRIDE_LOGO = "images/MUG.svg"
+OVERRIDE_FAVICON = "mug.ico"
+OVERRIDE_PRODUCTION = True
+OVERRIDE_ICON = "images/icon_use.png"
+OVERRIDE_CONTACT_FORM = False
+OVERRIDE_SHIBBOLETH = False
+OVERRIDE_FRONTPAGE_RIGHT = False
+OVERRIDE_FRONTPAGE_SHOW_RECENT_UPLOADS = True
+
+OVERRIDE_SHOW_PUBLICATIONS_SEARCH = False
+OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = False
+OVERRIDE_SHOW_PUBLICATIONS_CARD = False
+OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD = False
+OVERRIDE_SHOW_RDM_SEARCH = True
+
+OVERRIDE_HEADER_LOGO_LEFT = None
+OVERRIDE_HEADER_TEXT_LINE1 = None
+OVERRIDE_HEADER_TEXT_LINE2 = None
+OVERRIDE_HEADER_TEXT_LINE3 = None
+OVERRIDE_HEADER_LOGO_SVG = None
+OVERRIDE_HEADER_LOGO_LINK = None
+OVERRIDE_HEADER_CLAIM_WORDS = []
+
+THEME_FRONTPAGE_TITLE = "Medical University of Graz Repository"
+OVERRIDE_FRONTPAGE_SUBTITLE = None
+OVERRIDE_FRONTPAGE_FEATURES = []
+OVERRIDE_REASONS_PARTNER = "Meduni Graz & CERN"
+
+THEME_FOOTER_TEMPLATE = "invenio_override/footer.html"
+OVERRIDE_FOOTER_BACKGROUND = "#4a4a4a"
+OVERRIDE_FOOTER_FG_COLOR = "#ffffff"
+OVERRIDE_FOOTER_LOGO_FILTER = "brightness(0) invert(1)"
+OVERRIDE_FOOTER_DIVIDER_COLOR = "rgba(255,255,255,0.1)"
+OVERRIDE_FOOTER_LINKS = {
+    "Connected Services": [
+        {"label": "Research Portal", "url": "https://forschung.medunigraz.at/", "external": True},
+        {"label": "MED Online", "url": "https://online.medunigraz.at/", "external": True},
+        {"label": "Research Data Management", "url": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement/fdm-checklisten-vorlagen", "external": True},
+    ],
+}

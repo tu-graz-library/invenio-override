@@ -1,14 +1,16 @@
 /*
- * copyright (c) 2020-2023 graz university of technology.
- * copyright (c) 2024 shared rdm
+ * Copyright (C) 2020-2026 Graz University of Technology.
  *
  * invenio-override is free software; you can redistribute it and/or modify
- * it under the terms of the mit license; see license file for more details.
+ * it under the terms of the MIT License; see LICENSE file for more details.
  */
 
-/* creators styling */
+/* ======================================
+   Creators — author list styling
+====================================== */
 .creators {
   margin: 0 0 1em;
+  font-size: @font-size-base;
 }
 
 .creators span {
@@ -25,18 +27,446 @@
   margin-right: 5px;
 }
 
-/* identifiers styling */
+/* ======================================
+   Identifiers — inline DOI / handle display
+====================================== */
 .identifiers {
   display: inline;
 }
 
-/* labels actions styling */
-.ui.items > .item .extra.labels-actions {
-  float: right;
-  width: auto;
+/* ======================================
+   Search results — card-based item styling
+====================================== */
+.ui.items > .item {
+  background: #ffffff;
+  border: @borderSubtle !important;
+  border-radius: @radiusCardLarge !important;
+  padding: 1.1rem 1.5rem !important;
+  margin: 0 0 0.75rem 0 !important;
+  box-shadow: @cardShadowRest;
 }
 
-/* remove action buttons from search results */
-// .ui.small.compact.right.floated.button {
-//   display: none;
-// }
+.ui.items > .item:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Flex column so labels-actions (first in DOM) sits above the title */
+.ui.items > .item > .content,
+.ui.relaxed.divided.items > .item > .content {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Override Semantic UI first/last-child exceptions on divided items */
+.ui.divided.items > .item:first-child,
+.ui.relaxed.divided.items > .item:first-child {
+  border: @borderSubtle !important;
+  padding: 1.1rem 1.5rem !important;
+  margin-top: 0 !important;
+}
+
+.ui.divided.items > .item:last-child,
+.ui.relaxed.divided.items > .item:last-child {
+  padding-bottom: 1.1rem !important;
+}
+
+/* Badges row — unfloated, full-width above title, matching recent-uploads */
+.ui.items > .item > .content > .extra.labels-actions {
+  float: none !important;
+  width: auto !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  align-items: center !important;
+  margin: 0 0 0.5rem 0 !important;
+  padding: 0 !important;
+
+  .ui.label {
+    margin: 0 !important;
+  }
+}
+
+.ui.items > .item > .content > .header {
+  font-size: @font-size-nav !important;
+  font-weight: 600;
+}
+
+.ui.items > .item > .content > .header a {
+  color: @primaryText;
+  transition: color @transitionFast ease;
+}
+
+.ui.items > .item > .content > .header a:hover {
+  color: @primaryText;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ui.items > .item > .content > .description {
+  font-size: @font-size-base;
+  color: @primaryText;
+  line-height: 1.5;
+  margin: 0.5rem 0 0 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  width: 100% !important;
+  flex-grow: 0 !important;
+  /* override upstream display:initial which collapses the element in flex */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ui.items > .item > .content > .extra {
+  font-size: @font-size-sm;
+}
+
+/* Bottom meta footer — matches .record-card-meta style */
+.ui.items > .item > .content > .extra:not(.labels-actions) {
+  color: @recordLightText;
+  font-size: @font-size-sm;
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 0.75rem;
+
+  .flex.justify-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* ======================================
+   Search results — creatibutors
+====================================== */
+.creatibutors {
+  font-size: @font-size-base;
+  color: @recordText;
+  line-height: 1.5;
+}
+
+/* ======================================
+   Search results — truncated descriptions
+====================================== */
+.truncate-lines-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ======================================
+   Search results — primary text links
+====================================== */
+.theme-primary-text a {
+  color: @primaryText;
+  transition: color @transitionFast ease;
+
+  &:hover {
+    color: @primaryText;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+/* ======================================
+   Search sidebar — collapsible facet cards
+   Parent: aside.column (GridResponsiveSidebarColumn renders <aside class="column">)
+====================================== */
+aside.column .ui.card.borderless.facet {
+  background: #ffffff !important;
+  border: @borderSubtle !important;
+  border-radius: @radiusCardLarge !important;
+  box-shadow: @cardShadowRest !important;
+  margin-bottom: 0.75rem !important;
+  overflow: hidden !important;
+
+  & > .content {
+    padding: 0 !important;
+    border-top: none !important;
+    margin-bottom: 0 !important;
+
+    /* Clickable section header — upstream already display:flex space-between */
+    h2.header:not(.ui) {
+      position: relative;
+      flex: 1; /* fill full width when inside Accordion.Title flex container */
+      float: none !important; /* GlobalSearchBucketAggregationElement applies float:left inline */
+      width: 100% !important; /* ensure full width regardless of parent layout */
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.6px !important;
+      text-transform: uppercase !important;
+      color: @recordLightText !important;
+      margin: 0 !important;
+      /* extra right padding reserves space for the absolute chevron */
+      padding: 0.85rem 2.25rem 0.85rem 1.25rem !important;
+      cursor: pointer;
+      user-select: none;
+      transition: color @transitionFast ease;
+      /* divider on the header so it stays visible even when list is collapsed */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+
+      &:hover {
+        color: @primaryText !important;
+      }
+
+      /* Hide any built-in dropdown icon (Semantic UI Accordion renders one by default) */
+      i.dropdown.icon,
+      i.icon {
+        display: none !important;
+      }
+
+      /* CSS down-chevron ▾ (absolute so it never disrupts the flex layout) */
+      &::after {
+        content: "";
+        position: absolute;
+        right: 1rem;
+        top: calc(50% - 3px);
+        width: 6px;
+        height: 6px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg);
+        transition: transform 0.2s ease;
+        opacity: 0.7;
+      }
+    }
+
+    /* "All" search — Accordion.Title wraps h2 in a flex row.
+       Make it block so h2 spans full width and border-bottom extends edge-to-edge.
+       Hide the sibling dropdown icon (our CSS chevron on h2::after handles the indicator). */
+    .ui.accordion > .title {
+      display: block !important;
+      padding: 0 !important;
+      background: none !important;
+      border: none !important;
+
+      > i.icon,
+      > i.dropdown.icon {
+        display: none !important;
+      }
+    }
+
+    /* Item list — no top border needed, header already has border-bottom */
+    .ui.list {
+      border-top: none !important;
+      margin: 0 !important;
+      padding: 0.4rem 0 !important;
+    }
+
+    /* Clear selection button */
+    .ui.basic.mini.button,
+    .ui.mini.basic.icon.button {
+      font-size: 0.7rem !important;
+      padding: 0.2em 0.5em !important;
+      border-radius: @radiusSmall !important;
+      color: @recordLightText !important;
+      font-weight: 400 !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+/* Collapsed state — hide list, rotate chevron to › */
+aside.column .ui.card.borderless.facet.facet-collapsed {
+  & > .content > .ui.list {
+    display: none !important;
+  }
+
+  & > .content h2.header:not(.ui)::after {
+    transform: rotate(-45deg) !important;
+    top: calc(50% - 2px) !important;
+  }
+}
+
+/* Each facet item row (checkbox + label + count) */
+aside.column .facet-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.3rem 1.25rem !important;
+  margin: 0 !important;
+  transition: background-color @transitionFast ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.025);
+  }
+
+  /* Expand button for parent (nested) facets */
+  & > .ui.button.transparent {
+    padding: 0 0.2rem 0 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    color: @recordLightText !important;
+    font-size: @font-size-xs !important;
+    height: auto !important;
+  }
+}
+
+/* Checkbox label text */
+aside.column .facet-wrapper .ui.checkbox label {
+  font-size: @font-size-sm !important;
+  color: @primaryText !important;
+  cursor: pointer !important;
+  line-height: 1.4 !important;
+}
+
+/* Checked item — bolder */
+aside.column .facet-wrapper .ui.checkbox.checked label {
+  font-weight: 600 !important;
+}
+
+/* Checkbox tick color — override Semantic UI blue with our primary red */
+aside.column .facet-wrapper .ui.checkbox input:checked ~ .box::after,
+aside.column .facet-wrapper .ui.checkbox input:checked ~ label::after {
+  color: @overridePrimary !important;
+}
+
+aside.column .facet-wrapper .ui.checkbox input:focus ~ .box::before,
+aside.column .facet-wrapper .ui.checkbox input:focus ~ label::before {
+  border-color: @overridePrimary !important;
+}
+
+/* Count pill */
+aside.column .ui.label.facet-count {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: @recordLightText !important;
+  border: none !important;
+  border-radius: @radiusPill !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+  padding: 0.18em 0.55em !important;
+  line-height: 1.5 !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+}
+
+/* Count pill highlight when item is selected */
+aside.column .facet-wrapper:has(.ui.checkbox.checked) .ui.label.facet-count {
+  background-color: fade(@overridePrimary, 10%) !important;
+  color: @overridePrimary !important;
+}
+
+/* Help card — no chevron, no collapse */
+aside.column .ui.card.borderless.facet.mt-0 {
+  & > .content > h2.header:not(.ui) {
+    cursor: default !important;
+    pointer-events: none !important;
+
+    &::after {
+      display: none !important;
+    }
+  }
+
+  /* Matching left padding for help links */
+  .ui.list .item {
+    padding: 0.3rem 1.25rem !important;
+  }
+
+  .ui.list .item a {
+    font-size: @font-size-sm;
+    color: @overridePrimary;
+    text-decoration: none;
+
+    &:hover {
+      color: @overrideSecondary;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  }
+}
+
+/* ======================================
+   Versions toggle card
+   Renders as plain <Card> (no borderless/facet classes) with two .content sections:
+   first = header title, second = toggle checkbox
+====================================== */
+aside.column .ui.card:not(.borderless) {
+  background: #ffffff !important;
+  border: @borderSubtle !important;
+  border-radius: @radiusCardLarge !important;
+  box-shadow: @cardShadowRest !important;
+  margin-bottom: 0.75rem !important;
+  /* no overflow:hidden — it clips the toggle ball */
+
+  /* First .content — the section title */
+  & > .content:first-child {
+    padding: 0 !important;
+    border-top: none !important;
+    margin-bottom: 0 !important;
+
+    .header {
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.6px !important;
+      text-transform: uppercase !important;
+      color: @recordLightText !important;
+      padding: 0.85rem 1.25rem !important;
+      margin: 0 !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+  }
+
+  /* Second .content — toggle checkbox */
+  & > .content:not(:first-child) {
+    padding: 0.5rem 1.25rem !important;
+    border-top: none !important;
+    margin-bottom: 0 !important;
+
+    .ui.toggle.checkbox {
+      min-height: 1.5rem;
+
+      label {
+        font-size: @font-size-sm !important;
+        color: @primaryText !important;
+      }
+    }
+  }
+}
+
+/* ======================================
+   Parent facet items (e.g. Publication, Image in Resource Types)
+   The Accordion.Title gets class "facet-wrapper parent" AND contains an inner
+   List.Content with class "facet-wrapper" — fix the double-nesting.
+====================================== */
+
+/* Outer accordion title — strip layout, let inner facet-wrapper handle the row */
+aside.column .ui.accordion .title.facet-wrapper.parent {
+  padding: 0 !important;
+  display: block !important;
+  background: none !important;
+  border: none !important;
+  cursor: default !important;
+}
+
+/* Hide expand button — it was the cause of misaligned counts */
+aside.column .facet-wrapper > .ui.button.transparent {
+  display: none !important;
+}
+
+/* Hide child sub-items accordion content only — not the inner List.Content row */
+aside.column .ui.accordion .content:not(.facet-wrapper) {
+  display: none !important;
+}
+
+/* Restore left padding on parent facet rows (Publication, Image) — upstream zeros it */
+aside.column .ui.accordion .title.facet-wrapper.parent .content.facet-wrapper {
+  padding-left: 1.25rem !important;
+}
+
+/* Sidebar toggle — ensure margin regardless of container padding */
+aside.column .ui.toggle.checkbox {
+  margin: 10px 20px !important;
+}
+
+/* ======================================
+   Date/version badge — dark blue
+====================================== */
+.ui.label.primary.theme-primary {
+  background-color: @labelDateBlue !important;
+  border-color: @labelDateBlue !important;
+  color: #ffffff !important;
+}

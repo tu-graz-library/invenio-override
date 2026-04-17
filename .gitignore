@@ -2,8 +2,9 @@
 __pycache__/
 *.py[cod]
 
-# Idea software family
+# IDEs
 .idea/
+*.code-workspace
 
 # Virtual environment
 .venv/
@@ -49,8 +50,6 @@ nosetests.xml
 coverage.xml
 *,cover
 
-# Translations
-*.mo
 
 # Django stuff:
 *.log
@@ -63,3 +62,8 @@ target/
 
 # Vim swapfiles
 .*.sw?
+
+# macOS
+.DS_Store
+**/.DS_Store
+*.mo

@@ -1,18 +1,93 @@
 /*
- * Copyright (C) 2020-2023 Graz University of Technology.
- * Copyright (C) 2024 Shared RDM
+ * Copyright (C) 2020-2026 Graz University of Technology.
  *
  * invenio-override is free software; you can redistribute it and/or modify
  * it under the terms of the MIT License; see LICENSE file for more details.
  */
 
+/* ======================================
+   Keyword labels
+====================================== */
 .top-bottom-padded {
   margin: unset;
 }
 
 .label.label-keyword {
-  font-size: 0.71428571rem;
+  font-size: @font-size-sm;
   font-weight: 400;
   background-color: @labelKeywordBackground;
   border: unset;
+  border-radius: @radiusSmall;
+  transition: background-color @transitionFast ease;
+}
+
+.label.label-keyword:hover {
+  background-color: darken(@labelKeywordBackground, 5%);
+}
+
+/* ======================================
+   Record detail page — main content card
+====================================== */
+article.main-record-content {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem 1.75rem;
+}
+
+/* ======================================
+   Record detail page — Additional details section
+   Sits inside the white card above, separated by a divider
+====================================== */
+#additional-details {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.5rem 0 0;
+  margin-top: 1.5rem !important;
+}
+
+/* ======================================
+   Record sidebar — card per section
+====================================== */
+
+/* The outer wrapper becomes the card */
+.sidebar-container {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  margin-bottom: 1rem;
+  overflow: visible; /* must not clip dropdown menus */
+}
+
+/* Round first and last children to match card corners */
+.sidebar-container > :first-child {
+  border-radius: @radiusCardLarge @radiusCardLarge 0 0 !important;
+  overflow: hidden; /* clip header background to rounded corners */
+}
+.sidebar-container > :last-child {
+  border-radius: 0 0 @radiusCardLarge @radiusCardLarge !important;
+}
+.sidebar-container > :only-child {
+  border-radius: @radiusCardLarge !important;
+}
+
+/* Reset Semantic UI attached styles on inner header and segment */
+.sidebar-container .ui.top.attached.header,
+.sidebar-container .rdm-sidebar,
+.sidebar-container .ui.segment.rdm-sidebar {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+/* Subtle divider between header and content */
+.sidebar-container .ui.top.attached.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Technical metadata — increase text contrast */
+.sidebar-container.text-muted,
+.sidebar-container .text-muted {
+  color: @recordText !important;
 }

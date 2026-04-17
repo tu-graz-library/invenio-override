@@ -1,7 +1,7 @@
 {#
-  Copyright (C) 2020-2025 Graz University of Technology.
+  Copyright (C) 2020-2026 Graz University of Technology.
 
-  invenio-theme-tugraz is free software; you can redistribute it and/or
+  invenio-override is free software; you can redistribute it and/or
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
@@ -10,86 +10,18 @@
 
 {%- set active_dashboard_menu_item = "overview" %}
 {%- set title = _("Overview") %}
+{%- set page_description = _("Manage your uploads, communities and requests.") %}
 
-{% block javascript %}
+{%- block javascript %}
   {{ super() }}
-{% endblock javascript %}
+  {{ webpack['invenio-override-dashboard.js'] }}
+{%- endblock javascript %}
 
 {%- block page_body %}
-  {%- block user_dashboard_header %}
-    {% include "invenio_app_rdm/users/header.html" %}
-  {%- endblock user_dashboard_header %}
-
-  <div class="ui container rel-mt-2">
-    <h2>Overview</h2>
-
-    <div class="ui stackable grid">
-      <div class="row">
-        {% if is_authenticated %}
-        <div class="four wide column">
-          <div class="ui raised segment">
-            <h2 class="ui header centered">{{ _("Research Results") }}</h2>
-            <div class="content text-center">
-              <a href="/me/uploads">
-                <img class="overview-icon" alt="Research Results" 
-                     src="{{ url_for('static', filename='images/diamond.svg') }}">
-              </a>
-              <p class="description">
-                {{ _("Overview: Description for research results") }}
-                {{ _("Research results gives the base on which publications are built.") }}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="four wide column">
-          <div class="ui raised segment">
-            <h2 class="ui header centered">{{ _("Communities") }}</h2>
-            <div class="content text-center">
-              <a href="/me/communities">
-                <img class="overview-icon" alt="Communities" 
-                     src="{{ url_for('static', filename='images/group-discussion.svg') }}">
-              </a>
-              <p class="description">
-                {{ _("Grow a community of individuals to sustain the platform going forward and thereby organize, curate and collaborate on records for your institution, project, topic or event.") }}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="four wide column">
-          <div class="ui raised segment">
-            <h2 class="ui header centered">{{ _("Requests") }}</h2>
-            <div class="content text-center">
-              <a href="/me/requests">
-                <img class="overview-icon" alt="Requests" 
-                     src="{{ url_for('static', filename='images/umbrella.svg') }}">
-              </a>
-              <p class="description">
-                {{ _("Check for incoming notifications and community assignments or inquiries.") }}
-              </p>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-
-        {% if can_view_marc21 and config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH %}
-        <div class="four wide column">
-          <div class="ui raised segment">
-            <h2 class="ui header centered">{{ _("Publications") }}</h2>
-            <div class="content text-center">
-              <a href="/publications/uploads">
-                <img class="overview-icon" alt="Publications" 
-                     src="{{ url_for('static', filename='images/library-book-svgrepo-com.svg') }}">
-              </a>
-              <p class="description">
-                {{ _("Publications are the synthesized result of research.") }}
-              </p>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-      </div>
-    </div>
+<section class="ui container rel-mt-3 dashboard-overview">
+  <div id="dashboard-overview"
+       data-show-curations="{{ 'true' if current_menu.submenu('dashboard').submenu('curation-overview').visible else 'false' }}"
+       data-show-publications="{{ 'true' if can_view_marc21 else 'false' }}">
   </div>
-{% endblock %}
+</section>
+{%- endblock page_body %}

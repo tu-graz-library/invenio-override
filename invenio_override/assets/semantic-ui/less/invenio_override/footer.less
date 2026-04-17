@@ -1,69 +1,181 @@
 /*
- *   Copyright (C) 2020-2023 Graz University of Technology.
- *   Copyright (C) 2024 Shared RDM.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *
  *   invenio-override is free software; you can redistribute it and/or modify it
  *   under the terms of the MIT License; see LICENSE file for more details.
  */
 
- #footer {
-  color: @footerGrey;
+/* ======================================
+   Footer main block
+====================================== */
+#footer,
+#rdm-footer-element,
+footer {
+  margin-top: auto !important;
+}
 
-  /*
-   * background-image: url("/static/images/footer.jpg");
-   */
-  -webkit-background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  -o-background-size: 100% 100%;
-  background-size: 100% 100%;
-  min-height: 100%;
-
-  /*
-   * The following 2 lines are a hack for IE6
-   */
-  height: auto !important;
-  height: 100%;
+#footer {
+  /* --fo-fg / --fo-bg are injected inline from OVERRIDE_FOOTER_* config vars */
+  color: var(--fo-fg, @footerGrey);
   width: 100%;
-  background-attachment: fixed;
 
   &.footer-bottom {
-    background-color: @footerBottomBackground;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 16px;
+    background-color: var(--fo-bg, @footerBottomBackground);
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+    font-size: @font-size-base;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
 
     a {
       text-decoration: none;
-      color: @footerGrey;
+      color: var(--fo-fg, @footerGrey);
+      transition: color 0.15s ease;
 
-      /*
-       * :focus-visible activates on keyboard only
-       */
       &:hover,
       &:focus:focus-visible {
         color: @primaryLink;
-        background-color: @primaryLinkHoverBackground;
 
         i.icon.download {
           color: @overridePrimary;
         }
       }
 
-      /*
-       * Remove blue focus outline if clicked with mouse
-       */
       &:focus:not(:focus-visible) {
         outline-style: none;
       }
     }
   }
+
   div .logos a:hover {
     background-color: transparent !important;
   }
 }
 
+/* ======================================
+   Footer grid — CSS Grid layout
+====================================== */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.footer-column {
+  min-width: 0;
+}
+
+.footer-heading {
+  font-size: @font-size-nav;
+  font-weight: 600;
+  color: var(--fo-fg, @footerGrey);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a, span {
+    color: var(--fo-fg, @footerGrey);
+    opacity: 0.8;
+  }
+
+  a {
+    transition: opacity 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* ======================================
+   Footer bottom bar
+====================================== */
+.footer-bottom-bar {
+  border-top: 1px solid var(--fo-divider, rgba(0, 0, 0, 0.1));
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-partner-logo {
+  height: 40px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  opacity: 0.85;
+  /* --fo-logo-filter injected inline from OVERRIDE_FOOTER_LOGO_FILTER config */
+  filter: var(--fo-logo-filter, none);
+  display: block;
+
+  &:hover { opacity: 1; }
+}
+
+.footer-partner-logo-lg {
+  height: 40px;
+  max-width: 120px;
+}
+
+.footer-powered {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--fo-fg, @footerGrey);
+  font-size: @font-size-sm;
+
+  > span {
+    opacity: 0.7;
+    color: var(--fo-fg, @footerGrey);
+  }
+
+  img {
+    display: block;
+    opacity: 0.85;
+    filter: var(--fo-logo-filter, none);
+  }
+
+  a:hover {
+    background-color: transparent !important;
+  }
+}
+
+.footer-powered-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.footer-powered-rdm {
+  color: var(--fo-fg, @footerGrey);
+  opacity: 0.85;
+  font-size: @font-size-sm;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ======================================
+   Legacy
+====================================== */
 .bodytext {
-  font-size: 16px;
+  font-size: @font-size-base;
 }
 
 .spacer {
@@ -72,4 +184,20 @@
 
 .spacer-long {
   margin-top: 30px;
+}
+
+/* ======================================
+   Responsive
+====================================== */
+@media screen and (max-width: 767.9px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
 }

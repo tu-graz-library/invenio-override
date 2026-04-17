@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2020-2023 Graz University of Technology.
-# Copyright (C) 2024 Shared RDM.
+# Copyright (C) 2020-2026 Graz University of Technology.
 #
 # invenio-override is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -14,6 +13,7 @@ from typing import Dict, Optional
 
 from flask import Blueprint, current_app, g, redirect, render_template, url_for
 from flask_login import current_user, login_required
+from invenio_communities.proxies import current_communities
 from invenio_rdm_records.proxies import current_rdm_records
 from invenio_rdm_records.resources.serializers import UIJSONSerializer
 from invenio_records_global_search.resources.serializers import (
@@ -65,7 +65,7 @@ def index():
 
     Fetches the most recent records and renders the frontpage template.
     """
-    records = FrontpageRecordsSearch()[:5].sort("-created").execute()
+    records = FrontpageRecordsSearch()[:3].sort("-created").execute()
 
     return render_template(
         "invenio_override/frontpage.html", records=records_serializer(records)
@@ -114,6 +114,16 @@ def comingsoon() -> str:
     return render_template("invenio_override/comingsoon.html")
 
 
+def make_redirect(target: str, endpoint: str = "redirect"):
+    """Return a view function that redirects to target."""
+
+    def view():
+        return redirect(target)
+
+    view.__name__ = endpoint
+    return view
+
+
 def locked(e) -> str:
     """
     Render the locked error page.
@@ -124,6 +134,16 @@ def locked(e) -> str:
     return render_template("invenio_override/423.html")
 
 
+@blueprint.route("/communities")
+def communities_frontpage():
+    """Render the communities overview page."""
+    can_create = current_communities.service.check_permission(g.identity, "create")
+    return render_template(
+        "invenio_override/communities_frontpage.html",
+        permissions=dict(can_create=can_create),
+    )
+
+
 @blueprint.route("/records/search")
 def records_search():
     """
@@ -132,7 +152,7 @@ def records_search():
     Adds a new endpoint at repository.tugraz.at/records/search,
     serving as the dedicated search page for RDM records.
     """
-    return render_template("invenio_app_rdm/records/search.html")
+    return render_template("invenio_override/search.html")
 
 
 def current_identity_is_authenticated() -> bool:

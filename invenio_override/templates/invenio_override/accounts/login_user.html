@@ -31,19 +31,34 @@
       <div class="login-flash-messages">{{ flashed_messages() }}</div>
 
       {% if config.OAUTHCLIENT_REMOTE_APPS %}
-      {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
-      {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
-      {% if not allowed or name in allowed %}
-      <div class="login-oauth-section">
-        {{ oauth_button(name, next=request.args.get('next')) }}
-      </div>
-      {% endif %}
-      {% endfor %}
+        {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
+        {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
+          {% if not allowed or name in allowed %}
+            <div class="login-oauth-section">
+              {{ oauth_button(name, next=request.args.get('next')) }}
+            </div>
+          {% endif %}
+        {% endfor %}
       {% endif %}
 
-      {%- if config.OAUTHCLIENT_REMOTE_APPS and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
-      <div class="ui horizontal divider login-divider">{{ _("Or") }}</div>
-      {%- endif %}
+      {% if config.SSO_SAML_IDPS %}
+        {% for name in config.SSO_SAML_IDPS.keys() %}
+          <div class="field">
+            <a class="login-page-button ui fluid large button" href="{{ url_for('sso_saml.sso', idp=name, next=next_url) }}">
+              {{
+                _('Log in with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true))
+              }}
+              <img src="{{ url_for('static', filename=config.OVERRIDE_ICON) }}" height="20px" />
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if (config.OAUTHCLIENT_REMOTE_APPS or config.SSO_SAML_IDPS or config.EDUGAIN_LOGIN_ENABLED) and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+        <div class="ui horizontal divider">
+          {{ _("Or") }}
+        </div>
+      {% endif %}
 
       {%- block form_outer %}
       {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}

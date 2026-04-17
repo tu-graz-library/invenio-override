@@ -612,9 +612,13 @@ msgstr ""
 "Basierend auf der Expertise von Institutionen im Umgang mit "
 "Forschungsdaten aus dem Shared RDM."
 
-#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:49
-msgid "Sign up with sharedRDM "
+#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:43
+msgid "Sign up with sharedRDM"
 msgstr "Mit sharedRDM registrieren"
+
+#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:43
+msgid "Sign up with TUGRAZ"
+msgstr "Mit Ihrem TUGonline-Account registrieren"
 
 #: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:66
 #: invenio_override/templates/invenio_override/accounts/register_user.html:56

@@ -133,7 +133,6 @@ OVERRIDE_SHIBBOLETH = False       # Set True if SAML/Shibboleth is configured
 OVERRIDE_FRONTPAGE_RIGHT = False  # Enable the right section on the frontpage
 OVERRIDE_RESOURCE_OVERVIEW = False  # Show resource overview section
 
-
 # =============================================================================
 # Invenio-Override — Institution Examples
 # Real-world institution blocks. Uncomment the one you want to activate
@@ -205,6 +204,8 @@ OVERRIDE_RESOURCE_OVERVIEW = False  # Show resource overview section
 #         {"label": "to change the font size."},
 #     ],
 # }
+# OVERRIDE_AUTHENTICATED_ROLE = "tugraz_authenticated"
+# OVERRIDE_SAML_INSTITUTION = "TUGRAZ"
 
 # --- MUG (active) ---
 OVERRIDE_LOGO = "images/MUG.svg"

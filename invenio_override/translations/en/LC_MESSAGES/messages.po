@@ -563,8 +563,12 @@ msgid ""
 "from the Shared RDM."
 msgstr ""
 
-#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:49
-msgid "Sign up with sharedRDM "
+#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:43
+msgid "Sign up with sharedRDM"
+msgstr ""
+
+#: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:43
+msgid "Sign up with TUGRAZ"
 msgstr ""
 
 #: build/lib/invenio_override/templates/invenio_override/accounts/register_user.html:66

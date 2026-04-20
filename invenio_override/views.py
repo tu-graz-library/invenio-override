@@ -158,7 +158,9 @@ def records_search():
 def current_identity_is_authenticated() -> bool:
     """Check whether the current identity is authenticated via remote auth."""
     rdm_service = current_rdm_records.records_service
-    return rdm_service.check_permission(g.identity, "authenticated")
+    return rdm_service.check_permission(
+        g.identity, current_app.config["OVERRIDE_AUTHENTICATED_ROLE"]
+    )
 
 
 def require_authenticated(view_func):

@@ -152,6 +152,12 @@ OVERRIDE_ACCOUNT_BASE = "invenio_override/accounts/accounts_base.html"
 OVERRIDE_RESOURCE_OVERVIEW = False
 """Resource overview section"""
 
+OVERRIDE_AUTHENTICATED_ROLE = "authenticated"
+"""Special role to determine if current user is externally authenticated."""
+
+OVERRIDE_SAML_INSTITUTION = "TUGRAZ"
+"""Text to show for SAML signup option"""
+
 # ============================================================================
 # Branding and UI Customization
 # ============================================================================

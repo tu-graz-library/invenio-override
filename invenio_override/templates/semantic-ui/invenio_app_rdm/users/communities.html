@@ -14,59 +14,51 @@
     - Added desktop "New community" circle button injected via JS into the
       React search row after render.
 #}
-
 {%- set title = _("Communities") %}
 {%- set page_description = _("Manage your communities and collaborate with others.") %}
 {%- extends "invenio_app_rdm/users/base.html" %}
-
-{% set active_dashboard_menu_item = 'communities' %}
-
+{% set active_dashboard_menu_item = "communities" %}
 {%- block javascript %}
-{{ super() }}
-{{ webpack['invenio-app-rdm-user-communities.js'] }}
+    {{ super() }}
+    {{ webpack['invenio-app-rdm-user-communities.js'] }}
 {%- endblock javascript %}
-
 {%- block user_dashboard_body %}
-
-  {# Mobile/tablet: new community button shown above results on small screens #}
-  {% if can_create_community %}
-  <div class="dashboard-mobile-action-bar">
-    <div class="upload-new-wrap">
-      <a href="{{ url_for('invenio_communities.communities_new') }}"
-         class="upload-new-circle"
-         title="{{ _('New community') }}">
-        <i class="plus icon"></i>
-      </a>
-      <div class="upload-new-label-wrap">
-        <span class="upload-new-title">{{ _("New community") }}</span>
-        <span class="upload-new-desc">{{ _("Create a shared space") }}</span>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  <div
-    id="invenio-search-config"
-    data-invenio-search-config='{{ search_app_rdm_user_communities_config(app_id="InvenioAppRdm.DashboardCommunities") | tojson }}'
-    data-can-create-community='{{ can_create_community | tojson }}'
-  >
-  </div>
-
-  {% if can_create_community %}
-  {# Desktop: new community button injected into the search/tabs row by JS after React renders #}
-  <div id="new-community-circle" class="upload-new-wrap" style="display:none;">
-    <a href="{{ url_for('invenio_communities.communities_new') }}"
-       class="upload-new-circle"
-       title="{{ _('New community') }}">
-      <i class="plus icon"></i>
-    </a>
-    <div class="upload-new-label-wrap">
-      <span class="upload-new-title">{{ _("New community") }}</span>
-      <span class="upload-new-desc">{{ _("Create a shared space") }}</span>
-    </div>
-  </div>
-
-  <script>
+    {# Mobile/tablet: new community button shown above results on small screens #}
+    {% if can_create_community %}
+        <div class="dashboard-mobile-action-bar">
+            <div class="upload-new-wrap">
+                <a href="{{ url_for("invenio_communities.communities_new") }}"
+                   class="upload-new-circle"
+                   title="{{ _("New community") }}">
+                    <i class="plus icon"></i>
+                </a>
+                <div class="upload-new-label-wrap">
+                    <span class="upload-new-title">{{ _("New community") }}</span>
+                    <span class="upload-new-desc">{{ _("Create a shared space") }}</span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div id="invenio-search-config"
+         class="communities-search-app"
+         data-invenio-search-config='{{ search_app_rdm_user_communities_config(app_id="InvenioAppRdm.DashboardCommunities") | tojson }}'
+         data-can-create-community='{{ can_create_community | tojson }}'></div>
+    {% if can_create_community %}
+        {# Desktop: new community button injected into the search/tabs row by JS after React renders #}
+        <div id="new-community-circle"
+             class="upload-new-wrap"
+             style="display:none">
+            <a href="{{ url_for("invenio_communities.communities_new") }}"
+               class="upload-new-circle"
+               title="{{ _("New community") }}">
+                <i class="plus icon"></i>
+            </a>
+            <div class="upload-new-label-wrap">
+                <span class="upload-new-title">{{ _("New community") }}</span>
+                <span class="upload-new-desc">{{ _("Create a shared space") }}</span>
+            </div>
+        </div>
+        <script>
   (function () {
     function injectCommunityCircle() {
       var circle = document.getElementById('new-community-circle');
@@ -75,9 +67,6 @@
       if (!filterRow) return;
       var firstCol = filterRow.querySelector('.column:first-child');
       if (!firstCol) return;
-      firstCol.style.display = 'flex';
-      firstCol.style.alignItems = 'center';
-      firstCol.style.justifyContent = 'flex-start';
       circle.style.display = 'inline-flex';
       firstCol.appendChild(circle);
     }
@@ -94,6 +83,6 @@
       }
     }, 100);
   })();
-  </script>
-  {% endif %}
+        </script>
+    {% endif %}
 {%- endblock user_dashboard_body %}

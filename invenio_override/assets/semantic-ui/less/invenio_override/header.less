@@ -54,7 +54,9 @@ header > nav {
   padding: 0.3em 0.9em;
   display: inline-block;
   border-radius: @radiusPill;
-  transition: color @transitionFast ease, background-color @transitionFast ease;
+  transition:
+    color @transitionFast ease,
+    background-color @transitionFast ease;
 
   &:hover {
     color: @overridePrimary !important;
@@ -117,7 +119,7 @@ header > nav {
 
   /* Bridge the margin-top gap so hover isn't lost while moving mouse down */
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -0.5rem;
     left: 0;
@@ -369,7 +371,7 @@ svg:not(:root) {
 /* ======================================
    Responsive
 ====================================== */
-/* Tablet: tighten nav so items stay on one row */
+/* Tablet: tighten nav and scale logos */
 @media screen and (min-width: 768px) and (max-width: 1280px) {
   .header-topbar-link {
     font-size: 14px !important;
@@ -378,24 +380,133 @@ svg:not(:root) {
   .header-topbar-lang {
     margin-left: 1rem !important;
   }
+  .header-logorow {
+    padding: 0.6rem 0 !important;
+  }
+  .repo-img img {
+    height: 38px !important;
+    width: auto !important;
+  }
+  #int-header-logo-img {
+    height: 36px !important;
+    width: auto !important;
+  }
+  .affiliation-logo-claim-single {
+    font-size: 0.6rem !important;
+  }
 }
 
+/* ======================================
+   Mobile
+====================================== */
+.header-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: @radiusSmall;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: fade(@overridePrimary, 8%);
+  }
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: @primaryText;
+    border-radius: 2px;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  &.is-open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  &.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  &.is-open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
+
+/* Desktop: hamburger hidden, nav visible inline */
+@media screen and (min-width: 768px) {
+  .header-mobile-toggle {
+    display: none !important;
+  }
+  .header-mobile-nav {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+/* Mobile: hamburger visible, pill expands to reveal nav */
 @media screen and (max-width: 767.9px) {
+  /* Topbar: compact */
+  .header-topbar {
+    padding: 0.35rem 0;
+  }
+
+  /* Topbar container: fill width */
+  .header-topbar .ui.container {
+    width: 100%;
+  }
+
+  /* Pill: full-width, wraps when nav opens */
   .header-topbar-inner {
-    gap: 1rem;
+    display: flex !important;
     flex-wrap: wrap;
-    justify-content: center;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    align-items: center;
+  }
+
+  .header-mobile-toggle {
+    display: flex !important;
+    margin-left: auto;
+  }
+
+  /* Nav: hidden; when open it wraps below home+hamburger inside the pill */
+  .header-mobile-nav {
+    display: none !important;
+    width: 100%;
+    order: 99;
+  }
+
+  .header-mobile-nav.is-open {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 0.3rem;
+    padding-top: 0.3rem;
   }
 
   .header-logorow {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 1rem;
-    text-align: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0 !important;
   }
 
   .header-logorow-left {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .affiliation-text {
+    font-size: 10px;
+    letter-spacing: 1px;
   }
 
   .affiliation-logo-claim {
@@ -403,8 +514,13 @@ svg:not(:root) {
   }
 
   #int-header-logo-img {
-    width: 200px;
-    height: 75px;
+    width: auto;
+    height: 36px;
+  }
+
+  .repo-img img {
+    height: 28px !important;
+    width: auto !important;
   }
 
   .header-secondrow {

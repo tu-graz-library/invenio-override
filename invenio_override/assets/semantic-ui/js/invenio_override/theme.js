@@ -1,6 +1,7 @@
 import "semantic-ui-css";
 
 import $ from "jquery";
+import { CommunitiesResults } from "./CommunitiesResults";
 import { CommunityCards } from "./communities/CommunityCards";
 import { MultipleOptionsSearchBar } from "@js/invenio_search_ui/components";
 import React from "react";
@@ -9,8 +10,8 @@ import { UploadsResults } from "./UploadsResults";
 import { i18next } from "@translations/invenio_override/i18next";
 import { overrideStore } from "react-overridable";
 
-/* Register uploads results override — must run before invenio-app-rdm-user-uploads.js */
 overrideStore.add("InvenioAppRdm.DashboardUploads.SearchApp.results", UploadsResults);
+overrideStore.add("InvenioAppRdm.DashboardCommunities.SearchApp.results", CommunitiesResults);
 
 /* sticky notification setup for test instance */
 $(".ui.sticky.test-instance").sticky({
@@ -143,6 +144,45 @@ function watchForSearchSidebar() {
 }
 
 document.addEventListener("DOMContentLoaded", watchForSearchSidebar);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.querySelector(".header-mobile-toggle");
+  const nav = document.querySelector(".header-mobile-nav");
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    const open = nav.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+      nav.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  /* Mobile: */
+  nav.querySelectorAll(".header-topbar-dropdown").forEach(function (dropdown) {
+    const arrow = dropdown.querySelector(":scope > .header-topbar-link .topbar-arrow");
+    const menu = dropdown.querySelector(".header-topbar-dropdown-menu");
+    if (!arrow || !menu) return;
+
+    arrow.addEventListener("click", function (e) {
+      if (window.innerWidth >= 768) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = menu.style.display === "block";
+      nav.querySelectorAll(".header-topbar-dropdown-menu").forEach(function (m) {
+        m.style.display = "";
+      });
+      menu.style.display = isOpen ? "" : "block";
+    });
+  });
+});
 
 /* User profile dropdown */
 $("#user-profile-dropdown.ui.dropdown").dropdown({

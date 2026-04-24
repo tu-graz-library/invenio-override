@@ -83,13 +83,16 @@ footer {
     margin-bottom: 0.5rem;
   }
 
-  a, span {
+  a,
+  span {
     color: var(--fo-fg, @footerGrey);
     opacity: 0.8;
   }
 
   a {
-    transition: opacity 0.15s ease, color 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
 
     &:hover {
       opacity: 1;
@@ -125,7 +128,9 @@ footer {
   filter: var(--fo-logo-filter, none);
   display: block;
 
-  &:hover { opacity: 1; }
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .footer-partner-logo-lg {
@@ -194,10 +199,27 @@ footer {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .footer-logos {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-partner-logo,
+  .footer-partner-logo-lg {
+    height: 30px;
+    max-width: 90px;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+  .footer-logos {
+    gap: 0.75rem;
   }
 }

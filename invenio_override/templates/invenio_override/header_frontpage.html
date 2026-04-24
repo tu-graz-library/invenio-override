@@ -5,13 +5,9 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
 {%- extends "invenio_app_rdm/header_frontpage.html" %}
-
 {%- block page_inner_banner %}{% endblock %}
-
 {% set options = [] %}
-
 {% set base_option = {
     "key": "rdm",
     "text": _("Research Results"),
@@ -19,44 +15,39 @@
     "title": "Research Data",
 } %}
 {% set options = options + [base_option] %}
-
 {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH %}
     {% set pub_option = {
-        "key": "marc21",
-        "text": _("Publications"),
-        "value": "/publications/search",
-        "title": "Publication",
-    } %}
+            "key": "marc21",
+            "text": _("Publications"),
+            "value": "/publications/search",
+            "title": "Publication",
+        } %}
     {% set options = options + [pub_option] %}
 {% endif %}
-
 {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES %}
     {% set edu_option = {
-        "key": "lom",
-        "text": _("Educational Resources"),
-        "value": "/oer/search",
-        "title": "OER",
-    } %}
+            "key": "lom",
+            "text": _("Educational Resources"),
+            "value": "/oer/search",
+            "title": "OER",
+        } %}
     {% set options = options + [edu_option] %}
 {% endif %}
-
 {% if options | length > 1 %}
     {% set all_option = {
-        "key": "records",
-        "text": _("All"),
-        "value": url_for("invenio_search_ui.search"),
-        "title": "repo",
-    } %}
+            "key": "records",
+            "text": _("All"),
+            "value": url_for("invenio_search_ui.search"),
+            "title": "repo",
+        } %}
     {% set options = [all_option] + options %}
 {% endif %}
-
 {%- block site_banner %}
-{%- from "invenio_banners/banner.html" import banner with context -%}
-{{ banner() }}
+    {%- from "invenio_banners/banner.html" import banner with context -%}
+    {{ banner() }}
 {%- endblock site_banner %}
-
 {%- block frontpage_search %}
-<style>
+    <style>
 
   .frontpage-search-wrapper .ui.search,
   .frontpage-search-wrapper .ui.icon.input {
@@ -82,42 +73,46 @@
     .frontpage-search-hint { text-align: center !important; }
     .frontpage-search-wrapper { max-width: 100% !important; }
   }
-</style>
-<section class="frontpage-hero-section" role="banner" aria-label="{{ _('Search repository') }}">
-  <svg id="hero-canvas" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <!-- rdm cluster -->
-    <circle class="hnode node-rdm" cx="40%" cy="35%" r="2"/>
-    <circle class="hnode node-rdm" cx="45%" cy="14%" r="2"/>
-    <circle class="hnode node-rdm" cx="43%" cy="66%" r="2"/>
-    <circle class="hnode node-rdm" cx="52%" cy="28%" r="2"/>
-    <line class="hline node-rdm" x1="40%" y1="35%" x2="45%" y2="14%"/>
-    <line class="hline node-rdm" x1="40%" y1="35%" x2="43%" y2="66%"/>
-    <line class="hline node-rdm" x1="45%" y1="14%" x2="52%" y2="28%"/>
-    <line class="hline node-rdm" x1="43%" y1="66%" x2="52%" y2="28%"/>
-    <!-- pub cluster -->
-    <circle class="hnode node-pub" cx="58%" cy="20%" r="2"/>
-    <circle class="hnode node-pub" cx="57%" cy="58%" r="2"/>
-    <circle class="hnode node-pub" cx="63%" cy="75%" r="2"/>
-    <line class="hline node-pub" x1="58%" y1="20%" x2="57%" y2="58%"/>
-    <line class="hline node-pub" x1="57%" y1="58%" x2="63%" y2="75%"/>
-    <line class="hline node-pub" x1="58%" y1="20%" x2="63%" y2="75%"/>
-    <!-- edu cluster -->
-    <circle class="hnode node-edu" cx="69%" cy="22%" r="2"/>
-    <circle class="hnode node-edu" cx="74%" cy="58%" r="2"/>
-    <circle class="hnode node-edu" cx="78%" cy="16%" r="2"/>
-    <circle class="hnode node-edu" cx="80%" cy="72%" r="2"/>
-    <line class="hline node-edu" x1="69%" y1="22%" x2="78%" y2="16%"/>
-    <line class="hline node-edu" x1="69%" y1="22%" x2="74%" y2="58%"/>
-    <line class="hline node-edu" x1="78%" y1="16%" x2="80%" y2="72%"/>
-    <line class="hline node-edu" x1="74%" y1="58%" x2="80%" y2="72%"/>
-    <!-- bridges rdm → pub -->
-    <line class="hline node-rdm node-pub" x1="52%" y1="28%" x2="58%" y2="20%"/>
-    <line class="hline node-rdm node-pub" x1="43%" y1="66%" x2="57%" y2="58%"/>
-    <!-- bridges pub → edu -->
-    <line class="hline node-pub node-edu" x1="58%" y1="20%" x2="69%" y2="22%"/>
-    <line class="hline node-pub node-edu" x1="63%" y1="75%" x2="74%" y2="58%"/>
-  </svg>
-  <script>
+    </style>
+    <section class="frontpage-hero-section"
+             role="banner"
+             aria-label="{{ _("Search repository") }}">
+        <svg id="hero-canvas"
+             aria-hidden="true"
+             xmlns="http://www.w3.org/2000/svg">
+            <!-- rdm cluster -->
+            <circle class="hnode node-rdm" cx="40%" cy="35%" r="2" />
+            <circle class="hnode node-rdm" cx="45%" cy="14%" r="2" />
+            <circle class="hnode node-rdm" cx="43%" cy="66%" r="2" />
+            <circle class="hnode node-rdm" cx="52%" cy="28%" r="2" />
+            <line class="hline node-rdm" x1="40%" y1="35%" x2="45%" y2="14%" />
+            <line class="hline node-rdm" x1="40%" y1="35%" x2="43%" y2="66%" />
+            <line class="hline node-rdm" x1="45%" y1="14%" x2="52%" y2="28%" />
+            <line class="hline node-rdm" x1="43%" y1="66%" x2="52%" y2="28%" />
+            <!-- pub cluster -->
+            <circle class="hnode node-pub" cx="58%" cy="20%" r="2" />
+            <circle class="hnode node-pub" cx="57%" cy="58%" r="2" />
+            <circle class="hnode node-pub" cx="63%" cy="75%" r="2" />
+            <line class="hline node-pub" x1="58%" y1="20%" x2="57%" y2="58%" />
+            <line class="hline node-pub" x1="57%" y1="58%" x2="63%" y2="75%" />
+            <line class="hline node-pub" x1="58%" y1="20%" x2="63%" y2="75%" />
+            <!-- edu cluster -->
+            <circle class="hnode node-edu" cx="69%" cy="22%" r="2" />
+            <circle class="hnode node-edu" cx="74%" cy="58%" r="2" />
+            <circle class="hnode node-edu" cx="78%" cy="16%" r="2" />
+            <circle class="hnode node-edu" cx="80%" cy="72%" r="2" />
+            <line class="hline node-edu" x1="69%" y1="22%" x2="78%" y2="16%" />
+            <line class="hline node-edu" x1="69%" y1="22%" x2="74%" y2="58%" />
+            <line class="hline node-edu" x1="78%" y1="16%" x2="80%" y2="72%" />
+            <line class="hline node-edu" x1="74%" y1="58%" x2="80%" y2="72%" />
+            <!-- bridges rdm → pub -->
+            <line class="hline node-rdm node-pub" x1="52%" y1="28%" x2="58%" y2="20%" />
+            <line class="hline node-rdm node-pub" x1="43%" y1="66%" x2="57%" y2="58%" />
+            <!-- bridges pub → edu -->
+            <line class="hline node-pub node-edu" x1="58%" y1="20%" x2="69%" y2="22%" />
+            <line class="hline node-pub node-edu" x1="63%" y1="75%" x2="74%" y2="58%" />
+        </svg>
+        <script>
   document.addEventListener('DOMContentLoaded', function () {
     var section = document.querySelector('.frontpage-hero-section');
     document.querySelectorAll('.frontpage-pillar[data-hero-group]').forEach(function (pillar) {
@@ -126,78 +121,106 @@
       pillar.addEventListener('mouseleave', function () { section.classList.remove(cls); });
     });
   });
-  </script>
-
-  <div class="ui container">
-    {%- block frontpage_hero %}{%- endblock frontpage_hero %}
-
-    {%- block frontpage_form %}
-    <div class="frontpage-hero-layout" style="max-width:1200px; margin:0 auto; justify-content:flex-start; gap:6rem;">
-
-      {# Left: title + search #}
-      <div class="frontpage-hero-left">
-        {# <div class="hero-trust-badges">
+        </script>
+        <div class="ui container">
+            {%- block frontpage_hero %}{%- endblock frontpage_hero %}
+                {%- block frontpage_form %}
+                    <div class="frontpage-hero-layout"
+                         style="max-width:1200px;
+                                margin:0 auto;
+                                justify-content:flex-start;
+                                gap:6rem">
+                        {# Left: title + search #}
+                        <div class="frontpage-hero-left">
+                            {# <div class="hero-trust-badges">
           <span class="hero-trust-badge">{{ _("FAIR Data") }}</span>
           <span class="hero-trust-badge">{{ _("Citable with DOI") }}</span>
           <span class="hero-trust-badge">{{ _("Open Access") }}</span>
           <span class="hero-trust-badge">{{ _("Long-term Preservation") }}</span>
         </div> #}
-        <h1 class="frontpage-hero-title">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h1>
-        {% if config.OVERRIDE_FRONTPAGE_SUBTITLE %}
-        <p class="frontpage-hero-subtitle">{{ _(config.OVERRIDE_FRONTPAGE_SUBTITLE) }}</p>
-        {% endif %}
-
-        <div class="frontpage-search-wrapper" style="max-width:600px; width:100%; margin:1.5rem 0 0;">
-          <div id="frontpage-search-bar" data-options='{{ options | tojson }}' style="width:100%;"></div>
-        </div>
-      </div>
-
-      {# Right: pillar icons in a vertical column #}
-      <div class="frontpage-hero-right" style="margin-left:auto;">
-      <div class="frontpage-pillars" style="flex-direction:column; gap:1rem; align-items:center;">
-        <a href="/records/search" class="frontpage-pillar" data-hero-group="rdm" title="{{ _('Search research results') }}">
-          <div class="frontpage-pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="14" cy="14" r="4"/><circle cx="34" cy="10" r="4"/><circle cx="38" cy="34" r="4"/>
-              <circle cx="10" cy="36" r="4"/><circle cx="24" cy="24" r="2"/>
-              <line x1="17.5" y1="16" x2="21.5" y2="22"/><line x1="30.5" y1="12" x2="26.5" y2="22"/>
-              <line x1="26" y1="26.5" x2="34.5" y2="31"/><line x1="13" y1="32.5" x2="21.5" y2="26"/>
-            </svg>
-          </div>
-          <span class="frontpage-pillar-title">{{ _("Research Results") }}</span>
-        </a>
-
-        {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH or config.get('OVERRIDE_SHOW_PUBLICATIONS_CARD') %}
-        <a href="/publications/search" class="frontpage-pillar" data-hero-group="pub" title="{{ _('Search publications') }}">
-          <div class="frontpage-pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="10" y="6" width="22" height="30" rx="1"/><rect x="16" y="12" width="22" height="30" rx="1"/>
-              <line x1="21" y1="20" x2="33" y2="20"/><line x1="21" y1="25" x2="33" y2="25"/><line x1="21" y1="30" x2="29" y2="30"/>
-            </svg>
-          </div>
-          <span class="frontpage-pillar-title">{{ _("Publications") }}</span>
-        </a>
-        {% endif %}
-
-        {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES or config.get('OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD') %}
-        <a href="/oer/search" class="frontpage-pillar" data-hero-group="edu" title="{{ _('Search educational resources') }}">
-          <div class="frontpage-pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M24 8 L6 18 L24 28 L42 18 Z"/>
-              <path d="M12 22 L12 34 C12 34 18 40 24 40 C30 40 36 34 36 34 L36 22"/>
-              <line x1="42" y1="18" x2="42" y2="36"/>
-            </svg>
-          </div>
-          <span class="frontpage-pillar-title">{{ _("Educational Resources") }}</span>
-        </a>
-        {% endif %}
-      </div>
-      </div>{# end frontpage-hero-right #}
-
-    </div>{# end frontpage-hero-layout #}
-    {%- endblock frontpage_form %}
-
-
-  </div>
-</section>
-{%- endblock frontpage_search %}
+                            <h1 class="frontpage-hero-title">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h1>
+                            {% if config.OVERRIDE_FRONTPAGE_SUBTITLE %}
+                                <p class="frontpage-hero-subtitle">{{ _(config.OVERRIDE_FRONTPAGE_SUBTITLE) }}</p>
+                            {% endif %}
+                            <div class="frontpage-search-wrapper"
+                                 style="max-width:600px;
+                                        width:100%;
+                                        margin:1.5rem 0 0">
+                                <div id="frontpage-search-bar"
+                                     data-options='{{ options | tojson }}'
+                                     style="width:100%"></div>
+                            </div>
+                        </div>
+                        {# Right: pillar icons in a vertical column #}
+                        <div class="frontpage-hero-right" style="margin-left:auto;">
+                            <div class="frontpage-pillars"
+                                 style="flex-direction:column;
+                                        gap:1rem;
+                                        align-items:center">
+                                <a href="/records/search"
+                                   class="frontpage-pillar"
+                                   data-hero-group="rdm"
+                                   title="{{ _("Search research results") }}">
+                                    <div class="frontpage-pillar-icon">
+                                        <svg viewBox="0 0 48 48"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+                                            <circle cx="14" cy="14" r="4" /><circle cx="34" cy="10" r="4" /><circle cx="38" cy="34" r="4" />
+                                            <circle cx="10" cy="36" r="4" /><circle cx="24" cy="24" r="2" />
+                                            <line x1="17.5" y1="16" x2="21.5" y2="22" /><line x1="30.5" y1="12" x2="26.5" y2="22" />
+                                            <line x1="26" y1="26.5" x2="34.5" y2="31" /><line x1="13" y1="32.5" x2="21.5" y2="26" />
+                                        </svg>
+                                    </div>
+                                    <span class="frontpage-pillar-title">{{ _("Research Results") }}</span>
+                                </a>
+                                {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH or config.get('OVERRIDE_SHOW_PUBLICATIONS_CARD') %}
+                                    <a href="/publications/search"
+                                       class="frontpage-pillar"
+                                       data-hero-group="pub"
+                                       title="{{ _("Search publications") }}">
+                                        <div class="frontpage-pillar-icon">
+                                            <svg viewBox="0 0 48 48"
+                                                 fill="none"
+                                                 stroke="currentColor"
+                                                 stroke-width="1.2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <rect x="10" y="6" width="22" height="30" rx="1" /><rect x="16" y="12" width="22" height="30" rx="1" />
+                                                <line x1="21" y1="20" x2="33" y2="20" /><line x1="21" y1="25" x2="33" y2="25" /><line x1="21" y1="30" x2="29" y2="30" />
+                                            </svg>
+                                        </div>
+                                        <span class="frontpage-pillar-title">{{ _("Publications") }}</span>
+                                    </a>
+                                {% endif %}
+                                {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES or config.get('OVERRIDE_SHOW_EDUCATIONAL_RESOURCES_CARD') %}
+                                    <a href="/oer/search"
+                                       class="frontpage-pillar"
+                                       data-hero-group="edu"
+                                       title="{{ _("Search educational resources") }}">
+                                        <div class="frontpage-pillar-icon">
+                                            <svg viewBox="0 0 48 48"
+                                                 fill="none"
+                                                 stroke="currentColor"
+                                                 stroke-width="1.2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M24 8 L6 18 L24 28 L42 18 Z" />
+                                                <path d="M12 22 L12 34 C12 34 18 40 24 40 C30 40 36 34 36 34 L36 22" />
+                                                <line x1="42" y1="18" x2="42" y2="36" />
+                                            </svg>
+                                        </div>
+                                        <span class="frontpage-pillar-title">{{ _("Educational Resources") }}</span>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {# end frontpage-hero-right #}
+                    </div>
+                    {# end frontpage-hero-layout #}
+                {%- endblock frontpage_form %}
+            </div>
+        </section>
+    {%- endblock frontpage_search %}

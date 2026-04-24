@@ -21,6 +21,7 @@
 @import "communities";
 @import "dashboard";
 @import "deposit";
+@import "admin";
 
 /* ======================================
    Global utilities
@@ -30,7 +31,9 @@
 .no-decoration {
   color: inherit;
   text-decoration: none;
-  transition: background-color @transitionFast ease 0s, color @transitionFast ease 0s;
+  transition:
+    background-color @transitionFast ease 0s,
+    color @transitionFast ease 0s;
   outline: none;
 }
 
@@ -92,12 +95,19 @@
   margin: 0;
   width: 100%;
 
-  >.row {
+  > .row {
     padding: 0;
 
-    >.column {
+    > .column {
       padding: 1rem !important;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.grid > .column,
+  .ui.stackable.grid > .row > .column {
+    background-color: transparent !important;
   }
 }
 
@@ -189,7 +199,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1298px) {
-  .ui.stackable.grid>.row>.column {
+  .ui.stackable.grid > .row > .column {
     padding: 0.5rem !important;
   }
 

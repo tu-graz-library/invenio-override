@@ -14,7 +14,6 @@
   display: none !important;
 }
 
-
 /* ======================================
    Upstream overrides — page subheader
 ====================================== */
@@ -63,12 +62,16 @@
 }
 
 /* Match All Communities column widths: search=8/16 (50%), sort=4/16 (25%) */
-[data-invenio-search-config*="DashboardCommunities"] .row.computer.only > .column:nth-child(2) {
+[data-invenio-search-config*="DashboardCommunities"]
+  .row.computer.only
+  > .column:nth-child(2) {
   width: 50% !important;
 }
 
 /* Sort column — keep label and dropdown on one line */
-[data-invenio-search-config*="DashboardCommunities"] .row.computer.only .column:last-child {
+[data-invenio-search-config*="DashboardCommunities"]
+  .row.computer.only
+  .column:last-child {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
@@ -99,14 +102,18 @@
   border-radius: @radiusCardLarge !important;
   border: @borderSubtle !important;
   box-shadow: @cardShadowRest !important;
-  transition: box-shadow @transitionDuration ease, transform @transitionDuration ease;
+  transition:
+    box-shadow @transitionDuration ease,
+    transform @transitionDuration ease;
 
   &:hover {
     box-shadow: @cardShadowHover !important;
     transform: translateY(-2px);
     text-decoration: none;
 
-    .header { color: @overridePrimary; }
+    .header {
+      color: @overridePrimary;
+    }
   }
 
   /* Constrain image height */
@@ -249,6 +256,8 @@
     text-decoration: none;
     transition: color 0.15s ease;
 
-    &:hover { color: @overridePrimary; }
+    &:hover {
+      color: @overridePrimary;
+    }
   }
 }

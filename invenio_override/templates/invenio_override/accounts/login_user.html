@@ -5,108 +5,93 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
 {% extends config.OVERRIDE_ACCOUNT_BASE %}
 {% from "invenio_accounts/_macros.html" import render_field, form_errors %}
 {%- from "invenio_oauthclient/_macros.html" import oauth_button %}
-
 {% block page_body %}
-
-{%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
-<div class="page-inner-banner">
-  <div class="ui container">
-    <h1 class="page-inner-banner-title">{{ _('Log in to') }} {{ title }}</h1>
-    <p class="page-inner-banner-description">{{ _('Access and manage your research data.') }}</p>
-  </div>
-</div>
-
-{%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
-
-<div class="ui container">
-  <div class="login-page-container">
-    <div class="login-card">
-
-      {%- block form_header %}{%- endblock form_header %}
-
-      <div class="login-flash-messages">{{ flashed_messages() }}</div>
-
-      {% if config.OAUTHCLIENT_REMOTE_APPS %}
-        {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
-        {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
-          {% if not allowed or name in allowed %}
-            <div class="login-oauth-section">
-              {{ oauth_button(name, next=request.args.get('next')) }}
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      {% if config.SSO_SAML_IDPS %}
-        {% for name in config.SSO_SAML_IDPS.keys() %}
-          <div class="field">
-            <a class="login-page-button ui fluid large button" href="{{ url_for('sso_saml.sso', idp=name, next=next_url) }}">
-              {{
-                _('Log in with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true))
-              }}
-              <img src="{{ url_for('static', filename=config.OVERRIDE_ICON) }}" height="20px" />
-            </a>
-          </div>
-        {% endfor %}
-      {% endif %}
-
-      {% if (config.OAUTHCLIENT_REMOTE_APPS or config.SSO_SAML_IDPS or config.EDUGAIN_LOGIN_ENABLED) and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
-        <div class="ui horizontal divider">
-          {{ _("Or") }}
-        </div>
-      {% endif %}
-
-      {%- block form_outer %}
-      {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
-      {%- with form = login_user_form %}
-      <div class="login-form-section">
-        <p class="login-section-label">{{ _('Log in with repository credentials') }}</p>
-        <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="ui form">
-          {{ form.hidden_tag() }}
-          {{ form_errors(form) }}
-          {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
-          {{ render_field(form.password, icon="lock icon", errormsg=False) }}
-          <button type="submit" class="ui fluid large primary button" style="margin-top: 0.5rem;">
-            {{ _('Log In') }}
-          </button>
-        </form>
-      </div>
-      {%- endwith %}
-      {%- endif %}
-      {%- endblock form_outer %}
-
-      {%- if security.registerable or security.recoverable %}
-      <div class="login-card-footer">
-        {%- block registerable %}
-        {%- if security.registerable %}
-        <span class="login-footer-text">
-          {% trans sitename=config.ACCOUNTS_SITENAME %}New to {{ sitename }}?{% endtrans %}
-          <a href="{{ url_for_security('register', next=request.args.get('next')) }}">{{ _('Sign up') }}</a>
-        </span>
-        {%- endif %}
-        {%- endblock registerable %}
-
-        {%- block recoverable %}
-        {%- if security.recoverable %}
-        <a class="login-footer-link" href="{{ url_for_security('forgot_password') }}">{{ _('Forgot password?') }}</a>
-        {%- endif %}
-        {%- endblock recoverable %}
-      </div>
-      {%- endif %}
-
+  {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+  <div class="page-inner-banner">
+    <div class="ui container">
+      <h1 class="page-inner-banner-title">{{ _("Log in to") }} {{ title }}</h1>
+      <p class="page-inner-banner-description">{{ _("Access and manage your research data.") }}</p>
     </div>
   </div>
-</div>
-
-{% endblock page_body %}
-
-{% block javascript %}
-{{ super() }}
-<script>
+  {%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
+  <div class="ui container">
+    <div class="login-page-container">
+      <div class="login-card">
+        {%- block form_header %}{%- endblock form_header %}
+          <div class="login-flash-messages">{{ flashed_messages() }}</div>
+          {% if config.OAUTHCLIENT_REMOTE_APPS %}
+            {%- set allowed = config.get("OVERRIDE_LOGIN_OAUTH_PROVIDERS") %}
+            {% for name, app in config.OAUTHCLIENT_REMOTE_APPS.items() %}
+              {% if not allowed or name in allowed %}
+                <div class="login-oauth-section">{{ oauth_button(name, next=request.args.get('next') ) }}</div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          {% if config.SSO_SAML_IDPS %}
+            {% for name in config.SSO_SAML_IDPS.keys() %}
+              <div class="field">
+                <a class="login-page-button ui fluid large button"
+                   href="{{ url_for('sso_saml.sso', idp=name, next=next_url) }}">
+                  {{ _('Log in with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true) )
+                  }}
+                  <img src="{{ url_for('static', filename=config.OVERRIDE_ICON) }}"
+                       height="20px" />
+                </a>
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% if (config.OAUTHCLIENT_REMOTE_APPS or config.SSO_SAML_IDPS or config.EDUGAIN_LOGIN_ENABLED) and config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+            <div class="ui horizontal divider">{{ _("Or") }}</div>
+          {% endif %}
+          {%- block form_outer %}
+            {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+              {%- with form = login_user_form %}
+                <div class="login-form-section">
+                  <p class="login-section-label">{{ _("Log in with repository credentials") }}</p>
+                  <form action="{{ url_for_security('login') }}"
+                        method="POST"
+                        name="login_user_form"
+                        class="ui form">
+                    {{ form.hidden_tag() }}
+                    {{ form_errors(form) }}
+                    {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
+                    {{ render_field(form.password, icon="lock icon", errormsg=False) }}
+                    <button type="submit"
+                            class="ui fluid large primary button"
+                            style="margin-top: 0.5rem">{{ _("Log In") }}</button>
+                  </form>
+                </div>
+              {%- endwith %}
+            {%- endif %}
+          {%- endblock form_outer %}
+          {%- if security.registerable or security.recoverable %}
+            <div class="login-card-footer">
+              {%- block registerable %}
+                {%- if security.registerable %}
+                  <span class="login-footer-text">
+                    {% trans sitename=config.ACCOUNTS_SITENAME %}New to {{ sitename }}?{% endtrans %}
+                    <a href="{{ url_for_security('register', next=request.args.get('next') ) }}">{{ _("Sign up") }}</a>
+                  </span>
+                {%- endif %}
+              {%- endblock registerable %}
+              {%- block recoverable %}
+                {%- if security.recoverable %}
+                  <a class="login-footer-link"
+                     href="{{ url_for_security('forgot_password') }}">{{ _("Forgot password?") }}</a>
+                {%- endif %}
+              {%- endblock recoverable %}
+            </div>
+          {%- endif %}
+        </div>
+      </div>
+    </div>
+  {% endblock page_body %}
+  {% block javascript %}
+    {{ super() }}
+    <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.ui.message .close.icon').forEach(function (icon) {
       icon.addEventListener('click', function () {
@@ -115,5 +100,5 @@
       });
     });
   });
-</script>
-{% endblock javascript %}
+    </script>
+  {% endblock javascript %}

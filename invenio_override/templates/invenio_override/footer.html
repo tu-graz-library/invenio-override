@@ -5,100 +5,121 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
-{%- block css %}
-{{ webpack['invenio-override-theme.css'] }}
-{%- endblock %}
-
-{%- block javascript %}
-{{ webpack['invenio-override-js.js'] }}
-{%- endblock javascript %}
-
-{% set footer_links = config.get('OVERRIDE_FOOTER_LINKS', {}) %}
-
-{% if footer_links %}
-
-{# Build inline CSS custom properties from config — no webpack rebuild needed #}
-{% set fo_parts = [] %}
-{% if config.get('OVERRIDE_FOOTER_BACKGROUND') %}
-  {% set fo_parts = fo_parts + ['--fo-bg:' + config.OVERRIDE_FOOTER_BACKGROUND] %}
-{% endif %}
-{% if config.get('OVERRIDE_FOOTER_FG_COLOR') %}
-  {% set fo_parts = fo_parts + ['--fo-fg:' + config.OVERRIDE_FOOTER_FG_COLOR] %}
-{% endif %}
-{% if config.get('OVERRIDE_FOOTER_LOGO_FILTER') is not none and config.get('OVERRIDE_FOOTER_LOGO_FILTER') != '' %}
-  {% set fo_parts = fo_parts + ['--fo-logo-filter:' + config.OVERRIDE_FOOTER_LOGO_FILTER] %}
-{% endif %}
-{% if config.get('OVERRIDE_FOOTER_DIVIDER_COLOR') %}
-  {% set fo_parts = fo_parts + ['--fo-divider:' + config.OVERRIDE_FOOTER_DIVIDER_COLOR] %}
-{% endif %}
-
-<footer id="footer" class="footer-bottom" role="contentinfo"
-  {% if fo_parts %}style="{{ fo_parts | join('; ') }}"{% endif %}>
-  <div class="ui container">
-    <nav class="footer-grid" aria-label="{{ _('Footer navigation') }}">
-      {% for column_title, links in footer_links.items() %}
-      <div class="footer-column">
-        <h3 class="footer-heading">{{ _(column_title) }}</h3>
-        <ul class="footer-links">
-          {% for link in links %}
-          {%- set is_external = link.get('external', False) %}
-          <li>
-            {% if link.get('url') %}
-            <a href="{{ link.url }}" title="{{ link.get('title', link.label) }}"
-              {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
-              {{ _(link.label) }}
-              {% if is_external %}<i class="external alternate icon"></i>{% endif %}
-              {% if link.get('icon') %}<i class="{{ link.icon }} icon"></i>{% endif %}
+{%- block css %}{{ webpack['invenio-override-theme.css'] }}{%- endblock %}
+  {%- block javascript %}
+    {{ webpack['invenio-override-js.js'] }}
+  {%- endblock javascript %}
+  {% set footer_links = config.get('OVERRIDE_FOOTER_LINKS', {}) %}
+  {% if footer_links %}
+    {# Build inline CSS custom properties from config — no webpack rebuild needed #}
+    {% set fo_parts = [] %}
+    {% if config.get('OVERRIDE_FOOTER_BACKGROUND') %}
+      {% set fo_parts = fo_parts + ['--fo-bg:' + config.OVERRIDE_FOOTER_BACKGROUND] %}
+    {% endif %}
+    {% if config.get('OVERRIDE_FOOTER_FG_COLOR') %}
+      {% set fo_parts = fo_parts + ['--fo-fg:' + config.OVERRIDE_FOOTER_FG_COLOR] %}
+    {% endif %}
+    {% if config.get('OVERRIDE_FOOTER_LOGO_FILTER') is not none and config.get('OVERRIDE_FOOTER_LOGO_FILTER') != '' %}
+      {% set fo_parts = fo_parts + ['--fo-logo-filter:' + config.OVERRIDE_FOOTER_LOGO_FILTER] %}
+    {% endif %}
+    {% if config.get('OVERRIDE_FOOTER_DIVIDER_COLOR') %}
+      {% set fo_parts = fo_parts + ['--fo-divider:' + config.OVERRIDE_FOOTER_DIVIDER_COLOR] %}
+    {% endif %}
+    <footer id="footer"
+            class="footer-bottom"
+            role="contentinfo"
+            {% if fo_parts %}style="{{ fo_parts | join('; ') }}"{% endif %}>
+      <div class="ui container">
+        <nav class="footer-grid" aria-label="{{ _('Footer navigation') }}">
+          {% for column_title, links in footer_links.items() %}
+            <div class="footer-column">
+              <h3 class="footer-heading">{{ _(column_title) }}</h3>
+              <ul class="footer-links">
+                {% for link in links %}
+                  {%- set is_external = link.get('external', False) %}
+                  <li>
+                    {% if link.get('url') %}
+                      <a href="{{ link.url }}"
+                         title="{{ link.get('title', link.label) }}"
+                         {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {{ _(link.label) }}
+                        {% if is_external %}<i class="external alternate icon"></i>{% endif %}
+                        {% if link.get('icon') %}<i class="{{ link.icon }} icon"></i>{% endif %}
+                      </a>
+                    {% else %}
+                      <span>{{ _(link.label) }}</span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </nav>
+        <div class="footer-bottom-bar">
+          <div class="footer-powered">
+            <span>Powered by</span>
+            <a href="http://inveniosoftware.org/products/rdm"
+               target="_blank"
+               rel="noopener noreferrer"
+               title="InvenioRDM"
+               class="footer-powered-link">
+              <img src="{{ url_for('static', filename='images/logo-invenio-white.svg') }}"
+                   alt="Invenio"
+                   height="28"
+                   loading="lazy">
+              <span class="footer-powered-rdm">RDM</span>
             </a>
+          </div>
+          <div class="footer-logos">
+            {% set partner_logos = config.get('OVERRIDE_FOOTER_LOGOS') %}
+            {% if partner_logos is not none %}
+              {% for logo in partner_logos %}
+                <a href="{{ logo.url }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="{{ logo.get('title', logo.alt) }}">
+                  <img src="{{ url_for('static', filename=logo.src) }}"
+                       alt="{{ logo.alt }}"
+                       class="footer-partner-logo{% if logo.get('large') %} footer-partner-logo-lg{% endif %}"
+                       loading="lazy">
+                </a>
+              {% endfor %}
             {% else %}
-            <span>{{ _(link.label) }}</span>
+              <a href="https://forschungsdaten.at/en/fair-data-austria/"
+                 target="_blank"
+                 title="Fair Data Austria">
+                <img src="{{ url_for('static', filename='images/Fair_Data_Austria_orangerot.png') }}"
+                     alt="Fair Data Austria"
+                     class="footer-partner-logo"
+                     loading="lazy">
+              </a>
+              <a href="https://www.openeducation.at"
+                 target="_blank"
+                 title="Open Education Austria">
+                <img src="{{ url_for('static', filename='images/oea.svg') }}"
+                     alt="Open Education Austria"
+                     class="footer-partner-logo"
+                     loading="lazy">
+              </a>
+              <a href="https://forschungsdaten.at/en/sharedrdm/"
+                 target="_blank"
+                 title="Shared RDM">
+                <img src="{{ url_for('static', filename='images/sharedRDM.png') }}"
+                     alt="Shared RDM"
+                     class="footer-partner-logo footer-partner-logo-lg"
+                     loading="lazy">
+              </a>
+              <a href="https://www.re3data.org/repository/r3d100013565"
+                 target="_blank"
+                 title="re3data">
+                <img src="{{ url_for('static', filename='images/re3data.svg') }}"
+                     alt="re3data"
+                     class="footer-partner-logo"
+                     loading="lazy">
+              </a>
             {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
+          </div>
+        </div>
       </div>
-      {% endfor %}
-    </nav>
-
-    <div class="footer-bottom-bar">
-      <div class="footer-powered">
-        <span>Powered by</span>
-        <a href="http://inveniosoftware.org/products/rdm" target="_blank" rel="noopener noreferrer" title="InvenioRDM" class="footer-powered-link">
-          <img src="{{ url_for('static', filename='images/logo-invenio-white.svg') }}"
-               alt="Invenio" height="28" loading="lazy">
-          <span class="footer-powered-rdm">RDM</span>
-        </a>
-      </div>
-      <div class="footer-logos">
-        {% set partner_logos = config.get('OVERRIDE_FOOTER_LOGOS') %}
-        {% if partner_logos is not none %}
-          {% for logo in partner_logos %}
-          <a href="{{ logo.url }}" target="_blank" rel="noopener noreferrer" title="{{ logo.get('title', logo.alt) }}">
-            <img src="{{ url_for('static', filename=logo.src) }}"
-                 alt="{{ logo.alt }}" class="footer-partner-logo{% if logo.get('large') %} footer-partner-logo-lg{% endif %}" loading="lazy">
-          </a>
-          {% endfor %}
-        {% else %}
-          <a href="https://forschungsdaten.at/en/fair-data-austria/" target="_blank" title="Fair Data Austria">
-            <img src="{{ url_for('static', filename='images/Fair_Data_Austria_orangerot.png') }}"
-                 alt="Fair Data Austria" class="footer-partner-logo" loading="lazy">
-          </a>
-          <a href="https://www.openeducation.at" target="_blank" title="Open Education Austria">
-            <img src="{{ url_for('static', filename='images/oea.svg') }}"
-                 alt="Open Education Austria" class="footer-partner-logo" loading="lazy">
-          </a>
-          <a href="https://forschungsdaten.at/en/sharedrdm/" target="_blank" title="Shared RDM">
-            <img src="{{ url_for('static', filename='images/sharedRDM.png') }}"
-                 alt="Shared RDM" class="footer-partner-logo footer-partner-logo-lg" loading="lazy">
-          </a>
-          <a href="https://www.re3data.org/repository/r3d100013565" target="_blank" title="re3data">
-            <img src="{{ url_for('static', filename='images/re3data.svg') }}"
-                 alt="re3data" class="footer-partner-logo" loading="lazy">
-          </a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</footer>
-{% endif %}
+    </footer>
+  {% endif %}

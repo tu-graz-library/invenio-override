@@ -5,23 +5,18 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
 {%- extends config.OVERRIDE_BASE_TEMPLATE %}
-
 {%- set active_dashboard_menu_item = "overview" %}
 {%- set title = _("Overview") %}
 {%- set page_description = _("Manage your uploads, communities and requests.") %}
-
 {%- block javascript %}
   {{ super() }}
   {{ webpack['invenio-override-dashboard.js'] }}
 {%- endblock javascript %}
-
 {%- block page_body %}
-<section class="ui container rel-mt-3 dashboard-overview">
-  <div id="dashboard-overview"
-       data-show-curations="{{ 'true' if current_menu.submenu('dashboard').submenu('curation-overview').visible else 'false' }}"
-       data-show-publications="{{ 'true' if can_view_marc21 else 'false' }}">
-  </div>
-</section>
+  <section class="ui container rel-mt-3 dashboard-overview">
+    <div id="dashboard-overview"
+         data-show-curations="{{ 'true' if current_menu.submenu("dashboard").submenu('curation-overview').visible else 'false' }}"
+         data-show-publications="{{ 'true' if can_view_marc21 else 'false' }}"></div>
+  </section>
 {%- endblock page_body %}

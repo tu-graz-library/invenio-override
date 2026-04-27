@@ -15,7 +15,7 @@ from invenio_i18n import lazy_gettext as _
 
 try:
     from invenio_records_marc21.ui.theme import current_identity_can_view
-except ImportError:
+except (ImportError, AttributeError):
     current_identity_can_view = lambda: False
 
 from . import config

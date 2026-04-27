@@ -7,6 +7,14 @@
 
 Changes
 =======
+Version v0.0.8 (release 2026-04-27)
+
+- chore: upgrade to invenio-app-rdm v14
+- chore: add invenio-records-global-search dependency
+- chore: update invenio-global-search to >=0.2.0
+- chore: update invenio-rdm-records to >=20.0.0
+- chore: move repository to tu-graz-library organisation
+
 Version v0.0.7 (release 2025-02-11)
 
 - refactor: overview responsiveness on the front page

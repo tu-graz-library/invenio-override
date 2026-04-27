@@ -1,0 +1,60 @@
+/*
+ *   Copyright (C) 2020-2026 Graz University of Technology.
+ *
+ * invenio-override is free software; you can redistribute it and/or modify it
+ * under the terms of the MIT License; see LICENSE file for more details.
+ */
+
+/* ======================================
+   TU Graz admin UI overrides
+====================================== */
+
+/* ---- Header bars ---- */
+.invenio-administration #invenio-admin-home-nav.ui.inverted.menu,
+.invenio-administration #invenio-admin-top-nav.ui.inverted.menu {
+  background-color: @overridePrimary !important;
+}
+
+.invenio-administration .ui.inverted.menu .item,
+.invenio-administration .ui.inverted.menu .item > a {
+  color: #ffffff !important;
+}
+
+.invenio-administration .ui.inverted.menu .item:hover,
+.invenio-administration .ui.inverted.menu .item > a:hover {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  color: #ffffff !important;
+}
+
+/* ---- Sidebar text — dark and readable on default light background ---- */
+.invenio-administration .ui.vertical.menu .item {
+  color: @primaryText !important;
+}
+
+.invenio-administration .ui.vertical.menu .item:hover {
+  color: @overridePrimary !important;
+}
+
+.invenio-administration .ui.vertical.menu .item.active {
+  color: @overridePrimary !important;
+  font-weight: 600;
+}
+
+.invenio-administration .ui.vertical.menu .sub-menu .ui.small.header {
+  color: @recordText !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Page title ---- */
+.invenio-administration h1.ui.header {
+  color: @primaryText;
+}
+
+/* ---- Logo ---- */
+.invenio-administration .rdm-logo {
+  max-height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}

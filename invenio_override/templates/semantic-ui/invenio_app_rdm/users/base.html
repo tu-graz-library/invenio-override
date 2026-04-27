@@ -14,18 +14,13 @@
     - Suppresses the upstream user info + tab-nav header block.
     - Wraps dashboard body in a plain ui container (no upstream chrome).
 #}
-
 {%- extends config.OVERRIDE_BASE_TEMPLATE %}
-
 {%- block page_body %}
-
   {%- block user_dashboard_header %}
-  {# Intentionally empty — suppress the upstream user info + tab-nav header #}
+    {# Intentionally empty — suppress the upstream user info + tab-nav header #}
   {%- endblock user_dashboard_header %}
-
   <div class="ui container rel-mt-2">
     {%- block user_dashboard_body %}
     {%- endblock user_dashboard_body %}
   </div>
-
 {%- endblock page_body %}

@@ -14,20 +14,15 @@
     - Added desktop "New upload" circle button injected via JS into the
       React search row after render.
 #}
-
 {%- set title = _("Uploads") %}
 {%- set page_description = _("Manage and publish your research data, publications and other outputs.") %}
 {%- extends "invenio_app_rdm/users/base.html" %}
-
-{% set active_dashboard_menu_item = 'uploads' %}
-
+{% set active_dashboard_menu_item = "uploads" %}
 {%- block javascript %}
-{{ super() }}
-{{ webpack['invenio-app-rdm-user-uploads.js'] }}
+  {{ super() }}
+  {{ webpack['invenio-app-rdm-user-uploads.js'] }}
 {%- endblock javascript %}
-
 {%- block user_dashboard_body %}
-
   {# Mobile/tablet: upload button shown above results on small screens #}
   <div class="dashboard-mobile-action-bar">
     <div class="upload-new-wrap">
@@ -37,19 +32,15 @@
         <i class="upload icon"></i>
       </a>
       <div class="upload-new-label-wrap">
-        <span class="upload-new-title">{{ _("New upload") }}</span>
+        <span class="upload-new-title">{{ _('New upload') }}</span>
         <span class="upload-new-desc">{{ _("Share your research") }}</span>
       </div>
     </div>
   </div>
-
-  <div
-    id="invenio-search-config"
-    class="uploads-search-app"
-    data-invenio-search-config='{{ search_app_rdm_user_uploads_config(app_id="InvenioAppRdm.DashboardUploads") | tojson }}'
-  >
+  <div id="invenio-search-config"
+       class="uploads-search-app"
+       data-invenio-search-config='{{ search_app_rdm_user_uploads_config(app_id="InvenioAppRdm.DashboardUploads") | tojson }}'>
   </div>
-
   {# Desktop: Upload button injected into the search/tabs row by JS after React renders #}
   <div id="upload-new-circle" class="upload-new-wrap" style="display:none;">
     <a href="{{ url_for('invenio_app_rdm_records.deposit_create') }}"
@@ -58,11 +49,10 @@
       <i class="upload icon"></i>
     </a>
     <div class="upload-new-label-wrap">
-      <span class="upload-new-title">{{ _("New upload") }}</span>
+      <span class="upload-new-title">{{ _('New upload') }}</span>
       <span class="upload-new-desc">{{ _("Share your research") }}</span>
     </div>
   </div>
-
   <script>
   (function () {
     function injectUploadCircle() {
@@ -72,9 +62,6 @@
       if (!filterRow) return;
       var firstCol = filterRow.querySelector('.column:first-child');
       if (!firstCol) return;
-      firstCol.style.display = 'flex';
-      firstCol.style.alignItems = 'center';
-      firstCol.style.justifyContent = 'flex-start';
       circle.style.display = 'inline-flex';
       firstCol.appendChild(circle);
     }

@@ -5,81 +5,72 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
 {% extends config.OVERRIDE_ACCOUNT_BASE %}
-
 {% from "invenio_accounts/_macros.html" import render_field, form_errors %}
-
 {% block page_body %}
-<div class="page-inner-banner">
-  <div class="ui container">
-    <h1 class="page-inner-banner-title">{{ _('Create an Account') }}</h1>
-    <p class="page-inner-banner-description">{{ _('Join the research data management platform.') }}</p>
+  <div class="page-inner-banner">
+    <div class="ui container">
+      <h1 class="page-inner-banner-title">{{ _("Create an Account") }}</h1>
+      <p class="page-inner-banner-description">{{ _("Join the research data management platform.") }}</p>
+    </div>
   </div>
-</div>
-
-{%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
-<div class="ui container" style="padding-top: 1rem;">{{ flashed_messages() }}</div>
-
-<div class="ui container" style="margin-top: 1rem; margin-bottom: 2rem;">
-  <div class="ui stackable two column grid">
-
-    <div class="column" id="switch_left">
-      <div class="register-info-panel">
-        <h4>{{ _('Citeable. Discoverable.') }}</h4>
-        <p>{{ _('Uploads get a Digital Object Identifier (DOI) to make them easily and uniquely citeable.')}}</p>
-        <h4>{{ _('Communities.') }}</h4>
-        <p>{{ _('Accept or reject uploads to your own community (e.g workshops, EU projects, institutions or entire disciplines).') }}</p>
-        <h4>{{ _('Trusted Research Data Management') }}</h4>
-        <p>{{ _('Built on top of institutions expertise in managing of the research data from the Shared RDM.') }}</p>
+  {%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
+  <div class="ui container" style="padding-top: 1rem;">{{ flashed_messages() }}</div>
+  <div class="ui container" style="margin-top: 1rem; margin-bottom: 2rem;">
+    <div class="ui stackable two column grid">
+      <div class="column" id="switch_left">
+        <div class="register-info-panel">
+          <h4>{{ _("Citeable. Discoverable.") }}</h4>
+          <p>{{ _("Uploads get a Digital Object Identifier (DOI) to make them easily and uniquely citeable.") }}</p>
+          <h4>{{ _("Communities.") }}</h4>
+          <p>
+            {{ _("Accept or reject uploads to your own community (e.g workshops, EU projects, institutions or entire disciplines).") }}
+          </p>
+          <h4>{{ _("Trusted Research Data Management") }}</h4>
+          <p>{{ _("Built on top of institutions expertise in managing of the research data from the Shared RDM.") }}</p>
+        </div>
+      </div>
+      <div class="column" id="switch_right">
+        {# Sigup with SSO #}
+        {%- if config.OVERRIDE_SHIBBOLETH or config.INVENIO_CONFIG_TUGRAZ_SHIBBOLETH %}
+          {% for name in config.SSO_SAML_IDPS.keys() %}
+            <a href="{{ url_for('sso_saml.sso', idp=name) }}"
+               class="login-page-button ui fluid large button">
+              {{ _('Sign up with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true) ) }}
+              <img src="{{ url_for('static', filename=config.OVERRIDE_ICON) }}"
+                   height="20px" />
+            </a>
+          {% endfor %}
+          <div class="ui inverted horizontal divider">
+            <span class="text-color">{{ _ ("Or") }}</span>
+          </div>
+        {%- endif %}
+        {%- block form_header %}
+          {%- block form_outer %}
+          {%- endblock form_outer %}
+        {%- endblock form_header %}
+        {%- with form = register_user_form %}
+          <div class="register-card">
+            <p class="register-card-title">{{ _("Sign up with repository credentials") }}</p>
+            <form class="ui form register-form"
+                  action="{{ url_for_security('register') }}"
+                  method="POST"
+                  name="register_user_form">
+              {{ form_errors(form) }}
+              {{ form.hidden_tag() }}
+              {%- block registration_form_fields scoped %}
+                {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
+                {{ render_field(form.password, icon="lock icon", errormsg=False) }}
+                {%- if form.password_confirm %}{{ render_field(form.password_confirm, icon="lock icon", errormsg=False) }}{%- endif %}
+                {%- endblock registration_form_fields %}
+                {%- if form.recaptcha %}<div class="grouped fields">{{ form.recaptcha() }}</div>{%- endif %}
+                <button type="submit"
+                        class="ui fluid large primary button"
+                        style="margin-top: 0.5rem">{{ _("Sign up") }}</button>
+              </form>
+            </div>
+          {%- endwith %}
+        </div>
       </div>
     </div>
-
-    <div class="column" id="switch_right">
-      {# Sigup with SSO #}
-      {%- if config.OVERRIDE_SHIBBOLETH or config.INVENIO_CONFIG_TUGRAZ_SHIBBOLETH %}
-        {% for name in config.SSO_SAML_IDPS.keys() %}                                                                                                                                   
-          <a href="{{ url_for('sso_saml.sso', idp=name) }}" class="login-page-button ui fluid large button">
-            {{ _('Sign up with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true)) }}
-          <img src="{{ url_for('static', filename=config.OVERRIDE_ICON)}}" height="20px" />
-          </a>                                                                                                                                                                          
-        {% endfor %}
-      <div class="ui inverted horizontal divider"><span class="text-color">{{_ ("Or") }}</span></div>
-      {%- endif %}
-
-      {%- block form_header %}
-      {%- block form_outer %}
-      {%- endblock form_outer %}
-      {%- endblock form_header %}
-
-      {%- with form = register_user_form %}
-      <div class="register-card">
-        <p class="register-card-title">{{ _('Sign up with repository credentials') }}</p>
-        <form class="ui form register-form" action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
-          {{ form_errors(form) }}
-          {{ form.hidden_tag() }}
-          {%- block registration_form_fields scoped %}
-          {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
-          {{ render_field(form.password, icon="lock icon", errormsg=False) }}
-          {%- if form.password_confirm %}
-          {{ render_field(form.password_confirm, icon="lock icon", errormsg=False) }}
-          {%- endif %}
-          {%- endblock registration_form_fields %}
-
-          {%- if form.recaptcha %}
-          <div class="grouped fields">{{ form.recaptcha() }}</div>
-          {%- endif %}
-
-          <button type="submit" class="ui fluid large primary button" style="margin-top: 0.5rem;">
-            {{ _('Sign up') }}
-          </button>
-        </form>
-      </div>
-      {%- endwith %}
-
-    </div>
-
-  </div>
-</div>
-
-{% endblock page_body %}
+  {% endblock page_body %}

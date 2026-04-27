@@ -13,7 +13,8 @@
    those must remain visible. */
 .page-subheader-outer:not(.with-submenu),
 .page-subheader-outer:not(.with-submenu) .page-subheader,
-.page-subheader-outer:not(.with-submenu) .ui.secondary.pointing.menu.page-subheader,
+.page-subheader-outer:not(.with-submenu)
+  .ui.secondary.pointing.menu.page-subheader,
 #dashboard-user-header-container {
   display: none !important;
   visibility: hidden !important;
@@ -46,7 +47,10 @@
   color: @greyDark;
   text-decoration: none;
   flex-shrink: 0;
-  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 
   i.icon {
     font-size: @font-size-2xl;
@@ -80,7 +84,6 @@
   color: @recordLightText;
   line-height: 1.3;
 }
-
 
 /* ======================================
    Dashboard nav grid — big circles
@@ -132,7 +135,9 @@
     .dashboard-nav-box-circle {
       border-color: @overridePrimary;
 
-      i.icon { color: @overridePrimary; }
+      i.icon {
+        color: @overridePrimary;
+      }
     }
 
     .dashboard-nav-box-title {
@@ -145,13 +150,15 @@
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0,0,0,0.15);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
   background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   i.icon {
     font-size: 2.2rem;
@@ -165,7 +172,9 @@
 .dashboard-nav-box-highlight .dashboard-nav-box-circle {
   border-color: @overridePrimary;
 
-  i.icon { color: @overridePrimary; }
+  i.icon {
+    color: @overridePrimary;
+  }
 }
 
 .dashboard-nav-box-title {
@@ -213,7 +222,9 @@
   text-decoration: none;
   color: inherit;
   box-shadow: @cardShadowRest;
-  transition: box-shadow @transitionDuration ease, transform @transitionDuration ease;
+  transition:
+    box-shadow @transitionDuration ease,
+    transform @transitionDuration ease;
 }
 
 .dashboard-card:hover {
@@ -298,7 +309,9 @@
 
 .dashboard-item-card {
   border-radius: @radiusCard !important;
-  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease !important;
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
@@ -351,7 +364,9 @@
     font-weight: 500;
     color: @recordText;
     border-bottom-width: 3px;
-    transition: color @transitionFast ease, border-color @transitionFast ease;
+    transition:
+      color @transitionFast ease,
+      border-color @transitionFast ease;
     padding: 0.85em 1.25em;
 
     &:hover {
@@ -427,60 +442,160 @@
   align-items: center !important;
 }
 
-/* Uploads: [circle col1→1] [tabs col2→2] [search col3→3] | sort col4 hidden */
-.uploads-search-app .row.computer.only > .column:nth-child(1) { order: 1; }
-.uploads-search-app .row.computer.only > .column:nth-child(2) { order: 2; }
-.uploads-search-app .row.computer.only > .column:nth-child(3) { order: 3; }
-/* Use ID for higher specificity to override Semantic UI .computer.only display:block !important */
-#invenio-search-config.uploads-search-app .row.computer.only > .column:nth-child(4) { display: none !important; }
+#invenio-search-config.uploads-search-app .row.tablet.only:not(.mobile),
+#invenio-search-config.uploads-search-app
+  .row.mobile.only:not(.tablet):has(.right.aligned.column) {
+  display: none !important;
+}
 
+/* Uploads top row: [My uploads | Shared with me — left] [upload circle + label — right]
+   Search bar moved into highlight-background results row. Sort hidden (already in results row). */
+.uploads-search-app .row.computer.only {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+}
+/* Col 1 (4-wide empty → upload circle injected): right edge */
+.uploads-search-app .row.computer.only > .column:nth-child(1) {
+  order: 2;
+  flex: 0 0 auto;
+  width: auto !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+}
+.uploads-search-app .row.computer.only .upload-new-wrap {
+  flex-direction: row-reverse;
+  gap: 0.75rem;
+}
+.uploads-search-app .row.computer.only .upload-new-label-wrap {
+  text-align: right;
+}
+/* Col 2 (SharedOrMineFilter): natural width + white background with light-gray hover */
+.uploads-search-app .row.computer.only > .column:nth-child(2) {
+  overflow: visible !important;
+  padding-right: 0.5rem !important;
+}
+.uploads-search-app .row.computer.only > .column:nth-child(2) .ui.buttons,
+.uploads-search-app
+  .row.computer.only
+  > .column:nth-child(2)
+  .ui.fluid.buttons {
+  width: auto !important;
+}
+
+.uploads-search-app
+  .row.computer.only
+  > .column:nth-child(2)
+  .ui.buttons
+  .button {
+  background: #ffffff !important;
+  color: @recordText !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: background-color @transitionFast ease;
+
+  &:hover {
+    background: @greyLight !important;
+    color: @primaryText !important;
+  }
+
+  &.active {
+    background: @greyLight !important;
+    color: @greyDark !important;
+    font-weight: 600;
+  }
+}
+
+/* Col 3 (SearchBar) */
+.uploads-search-app .row.computer.only > .column:nth-child(3) {
+  flex: 0 0 auto;
+  float: none !important;
+  margin-left: calc(0% - 0.3rem);
+  max-width: 340px;
+}
+.uploads-search-app .row.computer.only > .column:nth-child(3) .ui.input,
+.uploads-search-app .row.computer.only > .column:nth-child(3) .ui.action.input {
+  width: 320px !important;
+  max-width: 100%;
+}
+/* Col 4 (Sort): hidden — lives in highlight-background row */
+#invenio-search-config.uploads-search-app
+  .row.computer.only
+  > .column:nth-child(4) {
+  display: none !important;
+}
 
 /* Requests: [empty] [search col4→1] [My requests col3→2] [Open col2→3] */
-[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(2) { order: 3; }
-[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(3) { order: 2; }
-[data-invenio-search-config*="DashboardRequests"] .row.computer.only > .column:nth-child(4) { order: 1; }
+[data-invenio-search-config*="DashboardRequests"]
+  .row.computer.only
+  > .column:nth-child(2) {
+  order: 3;
+}
+[data-invenio-search-config*="DashboardRequests"]
+  .row.computer.only
+  > .column:nth-child(3) {
+  order: 2;
+}
+[data-invenio-search-config*="DashboardRequests"]
+  .row.computer.only
+  > .column:nth-child(4) {
+  order: 1;
+}
 
 /* Requests search col: widen to five wide (match uploads) */
 .requests-search-app .row.computer.only > .column:nth-child(4) {
   width: 31.25% !important; /* five wide on computer = 5/16 */
 }
 
-/* Same height across search input, tab menu and sort dropdown */
-.uploads-search-app .row.computer.only .ui.action.input,
-.uploads-search-app .row.computer.only .ui.input,
-.requests-search-app .row.computer.only .ui.action.input,
-.requests-search-app .row.computer.only .ui.input {
-  height: 42px !important;
-}
-.uploads-search-app .row.computer.only .ui.action.input > input,
-.uploads-search-app .row.computer.only .ui.input > input,
-.requests-search-app .row.computer.only .ui.action.input > input,
-.requests-search-app .row.computer.only .ui.input > input {
-  height: 42px !important;
-  box-sizing: border-box !important;
-}
-.uploads-search-app .row.computer.only .ui.action.input > .button,
-.requests-search-app .row.computer.only .ui.action.input > .button {
-  height: 42px !important;
-  display: inline-flex !important;
+/* ======================================
+   Communities: [
+   Col 1 = empty (button injected), Col 2 = SearchBar (9-wide), Col 3 = Sort (3-wide)
+====================================== */
+.communities-search-app .row.computer.only {
+  display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  box-sizing: border-box !important;
+  flex-wrap: nowrap !important;
 }
-.uploads-search-app .row.computer.only .ui.selection.dropdown,
-.requests-search-app .row.computer.only .ui.selection.dropdown {
-  height: 42px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  box-sizing: border-box !important;
-  line-height: normal !important;
+.communities-search-app .row.computer.only > .column:nth-child(1) {
+  order: 3;
+  flex: 0 0 auto;
+  width: auto !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-left: auto !important;
 }
-.uploads-search-app .row.computer.only .ui.secondary.pointing.menu,
-.requests-search-app .row.computer.only .ui.secondary.pointing.menu {
-  height: 42px !important;
-  align-items: center !important;
-  border-bottom: none !important;
-  margin-bottom: 0 !important;
+.communities-search-app .row.computer.only .upload-new-wrap {
+  flex-direction: row-reverse;
+  gap: 0.75rem;
+}
+.communities-search-app .row.computer.only .upload-new-label-wrap {
+  text-align: right;
+}
+
+.communities-search-app .row.computer.only > .column:nth-child(2) {
+  order: 1;
+  flex: 0 0 auto;
+  float: none !important;
+  width: auto !important;
+  margin-left: calc(24% + 1rem);
+}
+.communities-search-app .row.computer.only > .column:nth-child(2) .ui.input,
+.communities-search-app
+  .row.computer.only
+  > .column:nth-child(2)
+  .ui.action.input {
+  width: 320px !important;
+}
+#invenio-search-config.communities-search-app
+  .row.computer.only
+  > .column:nth-child(3) {
+  display: none !important;
+}
+
+#invenio-search-config.communities-search-app .row.tablet.only:not(.mobile),
+#invenio-search-config.communities-search-app .row.mobile.only:not(.tablet) {
+  display: none !important;
 }
 
 /* ======================================
@@ -501,21 +616,19 @@
 /* Mobile action bar — shown on tablet/mobile, hidden on desktop */
 .dashboard-mobile-action-bar {
   display: none;
-  justify-content: flex-end;
-  padding: 0.5rem 0 0.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 1rem 0 0.75rem;
 }
 
 /* ======================================
-   Mobile/tablet search row (React renders .row.mobile.tablet.only)
-   — constrain action input so button stays icon-width, input fills rest
+   Mobile/tablet search row
 ====================================== */
 .uploads-search-app .row.mobile.tablet.only,
 .requests-search-app .row.mobile.tablet.only {
-
-  /* Prevent the search column from overflowing its grid cell */
   > .column {
     min-width: 0;
-    overflow: hidden;
   }
 
   .ui.action.input {
@@ -526,7 +639,7 @@
     /* Input grows to fill all available space */
     > input {
       flex: 1 1 auto !important;
-      width: 0 !important;       /* let flex-grow take over */
+      width: 0 !important;
       min-width: 0 !important;
       height: 42px !important;
       box-sizing: border-box !important;
@@ -559,14 +672,43 @@
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
+  .uploads-search-app .right.floated.column,
+  .requests-search-app .right.floated.column {
+    float: none !important;
+    margin-left: auto !important;
+  }
+}
+
+@media (max-width: 1279px) {
   /* Show mobile action bar (upload / new community button) */
   .dashboard-mobile-action-bar {
     display: flex;
   }
+
+  /* Hide the desktop upload/community button from the computer.only row
+     so it doesn't duplicate the mobile action bar button */
+  .uploads-search-app .row.computer.only > .column:nth-child(1),
+  .communities-search-app .row.computer.only > .column:nth-child(1) {
+    display: none !important;
+  }
+}
+
+.deposits-list-item.mobile.only .content.centered {
+  text-align: left !important;
 }
 
 @media (max-width: 767px) {
+  .uploads-search-app .ui.segment,
+  .communities-search-app .ui.segment,
+  .requests-search-app .ui.segment {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   .dashboard-section-header {
     flex-direction: column;
     align-items: flex-start;
@@ -577,13 +719,11 @@
     grid-template-columns: 1fr;
   }
 
-  /* Slightly smaller font on mobile search input */
   .uploads-search-app .row.mobile.tablet.only input,
   .requests-search-app .row.mobile.tablet.only input {
     font-size: @font-size-sm !important;
   }
 
-  /* Upload circle: scale down on mobile */
   .upload-new-circle {
     width: 70px;
     height: 70px;

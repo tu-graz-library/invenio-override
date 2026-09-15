@@ -185,6 +185,9 @@ OVERRIDE_CONTACT_FORM = False
 OVERRIDE_CONTACT_FORM_BUNDLE = None
 """Webpack bundle that activates the contact form """
 
+OVERRIDE_NOTICES_TEMPLATE = None
+"""Template rendered for user notices """
+
 # ============================================================================
 # Production and Shibboleth Configuration
 # ============================================================================

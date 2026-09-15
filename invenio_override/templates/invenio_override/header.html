@@ -69,3 +69,6 @@
       {%- endif %}
     {%- endblock page_inner_banner %}
   </div>
+  {%- if config.OVERRIDE_NOTICES_TEMPLATE %}
+    {%- include config.OVERRIDE_NOTICES_TEMPLATE %}
+  {%- endif %}

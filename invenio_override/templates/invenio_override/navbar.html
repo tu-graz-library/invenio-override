@@ -58,14 +58,14 @@
         {% if config.get('OVERRIDE_HEADER_TEXT_LINE1') %}
           <div class="affiliation-text">
             <a title="Home" href="/" class="no-decoration">
-              {{ _(config.OVERRIDE_HEADER_TEXT_LINE1) }}
+              {{ config.OVERRIDE_HEADER_TEXT_LINE1 }}
               {% if config.get('OVERRIDE_HEADER_TEXT_LINE2') %}
                 <br>
-                {{ _(config.OVERRIDE_HEADER_TEXT_LINE2) }}
+                {{ config.OVERRIDE_HEADER_TEXT_LINE2 }}
               {% endif %}
               {% if config.get('OVERRIDE_HEADER_TEXT_LINE3') %}
                 <br>
-                {{ _(config.OVERRIDE_HEADER_TEXT_LINE3) }}
+                {{ config.OVERRIDE_HEADER_TEXT_LINE3 }}
               {% endif %}
             </a>
           </div>

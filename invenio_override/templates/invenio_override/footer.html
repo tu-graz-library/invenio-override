@@ -42,12 +42,12 @@
                       <a href="{{ link.url }}"
                          title="{{ link.get('title', link.label) }}"
                          {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
-                        {{ _(link.label) }}
+                        {{ link.label }}
                         {% if is_external %}<i class="external alternate icon"></i>{% endif %}
                         {% if link.get('icon') %}<i class="{{ link.icon }} icon"></i>{% endif %}
                       </a>
                     {% else %}
-                      <span>{{ _(link.label) }}</span>
+                      <span>{{ link.label }}</span>
                     {% endif %}
                   </li>
                 {% endfor %}

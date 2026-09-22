@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v1.2.1 (released 2026-09-22)
+
+- fix(translation): Community de Community
+
 Version v1.2.0 (released 2026-09-22)
 
 - feat(header): render notices

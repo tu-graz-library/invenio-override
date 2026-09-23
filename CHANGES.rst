@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v1.2.2 (released 2026-09-23)
+
+- fix(frontpage): wrap header on narrow screens
+
 Version v1.2.1 (released 2026-09-22)
 
 - fix(translation): Community de Community

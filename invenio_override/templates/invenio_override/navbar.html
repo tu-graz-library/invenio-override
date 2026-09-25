@@ -226,25 +226,26 @@
         <li>{{ _("Find individual solutions.") }}</li>
       </ul>
       {%- if config.OVERRIDE_CONTACT_FORM %}
-        <div style="margin-top: 1em;">
-          <a id="feedback-form" class="ui primary button">{{ _("Contact us") }}</a>
-        </div>
-      {%- endif %}
-      {%- if config.OVERRIDE_SHOW_RIGHT_CONTACT_EMAIL %}
-        <div style="margin-top: 0.75em;">
-          <a href="mailto:{{ config.OVERRIDE_RIGHT_SECTION_CONTACT_EMAIL }}"
-             class="ui primary button">{{ _("Contact our Help Service") }}</a>
-        </div>
-      {%- endif %}
+        {%- if config.OVERRIDE_CONTACT_FORM_BUNDLE %}{{ webpack[config.OVERRIDE_CONTACT_FORM_BUNDLE] }}{%- endif %}
+          <div style="margin-top: 1em;">
+            <a id="feedback-form" class="ui primary button">{{ _("Contact us") }}</a>
+          </div>
+        {%- endif %}
+        {%- if config.OVERRIDE_SHOW_RIGHT_CONTACT_EMAIL %}
+          <div style="margin-top: 0.75em;">
+            <a href="mailto:{{ config.OVERRIDE_RIGHT_SECTION_CONTACT_EMAIL }}"
+               class="ui primary button">{{ _("Contact our Help Service") }}</a>
+          </div>
+        {%- endif %}
+      </div>
+      <div class="actions">
+        <div class="ui cancel button">{{ _("Close") }}</div>
+      </div>
     </div>
-    <div class="actions">
-      <div class="ui cancel button">{{ _("Close") }}</div>
-    </div>
-  </div>
-  <script>
+    <script>
   document.getElementById('contact-modal-trigger').addEventListener('click', function(e) {
     e.preventDefault();
     $('#contact-modal').modal('show');
   });
-  </script>
-{%- endif %}
+    </script>
+  {%- endif %}

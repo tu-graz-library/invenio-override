@@ -663,6 +663,13 @@ h2 {
 /* ======================================
    Zammad form styling
 ====================================== */
+
+/* Lift the Zammad modal above Semantic UI modals (!important beats Zammad's
+   own runtime z-index:999). */
+.zammad-form-modal {
+  z-index: 2000 !important;
+}
+
 .zammad-form {
   h2 {
     text-align: center;

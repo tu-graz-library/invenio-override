@@ -8,6 +8,16 @@
 Changes
 =======
 
+Version v1.2.3 (released 2026-09-28)
+
+- fix(i18n): clean up the German contact-popup text
+- fix(dashboard): make overview match the dropdown menu
+- feat(contact): theme the Zammad form
+- fix(header): uppercase the header text in every language
+- fix(contact): keep the Zammad modal above the help modal
+- fix(contact): load the Zammad bundle in the navbar
+- fix(theme): restore data-invenio-config on the body tag
+
 Version v1.2.2 (released 2026-09-23)
 
 - fix(frontpage): wrap header on narrow screens

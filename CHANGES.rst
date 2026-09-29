@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v1.2.4 (released 2026-09-29)
+
+- fix(record): dont clip the sidebar box dropdown menu
+
 Version v1.2.3 (released 2026-09-28)
 
 - fix(i18n): clean up the German contact-popup text

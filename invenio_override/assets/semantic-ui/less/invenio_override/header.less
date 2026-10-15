@@ -327,15 +327,19 @@ span.home-inline {
   margin: 0.75rem auto;
   padding: 1rem 1.5rem;
   font-size: @font-size-base;
-  font-weight: 600;
+  font-weight: normal;
   border-radius: @radiusCardLarge;
   border: 1px solid transparent;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   z-index: 100000;
 
-  p {
-    margin: 0;
+  .instance-banner-message {
     flex: 1;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
   }
 
   @media screen and (max-width: 767.9px) {

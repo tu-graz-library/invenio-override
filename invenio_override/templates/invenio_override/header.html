@@ -7,7 +7,7 @@
 #}
 {%- for _banner in get_active_banners() %}
   <div class="instance-banner instance-banner--{{ config.OVERRIDE_INSTANCE_TYPE }}">
-    <p>{{ _(_banner.message) |safe }}</p>
+    <div class="instance-banner-message">{{ _(_banner.message) |safe }}</div>
   </div>
 {%- endfor %}
 <div>

@@ -348,6 +348,25 @@ span.home-inline {
   }
 }
 
+/* colors per banner category, the test/demo rules below win on those instances */
+.instance-banner--info {
+  background-color: @instanceBannerInfo;
+  border-color: darken(@instanceBannerInfo, 12%);
+  color: @instanceBannerInfoText;
+}
+
+.instance-banner--warning {
+  background-color: @instanceBannerTest;
+  border-color: darken(@instanceBannerTest, 12%);
+  color: @instanceBannerTestText;
+}
+
+.instance-banner--other {
+  background-color: @instanceBannerOther;
+  border-color: darken(@instanceBannerOther, 12%);
+  color: @instanceBannerOtherText;
+}
+
 .instance-banner--test {
   background-color: @instanceBannerTest;
   border-color: darken(@instanceBannerTest, 12%);

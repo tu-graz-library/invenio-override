@@ -844,6 +844,63 @@ msgstr "Verwalten Sie Ihr Profil, Ihre Einstellungen und Kontooptionen."
 msgid "Account settings"
 msgstr "Kontoeinstellungen"
 
+msgid "Advanced search"
+msgstr "Erweiterte Suche"
+
+msgid "Fill in one or more fields. Empty fields are ignored."
+msgstr "Füllen Sie ein oder mehrere Felder aus. Leere Felder werden ignoriert."
+
+msgid "Any"
+msgstr "Beliebig"
+
+msgid "from"
+msgstr "von"
+
+msgid "to"
+msgstr "bis"
+
+msgid "or"
+msgstr "oder"
+
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Author / Creator"
+msgstr "Autor / Ersteller"
+
+msgid "Abstract / Description"
+msgstr "Abstract / Beschreibung"
+
+msgid "Keywords / Subject"
+msgstr "Schlagwörter / Thema"
+
+msgid "Publication date"
+msgstr "Veröffentlichungsdatum"
+
+msgid "Resource type"
+msgstr "Ressourcentyp"
+
+msgid "License"
+msgstr "Lizenz"
+
+msgid "Funder"
+msgstr "Fördergeber"
+
+msgid "e.g. deep learning"
+msgstr "z.B. Deep Learning"
+
+msgid "e.g. Smith"
+msgstr "z.B. Smith"
+
+msgid "e.g. machine learning"
+msgstr "z.B. Machine Learning"
+
+msgid "e.g. European Commission"
+msgstr "z.B. Europäische Kommission"
+
 #~ msgid "FAIR Data"
 #~ msgstr "FAIR-Daten"
 

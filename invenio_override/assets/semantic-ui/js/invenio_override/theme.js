@@ -32,6 +32,18 @@ overrideStore.add(
   () => null,
 );
 
+/* FOUC guard reveal: fouc_guard.html hides the body, this shows it once
+   the page has loaded. Lives in the bundle instead of an inline script so
+   it also runs with a CSP without 'unsafe-inline' in script-src. */
+function revealPage() {
+  document.body.classList.add("ready");
+}
+if (document.readyState === "complete") {
+  revealPage();
+} else {
+  window.addEventListener("load", revealPage);
+}
+
 /* sticky notification setup for test instance */
 $(".ui.sticky.instance-banner").sticky({
   context: "body",

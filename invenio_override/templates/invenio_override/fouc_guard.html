@@ -7,25 +7,12 @@
 
   App-wide FOUC guard. Hides the body until the client side widgets
   have initialised, so the server rendered placeholders dont flash
-  before JS fills them in.
+  before JS fills them in. The reveal lives in the theme JS bundle, so
+  it also runs with a CSP without 'unsafe-inline' in script-src; the
+  animation below reveals the page after 1.5s even if no JS runs at all.
 #}
 <style>
-  body { opacity: 0; }
-  body.ready { opacity: 1; transition: opacity 0.15s ease; }
+  body { opacity: 0; animation: fouc-reveal 0.15s ease 1.5s forwards; }
+  body.ready { opacity: 1; animation: none; transition: opacity 0.15s ease; }
+  @keyframes fouc-reveal { to { opacity: 1; } }
 </style>
-<noscript>
-  <style>body { opacity: 1; }</style>
-</noscript>
-<script>
-  (function () {
-    function reveal() {
-      if (document.body) document.body.classList.add("ready");
-    }
-    if (document.readyState === "complete") {
-      reveal();
-    } else {
-      window.addEventListener("load", reveal);
-    }
-    setTimeout(reveal, 1500);
-  })();
-</script>

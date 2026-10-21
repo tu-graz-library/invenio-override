@@ -83,8 +83,8 @@ export function initSearchSwitcher() {
   }
   initializing = false;
 
-  const origPushState = history.pushState.bind(history);
-  history.pushState = function (state, title, url) {
+  const origPushState = window.history.pushState.bind(window.history);
+  window.history.pushState = function (state, title, url) {
     origPushState(state, title, url);
     if (url) {
       syncFromURL(url);
@@ -92,7 +92,7 @@ export function initSearchSwitcher() {
   };
 
   window.addEventListener("popstate", function () {
-    syncFromURL(location.href);
+    syncFromURL(window.location.href);
   });
 
   form.addEventListener("submit", function () {

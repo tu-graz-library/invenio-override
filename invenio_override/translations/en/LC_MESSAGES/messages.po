@@ -787,6 +787,63 @@ msgstr ""
 msgid "Account settings"
 msgstr ""
 
+msgid "Advanced search"
+msgstr ""
+
+msgid "Fill in one or more fields. Empty fields are ignored."
+msgstr ""
+
+msgid "Any"
+msgstr ""
+
+msgid "from"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Author / Creator"
+msgstr ""
+
+msgid "Abstract / Description"
+msgstr ""
+
+msgid "Keywords / Subject"
+msgstr ""
+
+msgid "Publication date"
+msgstr ""
+
+msgid "Resource type"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid "Funder"
+msgstr ""
+
+msgid "e.g. deep learning"
+msgstr ""
+
+msgid "e.g. Smith"
+msgstr ""
+
+msgid "e.g. machine learning"
+msgstr ""
+
+msgid "e.g. European Commission"
+msgstr ""
+
 #~ msgid "Search"
 #~ msgstr ""
 

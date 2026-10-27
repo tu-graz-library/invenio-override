@@ -240,6 +240,13 @@ OVERRIDE_ROUTES = {
     "comingsoon": "/comingsoon",
 }
 
+OVERRIDE_ADVANCED_SEARCH_FIELDS = None
+"""Field definitions for the advanced search form at /search/advanced.
+None = use the default fields, see ``invenio_override.views``."""
+
+OVERRIDE_ADVANCED_SEARCH_TARGET = "/records/search"
+"""Search page the advanced search form redirects to."""
+
 OVERRIDE_LOGO = "images/inveniordm-tail.svg"
 """override logo"""
 

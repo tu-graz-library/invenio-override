@@ -1,7 +1,139 @@
+# SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "invenio-override"
+description = "Invenio module to simplify theme customization."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Graz University of Technology.", email = "repository-support@tugraz.at" }]
+keywords = ["client", "invenio", "layout", "ui"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+urls = { Repository = "https://github.com/tu-graz-library/invenio-override" }
+dynamic = ["version"]
+
+dependencies = [
+  "invenio-global-search>=0.3.0",
+  "invenio-rdm-records[opensearch2]>=32.0.0",
+  "invenio-records-global-search>=0.3.5",
+  "opensearch-dsl>=2.0.0,<3.0.0",
+  "opensearch-py>=2.0.0,<3.0.0",
+]
+
+[project.entry-points."invenio_assets.webpack"]
+invenio_override_theme = "invenio_override.webpack:theme"
+
+[project.entry-points."invenio_base.apps"]
+invenio_override = "invenio_override:InvenioOverride"
+
+[project.entry-points."invenio_base.blueprints"]
+invenio_override = "invenio_override.views:blueprint"
+
+[project.entry-points."invenio_base.finalize_app"]
+invenio_override = "invenio_override.ext:finalize_app"
+
+[project.entry-points."invenio_config.module"]
+invenio_override = "invenio_override.config"
+
+[project.entry-points."invenio_i18n.translations"]
+messages = "invenio_override"
+
+[project.optional-dependencies]
+edugain = [
+  "invenio-edugain>=0.2.0",
+]
+lom = [
+  "invenio-global-search[lom]>=0.3.0",
+]
+marc21 = [
+  "invenio-global-search[marc21]>=0.3.0",
+]
+opensearch2 = [
+  "invenio-search[opensearch2]>=3.0.0,<4.0.0",
+]
+tests = [
+  "invenio-app>=3.0.0,<4.0.0",
+  "invenio-previewer>=2.2.0",
+  "pytest-black>=0.6.0",
+  "invenio-global-search[lom, marc21]>=0.3.0",
+  "pytest-invenio>=3.3.0,<4.0.0",
+  "djlint~=1.36.4",
+]
+
 [build-system]
-requires = ["setuptools", "wheel", "babel>2.8"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.babel]
+[tool.babel.compile_catalog]
+directory = "invenio_override/translations/"
+use_fuzzy = true
+
+[tool.babel.extract_messages]
+copyright_holder = "Graz University of Technology"
+msgid_bugs_address = "repository-support@tugraz.at"
+mapping_file = "pyproject.toml"
+output_file = "invenio_override/translations/messages.pot"
+add_comments = "NOTE"
+
+[tool.babel.init_catalog]
+input_file = "invenio_override/translations/messages.pot"
+output_dir = "invenio_override/translations/"
+
+[[tool.babel.mappings]]
+method = "javascript"
+pattern = "**.js"
+encoding = "utf-8"
+extract_messages = "$._, jQuery._"
+
+[[tool.babel.mappings]]
+method = "python"
+pattern = "**.py"
+encoding = "utf-8"
+
+[[tool.babel.mappings]]
+method = "jinja2"
+pattern = "**/templates/**.html"
+encoding = "utf-8"
 
 [tool.djlint]
 indent = 2
 profile = "jinja"
+
+[tool.hatch.version]
+path = "invenio_override/__init__.py"
+
+[tool.hatch.build]
+artifacts = [
+  "*.mo",
+]
+exclude = [
+  ".github/**",
+  "tests/**",
+  ".gitignore",
+  "eslint.config.js",
+  "run-tests.sh",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["/invenio_override"]
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--black --isort --cov=invenio_override --cov-report=term-missing tests invenio_override"
+testpaths = "tests invenio_override"
+
+[tool.ruff.lint.flake8-copyright]
+notice-rgx = "(?i)# SPDX-FileCopyrightText:\\s\\d{4}(-(\\d{4}|present))*"

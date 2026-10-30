@@ -1,4 +1,7 @@
-// Copyright (C) 2020-2026 Graz University of Technology.
+/*
+ * SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+ * SPDX-License-Identifier: MIT
+ */
 
 import { CommunityCards } from "./CommunityCards";
 import React from "react";

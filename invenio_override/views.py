@@ -1,23 +1,16 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2020-2026 Graz University of Technology.
-#
-# invenio-override is free software; you can redistribute it and/or
-# modify it under the terms of the MIT License; see LICENSE file for more
-# details.
+# SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-License-Identifier: MIT
 
-"""invenio module for sharedRDM theme."""
+"""invenio module for configurable theme."""
 
 import secrets
 import traceback
 from functools import wraps
-from typing import Dict, Optional
 
 from flask import Blueprint, current_app, g, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from invenio_communities.proxies import current_communities
 from invenio_rdm_records.proxies import current_rdm_records
-from invenio_rdm_records.resources.serializers import UIJSONSerializer
 from invenio_records_global_search.resources.serializers import (
     GlobalSearchJSONSerializer,
 )
@@ -101,7 +94,7 @@ def default_error_handler(e: Exception) -> tuple:
 
 
 @blueprint.app_template_filter("make_dict_like")
-def make_dict_like(value: str, key: str) -> Dict[str, str]:
+def make_dict_like(value: str, key: str) -> dict[str, str]:
     """
     Convert a value to a dict-like structure.
 

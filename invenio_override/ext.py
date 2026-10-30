@@ -1,18 +1,12 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2020-2026 Graz University of Technology.
-#
-# invenio-override is free software; you can redistribute it and/or
-# modify it under the terms of the MIT License; see LICENSE file for more
-# details.
+# SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-License-Identifier: MIT
 
-"""invenio module for sharedRDM theme."""
+"""invenio module for configurable theme."""
 
 from types import SimpleNamespace
 
 from flask import g, request
 from flask_login import login_required
-from flask_menu import current_menu
 from invenio_i18n import lazy_gettext as _
 
 try:

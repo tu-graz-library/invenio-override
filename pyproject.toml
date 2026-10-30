@@ -26,8 +26,6 @@ dependencies = [
   "invenio-global-search>=0.3.0",
   "invenio-rdm-records[opensearch2]>=32.0.0",
   "invenio-records-global-search>=0.3.5",
-  "opensearch-dsl>=2.0.0,<3.0.0",
-  "opensearch-py>=2.0.0,<3.0.0",
 ]
 
 [project.entry-points."invenio_assets.webpack"]

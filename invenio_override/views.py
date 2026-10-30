@@ -14,8 +14,8 @@ from invenio_rdm_records.proxies import current_rdm_records
 from invenio_records_global_search.resources.serializers import (
     GlobalSearchJSONSerializer,
 )
+from invenio_search.engine import dsl
 from invenio_users_resources.proxies import current_user_resources
-from opensearch_dsl.utils import AttrDict
 
 from .search import FrontpageRecordsSearch
 
@@ -106,14 +106,14 @@ def make_dict_like(value: str, key: str) -> dict[str, str]:
 
 
 @blueprint.app_template_filter("cast_to_dict")
-def cast_to_dict(attr_dict: AttrDict) -> dict:
+def cast_to_dict(attr_dict: dsl.AttrDict) -> dict:
     """
     Convert an AttrDict to a regular dictionary.
 
     :param attr_dict: The AttrDict to convert.
     :returns: The converted dictionary.
     """
-    return AttrDict.to_dict(attr_dict)
+    return dsl.AttrDict.to_dict(attr_dict)
 
 
 def comingsoon() -> str:

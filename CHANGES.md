@@ -5,6 +5,15 @@ SPDX-License-Identifier: MIT
 
 # Changes
 
+## Version v1.3.0 (released 2026-11-03)
+
+- chore(search): forward compatibility opensearch3
+- chore: refactor multiple
+- fix(styling): record files table overflow
+- fix: color the banner by its category
+- fix: show editor bold in the banner
+- feat: add configurable header links
+
 
 ## Version v1.2.4 (released 2026-09-29)
 

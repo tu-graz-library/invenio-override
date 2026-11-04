@@ -5,6 +5,11 @@ SPDX-License-Identifier: MIT
 
 # Changes
 
+## Version v1.3.1 (released 2026-11-04)
+
+- chore: remove unused configs
+- chore: decouple override theme from global-search
+
 ## Version v1.3.0 (released 2026-11-03)
 
 - chore(search): forward compatibility opensearch3

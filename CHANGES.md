@@ -5,6 +5,10 @@ SPDX-License-Identifier: MIT
 
 # Changes
 
+## Version v1.3.3 (released 2026-11-04)
+
+- fix: publish workflow by changing ubuntu image
+
 ## Version v1.3.2 (released 2026-11-04)
 
 - fix: error in publish workflow

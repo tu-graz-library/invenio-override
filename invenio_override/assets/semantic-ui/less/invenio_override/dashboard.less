@@ -467,11 +467,13 @@
   display: flex !important;
   justify-content: flex-end !important;
   margin-left: auto !important;
+  flex-direction: row;
 }
 .uploads-search-app .row.computer.only .upload-new-wrap,
 .uploads-search-app .upload-new-wrap {
   flex-direction: row-reverse;
   gap: 0.75rem;
+  margin-left: 10px;
 }
 .uploads-search-app .row.computer.only .upload-new-label-wrap,
 .uploads-search-app .upload-new-label-wrap {
@@ -553,6 +555,7 @@
   float: none !important;
   margin-left: 25% !important;
   max-width: 340px !important;
+  align-self: unset !important;
 }
 
 /* Requests: [empty] [search col4→1] [My requests col3→2] [Open col2→3] */

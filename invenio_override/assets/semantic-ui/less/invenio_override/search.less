@@ -460,28 +460,8 @@ aside.column .ui.card:not(.borderless) {
    List.Content with class "facet-wrapper" — fix the double-nesting.
 ====================================== */
 
-/* Outer accordion title — strip layout, let inner facet-wrapper handle the row */
-aside.column .ui.accordion .title.facet-wrapper.parent {
-  padding: 0 !important;
-  display: block !important;
-  background: none !important;
-  border: none !important;
-  cursor: default !important;
-}
-
-/* Hide expand button — it was the cause of misaligned counts */
-aside.column .facet-wrapper > .ui.button.transparent {
-  display: none !important;
-}
-
-/* Hide child sub-items accordion content only — not the inner List.Content row */
-aside.column .ui.accordion .content:not(.facet-wrapper) {
-  display: none !important;
-}
-
-/* Restore left padding on parent facet rows (Publication, Image) — upstream zeros it */
-aside.column .ui.accordion .title.facet-wrapper.parent .content.facet-wrapper {
-  padding-left: 1.25rem !important;
+aside.column .ui.accordion {
+  margin-left: 5px;
 }
 
 /* Sidebar toggle — ensure margin regardless of container padding */

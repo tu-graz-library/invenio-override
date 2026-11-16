@@ -5,6 +5,12 @@ SPDX-License-Identifier: MIT
 
 # Changes
 
+## Version v1.3.2 (released 2026-11-16)
+
+- fix(ui): publication date input tag
+- fix(ui): nested facets
+- fix(ui): marc21 upload buttons layout
+
 ## Version v1.3.1 (released 2026-11-04)
 
 - chore: remove unused configs

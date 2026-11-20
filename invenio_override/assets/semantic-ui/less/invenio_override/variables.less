@@ -16,9 +16,15 @@
 @accessRightMetadata: #5e5e5e;
 
 /* Primary colors — TU Graz Red */
+/* Font for headings, menus, forms and buttons; instances set their own */
+@overrideFont: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 @overridePrimary: #e4154b;
 @overrideSecondary: #c41241;
 @overrideLabels: #ffffff;
+/* Primary colour when used as text on light backgrounds (links, hover states).
+   Institutions with a light primary (e.g. yellow) set this to a dark colour. */
+@overrideAccentText: @overridePrimary;
 @overridePrimaryBt: #dbdce0;
 @hoverOverridePrimaryBt: #bfc0c2;
 @highlightHeaderColor: @overridePrimaryBt;

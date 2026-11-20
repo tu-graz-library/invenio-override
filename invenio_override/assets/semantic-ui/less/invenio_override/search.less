@@ -349,7 +349,7 @@ aside.column .facet-wrapper .ui.checkbox.checked label {
 /* Checkbox tick color — override Semantic UI blue with our primary red */
 aside.column .facet-wrapper .ui.checkbox input:checked ~ .box::after,
 aside.column .facet-wrapper .ui.checkbox input:checked ~ label::after {
-  color: @overridePrimary !important;
+  color: @overrideAccentText !important;
 }
 
 aside.column .facet-wrapper .ui.checkbox input:focus ~ .box::before,
@@ -374,7 +374,7 @@ aside.column .ui.label.facet-count {
 /* Count pill highlight when item is selected */
 aside.column .facet-wrapper:has(.ui.checkbox.checked) .ui.label.facet-count {
   background-color: fade(@overridePrimary, 10%) !important;
-  color: @overridePrimary !important;
+  color: @overrideAccentText !important;
 }
 
 /* Help card — no chevron, no collapse */
@@ -395,7 +395,7 @@ aside.column .ui.card.borderless.facet.mt-0 {
 
   .ui.list .item a {
     font-size: @font-size-sm;
-    color: @overridePrimary;
+    color: @overrideAccentText;
     text-decoration: none;
 
     &:hover {
@@ -547,7 +547,7 @@ aside.column .ui.toggle.checkbox {
   }
 
   &.active > i.dropdown.icon {
-    color: @overridePrimary;
+    color: @overrideAccentText;
   }
 
   .menu {
@@ -565,7 +565,7 @@ aside.column .ui.toggle.checkbox {
 
       &.active,
       &.selected {
-        color: @overridePrimary !important;
+        color: @overrideAccentText !important;
         font-weight: 600;
         background: none !important;
       }

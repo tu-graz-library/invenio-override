@@ -79,16 +79,6 @@
         <line class="hline node-pub node-edu" x1="58%" y1="20%" x2="69%" y2="22%" />
         <line class="hline node-pub node-edu" x1="63%" y1="75%" x2="74%" y2="58%" />
       </svg>
-      <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var section = document.querySelector('.frontpage-hero-section');
-    document.querySelectorAll('.frontpage-pillar[data-hero-group]').forEach(function (pillar) {
-      var cls = 'hero-hover-' + pillar.dataset.heroGroup;
-      pillar.addEventListener('mouseenter', function () { section.classList.add(cls); });
-      pillar.addEventListener('mouseleave', function () { section.classList.remove(cls); });
-    });
-  });
-      </script>
       <div class="ui container">
         {%- block frontpage_hero %}{%- endblock frontpage_hero %}
           {%- block frontpage_form %}
@@ -111,7 +101,7 @@
                             margin:1.5rem 0 0">
                   <div id="frontpage-search-bar"
                        data-options='{{ options | tojson }}'
-                       data-placeholder="{{ _('Use this dropdown to search across different resource types') }}"
+                       data-placeholder="{{ config.OVERRIDE_FRONTPAGE_SEARCH_PLACEHOLDER or _('Use this dropdown to search across different resource types') }}"
                        style="width:100%"></div>
                 </div>
               </div>

@@ -1,12 +1,14 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
 
 from types import SimpleNamespace
 
-from flask import g, request
+from flask import current_app, g, has_request_context, request
 from flask_login import login_required
+from flask_menu import current_menu
 from invenio_i18n import lazy_gettext as _
 
 try:
@@ -37,7 +39,44 @@ from .views import (
     make_redirect,
     require_authenticated,
 )
-from .visibility import public_entries
+from .visibility import public_entries, visible_entries
+
+
+def show_publications() -> bool:
+    """Visibility rule: the instance shows publications."""
+    return bool(current_app.config.get("OVERRIDE_SHOW_PUBLICATIONS_SEARCH"))
+
+
+def can_upload_publications() -> bool:
+    """Visibility rule: the visitor may deposit publications."""
+    # OVERRIDE_SHOW_* gates the feature; the data-model permission
+    # decides who may upload.
+    return show_publications() and bool(
+        current_records_marc21.records_service.check_permission(g.identity, "create")
+    )
+
+
+def can_upload_oer() -> bool:
+    """Visibility rule: the visitor may deposit educational resources."""
+    return bool(
+        current_app.config.get("OVERRIDE_SHOW_EDUCATIONAL_RESOURCES")
+        and current_records_lom.records_service.check_permission(
+            g.identity, "handle_oer"
+        )
+    )
+
+
+def is_curator() -> bool:
+    """Visibility rule: the curation overview is in the visitor's menu."""
+    return bool(current_menu.submenu("dashboard").submenu("curation-overview").visible)
+
+
+BUILTIN_VISIBILITY_RULES = {
+    "show_publications": show_publications,
+    "can_upload_publications": can_upload_publications,
+    "can_upload_oer": can_upload_oer,
+    "is_curator": is_curator,
+}
 
 
 class InvenioOverride(object):
@@ -68,27 +107,23 @@ class InvenioOverride(object):
 
         @app.context_processor
         def inject_visibility():
-            # OVERRIDE_SHOW_* gates the feature; the data-model permission
-            # decides who may upload.
-            can_upload_publications = bool(
-                app.config.get("OVERRIDE_SHOW_PUBLICATIONS_SEARCH")
-                and current_records_marc21.records_service.check_permission(
-                    g.identity, "create"
-                )
-            )
-            can_upload_oer = bool(
-                app.config.get("OVERRIDE_SHOW_EDUCATIONAL_RESOURCES")
-                and current_records_lom.records_service.check_permission(
-                    g.identity, "handle_oer"
-                )
+            # The rules need a visitor; templates rendered outside a request
+            # (mails) get no dashboard entries.
+            entries = (
+                app.config.get("OVERRIDE_DASHBOARD_ENTRIES", [])
+                if has_request_context()
+                else []
             )
             return {
                 "can_view_marc21": current_identity_can_view(),
-                "can_upload_publications": can_upload_publications,
-                "can_upload_oer": can_upload_oer,
+                "can_upload_publications": can_upload_publications(),
+                "can_upload_oer": can_upload_oer(),
                 "override_header_links": public_entries(
                     app.config.get("OVERRIDE_HEADER_LINKS", [])
                 ),
+                "override_dashboard_entries": [
+                    entry.to_client() for entry in visible_entries(entries)
+                ],
             }
 
         @app.context_processor
@@ -131,6 +166,12 @@ class InvenioOverride(object):
         for k in dir(config):
             if k.startswith("INVENIO_OVERRIDE_") or k.startswith("OVERRIDE_"):
                 app.config.setdefault(k, getattr(config, k))
+        # The built-in entries use these rules; a rule of the same name in
+        # the instance config wins.
+        app.config["OVERRIDE_VISIBILITY_RULES"] = {
+            **BUILTIN_VISIBILITY_RULES,
+            **app.config["OVERRIDE_VISIBILITY_RULES"],
+        }
 
 
 def finalize_app(app):

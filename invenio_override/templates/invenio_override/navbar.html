@@ -1,5 +1,6 @@
 {#
   SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+  SPDX-FileCopyrightText: 2026 University of Graz.
   SPDX-License-Identifier: MIT
 #}
 {% set options = [] %}
@@ -127,25 +128,13 @@
           </a>
           <div class="header-topbar-dropdown-menu">
             {% if current_user.is_authenticated %}
-              <a href="/me/uploads" class="header-topbar-dropdown-item">{{ _("Research Results") }}</a>
-              {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH %}
-                <a href="/publications/uploads" class="header-topbar-dropdown-item">{{ _("Publications") }}</a>
-              {% endif %}
-              {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES and can_upload_oer %}
-                <a href="/oer/uploads" class="header-topbar-dropdown-item">{{ _("Educational Resources") }}</a>
-              {% endif %}
-              <a href="/me/requests" class="header-topbar-dropdown-item">{{ _("Requests") }}</a>
-              {% if current_menu.submenu("dashboard").submenu("curation-overview").visible %}
-                <a href="/curations/overview" class="header-topbar-dropdown-item">{{ _("Curation Requests") }}</a>
-              {% endif %}
-              <div class="header-topbar-dropdown-divider"></div>
-              <a href="/uploads/new" class="header-topbar-dropdown-item">{{ _("Upload Research Result") }}</a>
-              {% if can_upload_publications %}
-                <a href="/publications/uploads/new" class="header-topbar-dropdown-item">{{ _("Upload Publication") }}</a>
-              {% endif %}
-              {% if can_upload_oer %}
-                <a href="/oer/uploads/new" class="header-topbar-dropdown-item">{{ _("Upload Educational Resource") }}</a>
-              {% endif %}
+              {# OVERRIDE_DASHBOARD_ENTRIES, already filtered by visibility #}
+              {%- for entry in override_dashboard_entries %}
+                {%- if entry.divider_before %}
+                  <div class="header-topbar-dropdown-divider"></div>
+                {%- endif %}
+                <a href="{{ entry.url }}" class="header-topbar-dropdown-item">{{ entry.title }}</a>
+              {%- endfor %}
             {% else %}
               <a href="{{ url_for_security('login', next=request.path) }}"
                  class="header-topbar-dropdown-item">{{ _("Log in for more features") }}</a>
@@ -243,10 +232,4 @@
       <div class="ui cancel button">{{ _("Close") }}</div>
     </div>
   </div>
-  <script>
-  document.getElementById('contact-modal-trigger').addEventListener('click', function(e) {
-    e.preventDefault();
-    $('#contact-modal').modal('show');
-  });
-  </script>
 {%- endif %}

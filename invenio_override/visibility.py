@@ -1,9 +1,11 @@
 # SPDX-FileCopyrightText: 2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """Visibility of config driven entries, like header links and dashboard boxes.
 
-An entry can restrict who sees it with two optional keys:
+An entry (a dict, or a dataclass like ``DashboardEntry``) can restrict who
+sees it with two optional fields:
 
 * ``roles``: the visitor has to hold one of the listed roles,
 * ``visible``: the name of a rule in ``OVERRIDE_VISIBILITY_RULES``, a
@@ -21,12 +23,19 @@ def current_roles() -> set:
     return {need.value for need in g.identity.provides if need.method == "role"}
 
 
-def is_visible(entry: dict) -> bool:
+def _field(entry, name: str):
+    """A field of a dict entry or of a dataclass entry."""
+    if isinstance(entry, dict):
+        return entry.get(name)
+    return getattr(entry, name, None)
+
+
+def is_visible(entry) -> bool:
     """Check whether the current visitor may see the entry."""
-    roles = entry.get("roles")
+    roles = _field(entry, "roles")
     if roles and not current_roles().intersection(roles):
         return False
-    rule = entry.get("visible")
+    rule = _field(entry, "visible")
     if rule is None:
         return True
     check = current_app.config.get("OVERRIDE_VISIBILITY_RULES", {}).get(rule)

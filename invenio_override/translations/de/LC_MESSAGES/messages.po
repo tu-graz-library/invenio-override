@@ -844,6 +844,30 @@ msgstr "Verwalten Sie Ihr Profil, Ihre Einstellungen und Kontooptionen."
 msgid "Account settings"
 msgstr "Kontoeinstellungen"
 
+#: invenio_override/dashboard.py
+msgid "Your deposited research results"
+msgstr "Ihre hinterlegten Forschungsergebnisse"
+
+#: invenio_override/dashboard.py
+msgid "Your deposited publications"
+msgstr "Ihre hinterlegten Publikationen"
+
+#: invenio_override/dashboard.py
+msgid "Your openly licensed educational materials"
+msgstr "Ihre offen lizenzierten Bildungsmaterialien"
+
+#: invenio_override/dashboard.py
+msgid "Check for incoming notifications and assignments"
+msgstr "Eingehende Benachrichtigungen und Aufgaben prüfen"
+
+#: invenio_override/dashboard.py
+msgid "Review and manage curation submissions"
+msgstr "Einreichungen zur Kuration prüfen und verwalten"
+
+#: invenio_override/dashboard.py
+msgid "Deposit research data, software, preprints and more"
+msgstr "Forschungsdaten, Software, Preprints u.v.m. hinterlegen"
+
 #~ msgid "FAIR Data"
 #~ msgstr "FAIR-Daten"
 

@@ -67,7 +67,7 @@ pre,
 .ui.header,
 .ui.form input[type],
 .ui.form input[type]:focus {
-  font-family: "Source Sans Pro";
+  font-family: @overrideFont;
 }
 
 h1:not(.header) {
@@ -520,7 +520,7 @@ pre {
 
   h4 a {
     font-size: @font-size-nav;
-    color: @overridePrimary;
+    color: @overrideAccentText;
     font-weight: 600;
     transition: color @transitionFast ease;
   }
@@ -674,7 +674,7 @@ html {
     background-color @transitionFast ease;
 
   &:hover {
-    color: @overridePrimary !important;
+    color: @overrideAccentText !important;
     background-color: fade(@overridePrimary, 6%);
     text-decoration: none;
   }
@@ -784,12 +784,12 @@ html {
 .ui.secondary.pointing.menu.theme-primary {
   .active.item,
   .active.item:hover {
-    color: @overridePrimary !important;
+    color: @overrideAccentText !important;
     border-color: @overridePrimary !important;
   }
 
   .item:hover {
-    color: @overridePrimary !important;
+    color: @overrideAccentText !important;
     border-color: @overridePrimary !important;
   }
 }
@@ -827,11 +827,11 @@ html {
 }
 
 .invenio-administration .ui.vertical.menu .item:hover {
-  color: @overridePrimary !important;
+  color: @overrideAccentText !important;
 }
 
 .invenio-administration .ui.vertical.menu .item.active {
-  color: @overridePrimary !important;
+  color: @overrideAccentText !important;
   font-weight: 600;
 }
 

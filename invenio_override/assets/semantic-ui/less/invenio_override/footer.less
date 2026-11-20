@@ -34,7 +34,7 @@ footer {
         color: @primaryLink;
 
         i.icon.download {
-          color: @overridePrimary;
+          color: @overrideAccentText;
         }
       }
 
@@ -131,9 +131,10 @@ footer {
   }
 }
 
+/* logos flagged large: True in OVERRIDE_FOOTER_LOGOS */
 .footer-partner-logo-lg {
-  height: 40px;
-  max-width: 120px;
+  height: 72px;
+  max-width: 240px;
 }
 
 .footer-powered {
@@ -206,10 +207,13 @@ footer {
     flex-wrap: wrap;
     gap: 1rem;
   }
-  .footer-partner-logo,
-  .footer-partner-logo-lg {
+  .footer-partner-logo {
     height: 30px;
     max-width: 90px;
+  }
+  .footer-partner-logo-lg {
+    height: 48px;
+    max-width: 160px;
   }
 }
 

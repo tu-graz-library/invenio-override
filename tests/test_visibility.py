@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """Visibility tests."""
@@ -78,3 +79,8 @@ def test_public_entries_strips_visibility_keys(app):
     with app.test_request_context():
         g.identity = _identity("x")
         assert public_entries(entries) == [{"text": "Link", "url": "/a"}]
+
+
+def test_communities_menu_is_shown_by_default(app):
+    """Existing instances keep the Communities menu without a config change."""
+    assert app.config["OVERRIDE_SHOW_COMMUNITIES"] is True

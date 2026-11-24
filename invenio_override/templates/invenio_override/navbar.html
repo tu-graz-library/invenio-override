@@ -1,5 +1,6 @@
 {#
   SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+  SPDX-FileCopyrightText: 2026 University of Graz.
   SPDX-License-Identifier: MIT
 #}
 {% set options = [] %}
@@ -152,16 +153,18 @@
             {% endif %}
           </div>
         </div>
-        <div class="header-topbar-dropdown">
-          <a href="/communities" class="header-topbar-link">
-            {{ _("Communities") }} <span class="topbar-arrow"></span>
-          </a>
-          <div class="header-topbar-dropdown-menu">
-            <a href="/me/communities" class="header-topbar-dropdown-item">{{ _("Communities") }}</a>
-            <a href="/communities-search" class="header-topbar-dropdown-item">{{ _("All Communities") }}</a>
-            <a href="/communities/new" class="header-topbar-dropdown-item">{{ _("New Community") }}</a>
+        {%- if config.get('OVERRIDE_SHOW_COMMUNITIES_MENU', True) %}
+          <div class="header-topbar-dropdown">
+            <a href="/communities" class="header-topbar-link">
+              {{ _("Communities") }} <span class="topbar-arrow"></span>
+            </a>
+            <div class="header-topbar-dropdown-menu">
+              <a href="/me/communities" class="header-topbar-dropdown-item">{{ _("Communities") }}</a>
+              <a href="/communities-search" class="header-topbar-dropdown-item">{{ _("All Communities") }}</a>
+              <a href="/communities/new" class="header-topbar-dropdown-item">{{ _("New Community") }}</a>
+            </div>
           </div>
-        </div>
+        {%- endif %}
         <div class="header-topbar-dropdown">
           <a href="/help" class="header-topbar-link">
             {{ _("Help") }} <span class="topbar-arrow"></span>

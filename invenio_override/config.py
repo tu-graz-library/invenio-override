@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
@@ -42,6 +43,13 @@ OVERRIDE_FRONTPAGE_SUBTITLE = ""
 
 OVERRIDE_FRONTPAGE_SHOW_NEW_COMMUNITIES = True
 """Show the "New communities" tab next to "Recent uploads" on the frontpage."""
+
+OVERRIDE_SHOW_COMMUNITIES_MENU = True
+"""Show the "Communities" menu in the navbar.
+
+False hides the menu, for instances that do not use communities (together
+with ``OVERRIDE_FRONTPAGE_SHOW_NEW_COMMUNITIES = False``). The communities
+pages stay reachable by URL; this only changes the navigation."""
 
 OVERRIDE_REASONS_PARTNER = "CERN"
 """Trusted partner name shown in the 'Why use X?' reasons strip on the frontpage."""

@@ -33,6 +33,12 @@
       {%- if (title or _is_community_detail or _path == '/publications/search') and not (_path.startswith('/records/') and not _path.startswith('/records/search')) %}
         <div class="page-inner-banner">
           <div class="ui container">
+            {#- Optional back link: a template sets back_link = {"url": ..., "text": ...} #}
+            {%- if back_link %}
+              <a href="{{ back_link.url }}" class="page-inner-banner-back">
+                <i class="left arrow icon" aria-hidden="true"></i> {{ back_link.text }}
+              </a>
+            {%- endif %}
             <h1 class="page-inner-banner-title">{{ _("Community") if _is_community_detail else (title or _("Publications")) }}</h1>
             {%- if page_description %}
               <p class="page-inner-banner-description">{{ page_description }}</p>

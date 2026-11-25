@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
 
 from collections.abc import Callable
 
-from invenio_i18n import gettext as _
+from invenio_i18n import lazy_gettext as _
 
 # ============================================================================
 # Search Configuration
@@ -39,6 +40,11 @@ OVERRIDE_FRONTPAGE_RIGHT = True
 
 OVERRIDE_FRONTPAGE_SUBTITLE = ""
 """Subtitle displayed below the frontpage title in the hero section."""
+
+OVERRIDE_FRONTPAGE_SEARCH_PLACEHOLDER = _(
+    "Use this dropdown to search across different resource types"
+)
+"""Placeholder of the frontpage search field."""
 
 OVERRIDE_FRONTPAGE_SHOW_NEW_COMMUNITIES = True
 """Show the "New communities" tab next to "Recent uploads" on the frontpage."""

@@ -286,3 +286,24 @@ function initFrontpageTabs() {
 }
 
 document.addEventListener("DOMContentLoaded", initFrontpageTabs);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const trigger = document.getElementById("contact-modal-trigger");
+  if (!trigger) return;
+  trigger.addEventListener("click", function (e) {
+    e.preventDefault();
+    $("#contact-modal").modal("show");
+  });
+});
+
+function initHeroHover() {
+  const section = document.querySelector(".frontpage-hero-section");
+  if (!section) return;
+  document.querySelectorAll(".frontpage-pillar[data-hero-group]").forEach((pillar) => {
+    const cls = "hero-hover-" + pillar.dataset.heroGroup;
+    pillar.addEventListener("mouseenter", () => section.classList.add(cls));
+    pillar.addEventListener("mouseleave", () => section.classList.remove(cls));
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initHeroHover);

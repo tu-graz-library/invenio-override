@@ -787,6 +787,30 @@ msgstr ""
 msgid "Account settings"
 msgstr ""
 
+#: invenio_override/dashboard.py
+msgid "Your deposited research results"
+msgstr ""
+
+#: invenio_override/dashboard.py
+msgid "Your deposited publications"
+msgstr ""
+
+#: invenio_override/dashboard.py
+msgid "Your openly licensed educational materials"
+msgstr ""
+
+#: invenio_override/dashboard.py
+msgid "Check for incoming notifications and assignments"
+msgstr ""
+
+#: invenio_override/dashboard.py
+msgid "Review and manage curation submissions"
+msgstr ""
+
+#: invenio_override/dashboard.py
+msgid "Deposit research data, software, preprints and more"
+msgstr ""
+
 #~ msgid "Search"
 #~ msgstr ""
 

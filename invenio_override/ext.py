@@ -1,32 +1,12 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
 
-from types import SimpleNamespace
-
-from flask import g, request
+from flask import has_request_context, request
 from flask_login import login_required
 from invenio_i18n import lazy_gettext as _
-
-try:
-    from invenio_records_marc21.ui.theme import current_identity_can_view
-except (ImportError, AttributeError):
-    current_identity_can_view = lambda: False
-
-try:
-    from invenio_records_marc21.proxies import current_records_marc21
-except ImportError:
-    current_records_marc21 = SimpleNamespace(
-        records_service=SimpleNamespace(check_permission=lambda *args, **kwargs: False)
-    )
-
-try:
-    from invenio_records_lom.proxies import current_records_lom
-except ImportError:
-    current_records_lom = SimpleNamespace(
-        records_service=SimpleNamespace(check_permission=lambda *args, **kwargs: False)
-    )
 
 from . import config
 from .views import (
@@ -68,27 +48,20 @@ class InvenioOverride(object):
 
         @app.context_processor
         def inject_visibility():
-            # OVERRIDE_SHOW_* gates the feature; the data-model permission
-            # decides who may upload.
-            can_upload_publications = bool(
-                app.config.get("OVERRIDE_SHOW_PUBLICATIONS_SEARCH")
-                and current_records_marc21.records_service.check_permission(
-                    g.identity, "create"
-                )
-            )
-            can_upload_oer = bool(
-                app.config.get("OVERRIDE_SHOW_EDUCATIONAL_RESOURCES")
-                and current_records_lom.records_service.check_permission(
-                    g.identity, "handle_oer"
-                )
+            # The rules need a visitor; templates rendered outside a request
+            # (mails) get no dashboard entries.
+            entries = (
+                app.config.get("OVERRIDE_DASHBOARD_ENTRIES", [])
+                if has_request_context()
+                else []
             )
             return {
-                "can_view_marc21": current_identity_can_view(),
-                "can_upload_publications": can_upload_publications,
-                "can_upload_oer": can_upload_oer,
                 "override_header_links": public_entries(
                     app.config.get("OVERRIDE_HEADER_LINKS", [])
                 ),
+                "override_dashboard_entries": [
+                    entry.to_client() for entry in entries if entry.is_visible()
+                ],
             }
 
         @app.context_processor

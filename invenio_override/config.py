@@ -1,11 +1,20 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
 
 from collections.abc import Callable
 
-from invenio_i18n import gettext as _
+from invenio_i18n import lazy_gettext as _
+
+from .dashboard import DashboardEntry
+from .visibility import (
+    can_upload_oer,
+    can_upload_publications,
+    is_curator,
+    show_publications,
+)
 
 # ============================================================================
 # Search Configuration
@@ -39,6 +48,11 @@ OVERRIDE_FRONTPAGE_RIGHT = True
 
 OVERRIDE_FRONTPAGE_SUBTITLE = ""
 """Subtitle displayed below the frontpage title in the hero section."""
+
+OVERRIDE_FRONTPAGE_SEARCH_PLACEHOLDER = _(
+    "Use this dropdown to search across different resource types"
+)
+"""Placeholder of the frontpage search field."""
 
 OVERRIDE_FRONTPAGE_SHOW_NEW_COMMUNITIES = True
 """Show the "New communities" tab next to "Recent uploads" on the frontpage."""
@@ -82,12 +96,27 @@ who sees the link, see ``invenio_override.visibility``::
     ]
 """
 
-OVERRIDE_VISIBILITY_RULES: dict[str, Callable[[], bool]] = {}
-"""Visibility rules by name, e.g. ``{"can_archive": lambda: ...}``.
+OVERRIDE_VISIBILITY_RULES: dict[str, Callable[[], bool]] = {
+    "show_publications": show_publications,
+    "can_upload_publications": can_upload_publications,
+    "can_upload_oer": can_upload_oer,
+    "is_curator": is_curator,
+}
+"""Visibility rules by name, see ``invenio_override.visibility``.
 
 A rule is a no-argument callable returning bool. Config driven entries
-(like OVERRIDE_HEADER_LINKS) reference a rule by name with their
-``visible`` key; unknown names fail closed, the entry stays hidden."""
+(like OVERRIDE_HEADER_LINKS and OVERRIDE_DASHBOARD_ENTRIES) reference a
+rule by name with their ``visible`` key; unknown names fail closed, the
+entry stays hidden. The default holds the rules of the default dashboard
+entries. An instance extends it in its own configuration::
+
+    from invenio_override.config import OVERRIDE_VISIBILITY_RULES
+
+    OVERRIDE_VISIBILITY_RULES = {
+        **OVERRIDE_VISIBILITY_RULES,
+        "can_archive": can_archive,
+    }
+"""
 
 OVERRIDE_FOOTER_BACKGROUND = None
 """CSS background color for the footer (e.g. '#4a4a4a'). None = use @footerBottomBackground from variables.less."""
@@ -509,3 +538,95 @@ RATELIMIT_GUEST_USER = "5000 per hour;500 per minute"
 
 SESSION_COOKIE_SAMESITE = "Strict"
 """Sets cookie with the samesite flag to 'Strict' by default."""
+
+OVERRIDE_DASHBOARD_ENTRIES: list[DashboardEntry] = [
+    DashboardEntry(
+        key="uploads",
+        title=_("Research Results"),
+        description=_("Your deposited research results"),
+        icon="file alternate outline",
+        url="/me/uploads",
+    ),
+    DashboardEntry(
+        key="publications",
+        title=_("Publications"),
+        description=_("Your deposited publications"),
+        icon="book",
+        url="/publications/uploads",
+        visible="show_publications",
+    ),
+    DashboardEntry(
+        key="educational-resources",
+        title=_("Educational Resources"),
+        description=_("Your openly licensed educational materials"),
+        icon="graduation cap",
+        url="/oer/uploads",
+        visible="can_upload_oer",
+    ),
+    DashboardEntry(
+        key="requests",
+        title=_("Requests"),
+        description=_("Check for incoming notifications and assignments"),
+        icon="tasks",
+        url="/me/requests",
+    ),
+    DashboardEntry(
+        key="curations",
+        title=_("Curation Requests"),
+        description=_("Review and manage curation submissions"),
+        icon="clipboard check",
+        url="/curations/overview",
+        visible="is_curator",
+    ),
+    DashboardEntry(
+        key="upload-dataset",
+        title=_("Upload Research Result"),
+        description=_("Deposit research data, software, preprints and more"),
+        icon="database",
+        url="/uploads/new",
+        highlight=True,
+        divider_before=True,
+    ),
+    DashboardEntry(
+        key="upload-publication",
+        title=_("Upload Publication"),
+        description=_("Deposit a publication"),
+        icon="book",
+        url="/publications/uploads/new",
+        highlight=True,
+        visible="can_upload_publications",
+    ),
+    DashboardEntry(
+        key="upload-educational-resource",
+        title=_("Upload Educational Resource"),
+        description=_("Deposit an educational resource"),
+        icon="graduation cap",
+        url="/oer/uploads/new",
+        highlight=True,
+        visible="can_upload_oer",
+    ),
+]
+"""Entries of the Dashboard menu and tiles of the dashboard overview page.
+
+Both read this one list, in its order. The default is the set the package
+has always shown; the publication, educational resource and curation
+entries use rules from ``OVERRIDE_VISIBILITY_RULES``. An instance changes
+the list in its own configuration, e.g. drops one entry and adds one for
+a role::
+
+    from invenio_override.config import OVERRIDE_DASHBOARD_ENTRIES
+    from invenio_override.dashboard import DashboardEntry
+
+    OVERRIDE_DASHBOARD_ENTRIES = [
+        entry for entry in OVERRIDE_DASHBOARD_ENTRIES if entry.key != "uploads"
+    ] + [
+        DashboardEntry(
+            key="upload-guide",
+            title="Upload guide",
+            description="How to prepare your data",
+            icon="book",
+            url="/upload-guide",
+            roles=("researcher",),
+        ),
+    ]
+"""

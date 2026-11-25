@@ -78,6 +78,7 @@
                   <img src="{{ url_for('static', filename=logo.src) }}"
                        alt="{{ logo.alt }}"
                        class="footer-partner-logo{% if logo.get('large') %} footer-partner-logo-lg{% endif %}"
+                       {% if logo.get('height') %}style="height: {{ logo.height }}px; max-width: none;"{% endif %}
                        loading="lazy">
                 </a>
               {% endfor %}
